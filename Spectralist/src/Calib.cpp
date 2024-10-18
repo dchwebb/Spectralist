@@ -4,6 +4,19 @@
 
 Calib calib;
 
+Calib::Calib()
+{
+	UpdatePitchLUT();
+}
+
+void Calib::UpdatePitchLUT()
+{
+	for (uint32_t i = 0; i < adcMax + 1; ++i) {
+		calib.pitchLUT[i] = calib.cfg.pitchBase * std::pow(2.0f, (float)i * calib.cfg.pitchMult);
+	}
+}
+
+
 void Calib::Calibrate(char key)
 {
 	// Can be called either from main (key = 0) to update calibration values or from serial console (key != 0) to update state

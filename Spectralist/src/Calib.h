@@ -6,8 +6,9 @@
 
 class Calib {
 public:
+	Calib();
 	void Calibrate(char key = 0);
-	static void UpdateConfig();
+	static void UpdatePitchLUT();
 
 	// 0v = 61200; 1v = 50110; 2v = 39020; 3v = 27910; 4v = 16790; 5v = 5670
 	// C: 16.35 Hz 32.70 Hz; 65.41 Hz; 130.81 Hz; 261.63 Hz; 523.25 Hz; 1046.50 Hz; 2093.00 Hz; 4186.01 Hz
@@ -26,10 +27,16 @@ public:
 	ConfigSaver configSaver = {
 		.settingsAddress = &cfg,
 		.settingsSize = sizeof(cfg),
-		.validateSettings = nullptr
+		.validateSettings = UpdatePitchLUT
 	};
 
+	float pitchLUT[adcMax + 1];
+
 	bool calibrating;			// Triggered by serial console
+
+private:
+
+
 	enum class State {Waiting0, Waiting1, Octave0, Octave1, PendingSave};
 	State state;
 

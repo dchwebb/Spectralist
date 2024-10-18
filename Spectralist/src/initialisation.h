@@ -11,6 +11,7 @@ static constexpr uint32_t sampleRate = 48000;
 static constexpr float inverseSampleRate  = 1.0f / (float)sampleRate;
 static constexpr float pi = std::numbers::pi_v<float>;
 static constexpr float pi_x_2 = pi * 2.0f;
+static constexpr uint32_t adcMax = 4095;
 
 #ifndef M_PI_4
 #define M_PI_4 0.78539816339744830962f
