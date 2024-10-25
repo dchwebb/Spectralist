@@ -15,18 +15,29 @@ Additive::Additive()
 	//readPos = {0, 8192, 0, 12288, 0, 40960, 0, 26542, 21954, 18022, 9011, 39649, 22773, 45711, 17694, 35880, 58654, 43417, 27688, 52756, 5079, 20643, 33259, 16056, 39157, 53903, 12124, 63242, 14745, 36536, 4259, 54722, 11304, 45547, 17530, 9666, 2457, 57507, 43581, 32604, 15073, 64389, 46858, 21790, 52264, 10158, 24903, 19169, 52101, 61603, 20643, 27852, 5570, 44728, 6717, 43253, 327, 13434, 5734, 20316, 17039, 10158, 22118, 33914, 42270, 16384, 2621, 62586, 29491, 6553, 47349, 327, 8192, 38830, 53084, 23265, 26050, 38010, 36044, 53903, 50626, 40468, 7045, 46202, 64225, 10321, 7536, 20316, 59965, 47349, 33914, 327, 4751, 30801, 10649, 39321, 46694, 23756, 35880, 52920, 13926, 13926, 32276, 58327, 51281, 46202, 48005, 53575, 52428, 14581, 38174, 38338, 34078, 45219, 42598, 2785, 50790, 13434, 46202, 34897, 9830, 44564, 31457, 10485, 28344, 29491, 38338, 57671, 29163, 49971, 50790, 15892, 28672, 19005, 58654, 60456, 21463, 42926, 1146, 61767, 5406, 11796, 59637, 21135, 29163, 12451, 64225, 48168, 34406, 46530, 59310, 61931, 63569, 6225, 59310, 55541, 7864, 24576, 46530, 59146, 3112, 19660, 42434, 35553, 11304, 4915, 7864, 58327, 53411, 47185, 25067, 23265, 20152, 64880, 36864, 55869, 25559, 15073, 29982, 36372, 27033, 41451, 39976, 49643, 57344, 163, 2621, 52592, 41615, 20480, 64061, 64716, 49479, 58163, 55050, 63897, 5570, 47513, 15892, 40796};
 }
 
-std::pair<float, float> Additive::ProcessSamples(Samples& samples)
+void Additive::CalcSample()
 {
-	debug1.SetHigh();
+	debugPin2.SetHigh();
+
+	// Previously calculated samples output at beginning of interrupt to keep timing independent of calculation time
+	if (vcaConnected) {
+		const float vcaMult = std::max(60000.0f - adc.VcaCV, 0.0f);
+		SPI2->TXDR = (int32_t)(outputSamples[0] * scaleVCAOutput * vcaMult);
+		SPI2->TXDR = (int32_t)(outputSamples[1] * scaleVCAOutput * vcaMult);
+	} else {
+		SPI2->TXDR = (int32_t)(outputSamples[0] * scaleOutput);
+		SPI2->TXDR = (int32_t)(outputSamples[1] * scaleOutput);
+	}
+
 
 	// Pitch calculations
-	const float octave = octaveDown.IsHigh() ? 0.5 : 1.0f;
+	const float octave = wavetable.octaveDown.IsHigh() ? 0.5 : 1.0f;
 	//const float newInc = calib.cfg.pitchBase * std::pow(2.0f, (float)adc.Pitch_CV * calib.cfg.pitchMult) * octave;			// for cycle length matching sample rate (48k)
 	const float newInc = calib.pitchLUT[adc.Pitch_CV] * octave + prevIncErr;
 	smoothedInc = 0.99 * smoothedInc + 0.01 * newInc;
 
 	// Calculate the maximum harmonic before aliasing
-	maxHarmonic = std::min(harmonics, (uint32_t)((float)(sinLUTSize / 2) / newInc));
+	maxHarmonic = std::min(260UL, (uint32_t)((float)(sinLUTSize / 2) / newInc));
 
 	// Increment the sine read position
 	uint32_t inc = std::round(newInc);
@@ -36,22 +47,30 @@ std::pair<float, float> Additive::ProcessSamples(Samples& samples)
 	float amp = 0.3f;
 
 	float mixOutL = 0.0f;
-	float mixOutR = 0.0f;
+
 	for (uint32_t i = 0; i < maxHarmonic; ++i) {
 		readPos[i] += incMult;
-		mixOutL += sineLUT[readPos[i]] * amp;
+		mixOutL += sineLUT[readPos[i] & lutMask] * amp;
 		amp *= 0.95f;
 		incMult += inc;
 	}
-	mixOutR = mixOutL;
 
-	debug1.SetLow();
+	outputSamples[0] = FastTanh(mixOutL);
+	outputSamples[1] = FastTanh(mixOutL);
 
-	return std::make_pair(mixOutL, mixOutR);
+	debugPin2.SetLow();
+
 }
 
 
-
+float Additive::FastTanh(const float x)
+{
+	// Apply FastTan approximation to limit sample from -1 to +1
+	float x2 = x * x;
+	float a = x * (135135.0f + x2 * (17325.0f + x2 * (378.0f + x2)));
+	float b = 135135.0f + x2 * (62370.0f + x2 * (3150.0f + x2 * 28.0f));
+	return a / b;
+}
 
 void Additive::IdleJobs()
 {

@@ -11,6 +11,7 @@ RM := rm -rf
 -include sources.mk
 -include src/usb/subdir.mk
 -include src/subdir.mk
+-include Drivers/FatFs/src/subdir.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
@@ -57,34 +58,35 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := Spectralist
+BUILD_ARTIFACT_NAME := Spectralist_Kishoof
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-Spectralist.elf \
+Spectralist_Kishoof.elf \
 
 MAP_FILES += \
-Spectralist.map \
+Spectralist_Kishoof.map \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-Spectralist.list \
+Spectralist_Kishoof.list \
 
 
 # All Target
-all: main-build
+all:
+	+@$(MAKE) --no-print-directory pre-build && $(MAKE) --no-print-directory main-build
 
 # Main-build Target
-main-build: Spectralist.elf secondary-outputs
+main-build: Spectralist_Kishoof.elf secondary-outputs
 
 # Tool invocations
-Spectralist.elf Spectralist.map: $(OBJS) $(USER_OBJS) D:\Eurorack\Spectralist\Spectralist\STM32H563VITX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-g++ -o "Spectralist.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m33 -T"D:\Eurorack\Spectralist\Spectralist\STM32H563VITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Spectralist.map" -Wl,--gc-sections -static -Wl,--no-warn-rwx-segment --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Spectralist_Kishoof.elf Spectralist_Kishoof.map: $(OBJS) $(USER_OBJS) D:\Eurorack\Spectralist\Spectralist_Kishoof\STM32H7B0VBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-g++ -o "Spectralist_Kishoof.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"D:\Eurorack\Spectralist\Spectralist_Kishoof\STM32H7B0VBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Spectralist_Kishoof.map" -Wl,--gc-sections -static -Wl,--no-warn-rwx-segment --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -93,14 +95,18 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-Spectralist.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "Spectralist.list"
+Spectralist_Kishoof.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "Spectralist_Kishoof.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) Spectralist.elf Spectralist.list Spectralist.map default.size.stdout
+	-$(RM) Spectralist_Kishoof.elf Spectralist_Kishoof.list Spectralist_Kishoof.map default.size.stdout
+	-@echo ' '
+
+pre-build:
+	rm -f D:\Eurorack\Spectralist\Spectralist_Kishoof\Debug\src\usb\CDCHandler.o
 	-@echo ' '
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)
@@ -112,6 +118,6 @@ fail-specified-linker-script-missing:
 warn-no-linker-script-specified:
 	@echo 'Warning: No linker script specified. Check the linker settings in the build configuration.'
 
-.PHONY: all clean dependents main-build fail-specified-linker-script-missing warn-no-linker-script-specified
+.PHONY: all clean dependents main-build fail-specified-linker-script-missing warn-no-linker-script-specified pre-build
 
 -include ../makefile.targets
