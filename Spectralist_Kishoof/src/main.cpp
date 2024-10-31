@@ -51,6 +51,9 @@ int main(void) {
 		config.SaveConfig();		// Save any scheduled changes
 		CheckVCA();					// Bodge to check if VCA is normalled to 3.3v
 		calib.Calibrate();
+		if (modeSpectralist) {
+			additive.IdleJobs();
+		}
 #if (USB_DEBUG)
 		if ((GPIOB->IDR & GPIO_IDR_ID4) == 0 && USBDebug) {
 			USBDebug = false;
