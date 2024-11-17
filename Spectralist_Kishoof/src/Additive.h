@@ -43,7 +43,7 @@ private:
 
 	float filterStart[2] = {0.0f, 0.0f};
 	float filterSlope = 0.0f;
-	float startLevel = 0.0f;
+	//float startLevel = 0.0f;
 	float multSpread = 0.0f;
 
 	enum class Filter {LP, HP, BP, Comb, count} filterType = Filter::LP;

@@ -88,56 +88,65 @@ void Additive::IdleJobs()
 	filterStart[1] = filterStart[1] * 0.9f + 0.1f * adc.Wavetable_Pos_B_Pot * startMult;
 	filterSlope = filterSlope * 0.9f + 0.1f * adc.Wavetable_Pos_A_Trm * slopeMult;
 
-	startLevel = 0.3f;
+	float startLevel[2] = {0.3f, 0.3f};
 
-	multSpread = multSpread * 0.9f + 0.1f * (1.0f + adc.Warp_Type_Pot * spreadMult);
+	multSpread = multSpread * 0.95f + 0.05f * (1.0f + adc.Warp_Type_Pot * spreadMult);
 	float spreadHarm = 1.0f + multSpread;
 
-	multipliers[0] = startLevel;
-	multipliers[1] = startLevel;
+	multipliers[0] = startLevel[0];
+	multipliers[1] = startLevel[1];
 
 	volatile uint32_t i;
 	float nextVal = 0.0f;
 
 	for (i = 2; i < maxHarmonics; ++i) {
+
+		if (i >= filterStart[i & 1]) {
+			if (startLevel[i & 1] > 0.001f) {
+				startLevel[i & 1] *= filterSlope;
+			} else {
+				startLevel[i & 1] = 0.0f;
+			}
+		}
+
 		uint32_t intPart = (uint32_t)spreadHarm;
 		if (intPart == i) {
 			float fractPart = spreadHarm - intPart;
-			multipliers[i] = (nextVal + 1.0f - fractPart) * startLevel;
-			nextVal = (fractPart) * startLevel;
+			multipliers[i] = (nextVal + 1.0f - fractPart) * startLevel[i & 1];
+			nextVal = fractPart * startLevel[i & 1];
 			spreadHarm += multSpread;
 
 			if ((uint32_t)spreadHarm > i + 1) {
-				multipliers[++i] = nextVal * startLevel;
+				multipliers[++i] = nextVal * startLevel[i & 1];
 				nextVal = 0.0f;
 			}
 
 		} else {
 			multipliers[i] = 0.0f;
 		}
-		wavetable.drawData[0][i] = 200 - (200 * multipliers[i]);
+		wavetable.drawData[0][i] = 200 - (600 * multipliers[i]);
 	}
 
-	if (false) {
-		// Update the multipliers table with LPF
-		float multLevel[2] = {startLevel, startLevel};
-		multipliers[0] = startLevel;
-		multipliers[1] = startLevel;
-		wavetable.drawData[0][0] = 200 - (200 * startLevel);
-
-		for (uint32_t i = 2; i < maxHarmonics; ++i) {
-			if (i >= filterStart[i & 1]) {
-				if (multLevel[i & 1] > filterSlope) {
-					multLevel[i & 1] -= filterSlope;
-				} else {
-					multLevel[i & 1] = 0.0f;
-				}
-			}
-			multipliers[i] = multipliers[i - 2] * 0.9f + multLevel[i & 1] * 0.1f;
-			wavetable.drawData[0][i] = 200 - (200 * multipliers[i]);
-		}
-	}
-
+//	if (false) {
+//		// Update the multipliers table with LPF
+//		float multLevel[2] = {startLevel, startLevel};
+//		multipliers[0] = startLevel;
+//		multipliers[1] = startLevel;
+//		wavetable.drawData[0][0] = 200 - (200 * startLevel);
+//
+//		for (uint32_t i = 2; i < maxHarmonics; ++i) {
+//			if (i >= filterStart[i & 1]) {
+//				if (multLevel[i & 1] > filterSlope) {
+//					multLevel[i & 1] -= filterSlope;
+//				} else {
+//					multLevel[i & 1] = 0.0f;
+//				}
+//			}
+//			multipliers[i] = multipliers[i - 2] * 0.9f + multLevel[i & 1] * 0.1f;
+//			wavetable.drawData[0][i] = 200 - (200 * multipliers[i]);
+//		}
+//	}
+//
 	debugPin1.SetLow();
 }
 
