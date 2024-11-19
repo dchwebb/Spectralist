@@ -58,7 +58,13 @@ void Additive::CalcSample()
 		incMult += inc;
 	}
 
-	outputSamples[0] = FastTanh(mixOut[0]);
+	if (wavetable.chBRingMod.IsHigh()) {
+		outputSamples[0] = FastTanh(mixOut[0] * mixOut[1]);
+	} else if (wavetable.chBMix.IsHigh()) {
+		outputSamples[0] = FastTanh(mixOut[0] + mixOut[1]);
+	} else {
+		outputSamples[0] = FastTanh(mixOut[0]);
+	}
 	outputSamples[1] = FastTanh(mixOut[1]);
 
 	debugPin2.SetLow();
@@ -84,13 +90,19 @@ void Additive::IdleJobs()
 	static constexpr float slopeMult = 1.0f / 65535.0f;
 	static constexpr float spreadMult = 10.0f / 65535.0f;
 
+	float startLevel[2] = {0.3f, 0.3f};
+
 	filterStart[0] = filterStart[0] * 0.9f + 0.1f * adc.Wavetable_Pos_A_Pot * startMult;
 	filterStart[1] = filterStart[1] * 0.9f + 0.1f * adc.Wavetable_Pos_B_Pot * startMult;
 	filterSlope = filterSlope * 0.9f + 0.1f * adc.Wavetable_Pos_A_Trm * slopeMult;
 
-	float startLevel[2] = {0.3f, 0.3f};
+	//multSpread = multSpread * 0.95f + 0.05f * (1.0f + adc.Warp_Type_Pot * spreadMult);
 
-	multSpread = multSpread * 0.95f + 0.05f * (1.0f + adc.Warp_Type_Pot * spreadMult);
+	// Calculate smoothed spread amount from pot and CV with trimmer controlling range of CV
+	const float cv = std::max(61300.0f - adc.WarpCV, 0.0f);		// Reduce to ensure can hit zero with noise
+	multSpread = (0.99f * multSpread) +
+			  (0.01f * (1.0f + (adc.Warp_Amt_Pot + WaveTable::NormaliseADC(adc.Warp_Amt_Trm) * cv) * spreadMult));
+
 	float spreadHarm = 1.0f + multSpread;
 
 	multipliers[0] = startLevel[0];
@@ -101,6 +113,7 @@ void Additive::IdleJobs()
 
 	for (i = 2; i < maxHarmonics; ++i) {
 
+		// Use per channel exponentional filtering with slope configurable
 		if (i >= filterStart[i & 1]) {
 			if (startLevel[i & 1] > 0.001f) {
 				startLevel[i & 1] *= filterSlope;
@@ -109,15 +122,17 @@ void Additive::IdleJobs()
 			}
 		}
 
+		// Increase the spread of harmonics dividing fractional components between the current and next multiplier
 		uint32_t intPart = (uint32_t)spreadHarm;
 		if (intPart == i) {
 			float fractPart = spreadHarm - intPart;
 			multipliers[i] = (nextVal + 1.0f - fractPart) * startLevel[i & 1];
-			nextVal = fractPart * startLevel[i & 1];
+			nextVal = fractPart;
 			spreadHarm += multSpread;
 
 			if ((uint32_t)spreadHarm > i + 1) {
-				multipliers[++i] = nextVal * startLevel[i & 1];
+				++i;
+				multipliers[i] = nextVal * startLevel[i & 1];
 				nextVal = 0.0f;
 			}
 
@@ -127,26 +142,7 @@ void Additive::IdleJobs()
 		wavetable.drawData[0][i] = 200 - (600 * multipliers[i]);
 	}
 
-//	if (false) {
-//		// Update the multipliers table with LPF
-//		float multLevel[2] = {startLevel, startLevel};
-//		multipliers[0] = startLevel;
-//		multipliers[1] = startLevel;
-//		wavetable.drawData[0][0] = 200 - (200 * startLevel);
-//
-//		for (uint32_t i = 2; i < maxHarmonics; ++i) {
-//			if (i >= filterStart[i & 1]) {
-//				if (multLevel[i & 1] > filterSlope) {
-//					multLevel[i & 1] -= filterSlope;
-//				} else {
-//					multLevel[i & 1] = 0.0f;
-//				}
-//			}
-//			multipliers[i] = multipliers[i - 2] * 0.9f + multLevel[i & 1] * 0.1f;
-//			wavetable.drawData[0][i] = 200 - (200 * multipliers[i]);
-//		}
-//	}
-//
+
 	debugPin1.SetLow();
 }
 
