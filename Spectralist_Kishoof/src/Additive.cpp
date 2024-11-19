@@ -85,63 +85,93 @@ float Additive::FastTanh(const float x)
 void Additive::IdleJobs()
 {
 	debugPin1.SetHigh();
-
 	static constexpr float startMult = 200.0f / 65535.0f;
 	static constexpr float slopeMult = 1.0f / 65535.0f;
-	static constexpr float spreadMult = 10.0f / 65535.0f;
-
-	float startLevel[2] = {0.3f, 0.3f};
 
 	filterStart[0] = filterStart[0] * 0.9f + 0.1f * adc.Wavetable_Pos_A_Pot * startMult;
 	filterStart[1] = filterStart[1] * 0.9f + 0.1f * adc.Wavetable_Pos_B_Pot * startMult;
 	filterSlope = filterSlope * 0.9f + 0.1f * adc.Wavetable_Pos_A_Trm * slopeMult;
 
-	//multSpread = multSpread * 0.95f + 0.05f * (1.0f + adc.Warp_Type_Pot * spreadMult);
+	if (wavetable.modeSwitch.IsHigh()) {
+		// Mode to scale multipliers according to a sine wave shape
+		static constexpr float spreadMult = 10000.0f / 65535.0f;
 
-	// Calculate smoothed spread amount from pot and CV with trimmer controlling range of CV
-	const float cv = std::max(61300.0f - adc.WarpCV, 0.0f);		// Reduce to ensure can hit zero with noise
-	multSpread = (0.99f * multSpread) +
-			  (0.01f * (1.0f + (adc.Warp_Amt_Pot + WaveTable::NormaliseADC(adc.Warp_Amt_Trm) * cv) * spreadMult));
+		uint16_t sinePos = Additive::sinLUTSize / 4;		// Start at maximum (pi/2)
+		float sineScale[2] = {0.15f, 0.15f};
 
-	float spreadHarm = 1.0f + multSpread;
+		// Calculate smoothed spread amount from pot and CV with trimmer controlling range of CV
+		const float cv = std::max(61300.0f - adc.WarpCV, 0.0f);		// Reduce to ensure can hit zero with noise
+//		multSpread = (0.99f * multSpread) +
+//				(0.01f * (100.0f + (adc.Warp_Amt_Pot + WaveTable::NormaliseADC(adc.Warp_Amt_Trm) * cv) * spreadMult));
 
-	multipliers[0] = startLevel[0];
-	multipliers[1] = startLevel[1];
+		multSpread = multSpread * 0.95f + 0.05f * (100.0f + adc.Warp_Type_Pot * spreadMult);
 
-	volatile uint32_t i;
-	float nextVal = 0.0f;
+		for (uint32_t i = 0; i < maxHarmonics; ++i) {
 
-	for (i = 2; i < maxHarmonics; ++i) {
+			// Use per channel exponentional filtering with slope configurable
+			if (i >= filterStart[i & 1]) {
+				if (sineScale[i & 1] > 0.001f) {
+					sineScale[i & 1] *= filterSlope;
+				} else {
+					sineScale[i & 1] = 0.0f;
+				}
+			}
 
-		// Use per channel exponentional filtering with slope configurable
-		if (i >= filterStart[i & 1]) {
-			if (startLevel[i & 1] > 0.001f) {
-				startLevel[i & 1] *= filterSlope;
+			multipliers[i] = sineScale[i & 1] * (1.0f + sineLUT[sinePos]);
+			sinePos += multSpread;
+
+			wavetable.drawData[0][i] = 200 - (600 * multipliers[i]);
+		}
+
+	} else {
+		// Mode to spread individual harmonics
+		static constexpr float spreadMult = 10.0f / 65535.0f;
+
+		float startLevel[2] = {0.3f, 0.3f};
+
+		// Calculate smoothed spread amount from pot and CV with trimmer controlling range of CV
+		const float cv = std::max(61300.0f - adc.WarpCV, 0.0f);		// Reduce to ensure can hit zero with noise
+		multSpread = (0.99f * multSpread) +
+				(0.01f * (1.0f + (adc.Warp_Amt_Pot + WaveTable::NormaliseADC(adc.Warp_Amt_Trm) * cv) * spreadMult));
+
+		float spreadHarm = 1.0f + multSpread;
+
+		multipliers[0] = startLevel[0];
+		multipliers[1] = startLevel[1];
+
+		float nextVal = 0.0f;		// For storing partial value when spread creates fractional harmonic
+
+		for (uint32_t i = 2; i < maxHarmonics; ++i) {
+
+			// Use per channel exponentional filtering with slope configurable
+			if (i >= filterStart[i & 1]) {
+				if (startLevel[i & 1] > 0.001f) {
+					startLevel[i & 1] *= filterSlope;
+				} else {
+					startLevel[i & 1] = 0.0f;
+				}
+			}
+
+			// Increase the spread of harmonics dividing fractional components between the current and next multiplier
+			uint32_t intPart = (uint32_t)spreadHarm;
+			if (intPart == i) {
+				float fractPart = spreadHarm - intPart;
+				multipliers[i] = (nextVal + 1.0f - fractPart) * startLevel[i & 1];
+				nextVal = fractPart;
+				spreadHarm += multSpread;
+
+				if ((uint32_t)spreadHarm > i + 1) {
+					++i;
+					multipliers[i] = nextVal * startLevel[i & 1];
+					nextVal = 0.0f;
+				}
+
 			} else {
-				startLevel[i & 1] = 0.0f;
+				multipliers[i] = 0.0f;
 			}
+			wavetable.drawData[0][i] = 200 - (600 * multipliers[i]);
 		}
-
-		// Increase the spread of harmonics dividing fractional components between the current and next multiplier
-		uint32_t intPart = (uint32_t)spreadHarm;
-		if (intPart == i) {
-			float fractPart = spreadHarm - intPart;
-			multipliers[i] = (nextVal + 1.0f - fractPart) * startLevel[i & 1];
-			nextVal = fractPart;
-			spreadHarm += multSpread;
-
-			if ((uint32_t)spreadHarm > i + 1) {
-				++i;
-				multipliers[i] = nextVal * startLevel[i & 1];
-				nextVal = 0.0f;
-			}
-
-		} else {
-			multipliers[i] = 0.0f;
-		}
-		wavetable.drawData[0][i] = 200 - (600 * multipliers[i]);
 	}
-
 
 	debugPin1.SetLow();
 }
