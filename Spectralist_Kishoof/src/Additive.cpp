@@ -85,26 +85,37 @@ float Additive::FastTanh(const float x)
 void Additive::IdleJobs()
 {
 	debugPin1.SetHigh();
-	static constexpr float startMult = 200.0f / 65535.0f;
+	static constexpr float startMult = 0.1f * (200.0f / 65535.0f);
 	static constexpr float slopeMult = 1.0f / 65535.0f;
 
-	filterStart[0] = filterStart[0] * 0.9f + 0.1f * adc.Wavetable_Pos_A_Pot * startMult;
-	filterStart[1] = filterStart[1] * 0.9f + 0.1f * adc.Wavetable_Pos_B_Pot * startMult;
+	//filterStart[0] = filterStart[0] * 0.9f + adc.Wavetable_Pos_A_Pot * startMult;
+//	filterStart[1] = filterStart[1] * 0.9f + 0.1f * adc.Wavetable_Pos_B_Pot * startMult;
 	filterSlope = filterSlope * 0.9f + 0.1f * adc.Wavetable_Pos_A_Trm * slopeMult;
+
+	const float cvA = std::max(61300.0f - adc.WavetablePosA_CV, 0.0f);		// Reduce to ensure can hit zero with noise
+	filterStart[0] = filterStart[0] * 0.9f + std::clamp((adc.Wavetable_Pos_A_Pot + cvA), 0.0f, 65535.0f) * startMult;
+
+	const float cvB = std::max(61300.0f - adc.WavetablePosB_CV, 0.0f);		// Reduce to ensure can hit zero with noise
+	filterStart[1] = filterStart[1] * 0.9f + std::clamp((adc.Wavetable_Pos_B_Pot + cvB), 0.0f, 65535.0f) * startMult;
+
+
 
 	if (wavetable.modeSwitch.IsHigh()) {
 		// Mode to scale multipliers according to a sine wave shape
-		static constexpr float spreadMult = 10000.0f / 65535.0f;
 
 		uint16_t sinePos = Additive::sinLUTSize / 4;		// Start at maximum (pi/2)
 		float sineScale[2] = {0.15f, 0.15f};
 
 		// Calculate smoothed spread amount from pot and CV with trimmer controlling range of CV
+		static constexpr float spreadMult = 20000.0f / 65535.0f;
 		const float cv = std::max(61300.0f - adc.WarpCV, 0.0f);		// Reduce to ensure can hit zero with noise
-//		multSpread = (0.99f * multSpread) +
-//				(0.01f * (100.0f + (adc.Warp_Amt_Pot + WaveTable::NormaliseADC(adc.Warp_Amt_Trm) * cv) * spreadMult));
 
-		multSpread = multSpread * 0.95f + 0.05f * (100.0f + adc.Warp_Type_Pot * spreadMult);
+		multSpread = (0.99f * multSpread) +
+				(0.01f * (100.0f + (adc.Warp_Amt_Pot + WaveTable::NormaliseADC(adc.Warp_Amt_Trm) * cv) * spreadMult));
+		float spread = multSpread;
+
+		static constexpr float growMult = 30.0f / 65535.0f;
+		multGrow = multGrow * 0.95f + 0.05f * ((adc.Warp_Type_Pot - 32768) * growMult);
 
 		for (uint32_t i = 0; i < maxHarmonics; ++i) {
 
@@ -118,7 +129,10 @@ void Additive::IdleJobs()
 			}
 
 			multipliers[i] = sineScale[i & 1] * (1.0f + sineLUT[sinePos]);
-			sinePos += multSpread;
+			if (spread + multGrow > 50.0f) {
+				spread += multGrow;
+			}
+			sinePos += spread;
 
 			wavetable.drawData[0][i] = 200 - (600 * multipliers[i]);
 		}
@@ -134,7 +148,11 @@ void Additive::IdleJobs()
 		multSpread = (0.99f * multSpread) +
 				(0.01f * (1.0f + (adc.Warp_Amt_Pot + WaveTable::NormaliseADC(adc.Warp_Amt_Trm) * cv) * spreadMult));
 
-		float spreadHarm = 1.0f + multSpread;
+		static constexpr float growMult = 1.0f / 65535.0f;
+		multGrow = multGrow * 0.95f + 0.05f * ((adc.Warp_Type_Pot - 32768) * growMult);
+		float spread = multSpread;
+
+		float spreadHarm = 1.0f + spread;
 
 		multipliers[0] = startLevel[0];
 		multipliers[1] = startLevel[1];
@@ -158,7 +176,10 @@ void Additive::IdleJobs()
 				float fractPart = spreadHarm - intPart;
 				multipliers[i] = (nextVal + 1.0f - fractPart) * startLevel[i & 1];
 				nextVal = fractPart;
-				spreadHarm += multSpread;
+				spreadHarm += spread;
+				if (spread + multGrow > 3.0f) {
+					spread += multGrow;
+				}
 
 				if ((uint32_t)spreadHarm > i + 1) {
 					++i;
