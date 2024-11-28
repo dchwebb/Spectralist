@@ -10,7 +10,7 @@
 #include "UI.h"
 #include "Additive.h"
 
-bool modeSpectralist = true;
+bool modeSpectralist = false;
 volatile uint32_t SysTickVal;
 extern uint32_t SystemCoreClock;
 bool SafeMode = false;				// Disables file system mounting, USB MSC drive is disabled, don't load config

@@ -15,7 +15,30 @@ void UI::DrawWaveTable()
 
 	// Populate a frame buffer to display either text portion of screen or wavetables
 
-	if (timedInfo == TimedInfo::showFileInfo) {		// Show frame count or error type when trying to load a wavetable
+	if (modeSpectralist) {
+
+		for (uint8_t i = 0; i < 200; ++i) {
+			// Pixel order is across then down
+			uint32_t yPos = 160 * i;
+			if ((i & 1) == 0) {		// left harmonic
+				for (uint32_t x = 0; x < wavetable.drawData[0][i]; ++x) {
+					lcd.drawBuffer[activeDrawBuffer][yPos + 80 - x] = RGBColour::LightBlue;
+				}
+			} else {
+				for (uint32_t x = 0; x < wavetable.drawData[0][i]; ++x) {
+					lcd.drawBuffer[activeDrawBuffer][yPos + 80 + x] = RGBColour::Orange;
+				}
+			}
+		}
+
+
+		constexpr uint32_t drawL = (LCD::width - 160) / 2;
+		constexpr uint32_t drawR = drawL + 160 - 1;
+		constexpr uint32_t drawT = (LCD::height - 200) / 2;
+		constexpr uint32_t drawB = drawT + 200 - 1;
+		lcd.PatternFill(drawL, drawT, drawR, drawB, lcd.drawBuffer[activeDrawBuffer]);
+
+	} else if (timedInfo == TimedInfo::showFileInfo) {		// Show frame count or error type when trying to load a wavetable
 		timedInfo = TimedInfo::none;
 
 		const char* buff;
@@ -125,7 +148,7 @@ void UI::DrawWaveTable()
 
 	// Trigger MDMA frame buffer blanking (memset very slow and MDMA does not require processor)
 	blankData = 0;
-	MDMATransfer(MDMA_Channel0, (const uint8_t*)&blankData, (const uint8_t*)lcd.drawBuffer[activeDrawBuffer], sizeof(lcd.drawBuffer[0]) / 2);
+	MDMATransfer(MDMA_Channel0, (const uint8_t*)&blankData, (const uint8_t*)lcd.drawBuffer[activeDrawBuffer], 65536);		//sizeof(lcd.drawBuffer[0]) / 2
 	bufferClear = false;
 }
 

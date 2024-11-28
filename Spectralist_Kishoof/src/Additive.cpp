@@ -86,11 +86,11 @@ void Additive::IdleJobs()
 {
 	debugPin1.SetHigh();
 	static constexpr float startMult = 0.1f * (200.0f / 65535.0f);
-	static constexpr float slopeMult = 1.0f / 65535.0f;
+	static constexpr float slopeMult = 0.1f * (1.0f / 65535.0f);
 
 	//filterStart[0] = filterStart[0] * 0.9f + adc.Wavetable_Pos_A_Pot * startMult;
 //	filterStart[1] = filterStart[1] * 0.9f + 0.1f * adc.Wavetable_Pos_B_Pot * startMult;
-	filterSlope = filterSlope * 0.9f + 0.1f * adc.Wavetable_Pos_A_Trm * slopeMult;
+	filterSlope = filterSlope * 0.9f + adc.Wavetable_Pos_A_Trm * slopeMult;
 
 	const float cvA = std::max(61300.0f - adc.WavetablePosA_CV, 0.0f);		// Reduce to ensure can hit zero with noise
 	filterStart[0] = filterStart[0] * 0.9f + std::clamp((adc.Wavetable_Pos_A_Pot + cvA), 0.0f, 65535.0f) * startMult;
@@ -134,7 +134,7 @@ void Additive::IdleJobs()
 			}
 			sinePos += spread;
 
-			wavetable.drawData[0][i] = 200 - (600 * multipliers[i]);
+			wavetable.drawData[0][i] = 240 * multipliers[i];
 		}
 
 	} else {
@@ -190,7 +190,7 @@ void Additive::IdleJobs()
 			} else {
 				multipliers[i] = 0.0f;
 			}
-			wavetable.drawData[0][i] = 200 - (600 * multipliers[i]);
+			wavetable.drawData[0][i] = 240 * multipliers[i];
 		}
 	}
 

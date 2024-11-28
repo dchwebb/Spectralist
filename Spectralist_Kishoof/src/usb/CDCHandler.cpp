@@ -163,7 +163,9 @@ void CDCHandler::ProcessCommand()
 		Reboot();
 
 	} else if (cmd.compare("mode") == 0) {						// Change between Kishoof and Spectralist
+		lcd.ScreenFill(RGBColour::Black);
 		modeSpectralist = !modeSpectralist;
+
 
 	} else if (cmd.compare("calib") == 0) {						// Start calibration process
 		calib.Calibrate('s');
