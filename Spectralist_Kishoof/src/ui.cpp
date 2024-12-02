@@ -230,24 +230,30 @@ void UI::Update()
 		}
 	}
 
-	if (buttons.encoder.Pressed()) {
-		// If directory selected by picker, click opens folder
-		if (pickerDir) {
-			activeWaveTable = wavetable.wavList[activeWaveTable].firstWav;
-			WavetablePicker(0);
-		} else {
-			switch (cfg.displayWave) {
-			case DisplayWave::channelA:
-				cfg.displayWave = DisplayWave::channelB;
-				break;
-			case DisplayWave::channelB:
-				cfg.displayWave = DisplayWave::Both;
-				break;
-			case DisplayWave::Both:
-				cfg.displayWave = DisplayWave::channelA;
-				break;
+	if (buttons.encoder.LongPress()) {
+		lcd.ScreenFill(RGBColour::Black);
+		modeSpectralist = !modeSpectralist;
+		Refresh();
+	} else {
+		if (buttons.encoder.Pressed() && !modeSpectralist) {
+			// If directory selected by picker, click opens folder
+			if (pickerDir) {
+				activeWaveTable = wavetable.wavList[activeWaveTable].firstWav;
+				WavetablePicker(0);
+			} else {
+				switch (cfg.displayWave) {
+				case DisplayWave::channelA:
+					cfg.displayWave = DisplayWave::channelB;
+					break;
+				case DisplayWave::channelB:
+					cfg.displayWave = DisplayWave::Both;
+					break;
+				case DisplayWave::Both:
+					cfg.displayWave = DisplayWave::channelA;
+					break;
+				}
+				config.ScheduleSave();
 			}
-			config.ScheduleSave();
 		}
 	}
 
@@ -272,6 +278,14 @@ void UI::Update()
 	if (!(SPI_DMA_Working)) {
 		DrawWaveTable();
 	}
+}
+
+
+void UI::Refresh()
+{
+	// Force redraw of wavetable info
+	timedInfo = TimedInfo::clearFileInfo;
+	oldWavetable = -1;
 }
 
 

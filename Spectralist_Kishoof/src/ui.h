@@ -40,6 +40,7 @@ private:
 	uint32_t WavetablePicker(const int32_t upDown);
 	void DrawWaveTable();
 	void DrawPositionMarker(uint32_t yPos, bool dirUp, float xPos, RGBColour drawColour);
+	void Refresh();
 
 	// Variables to handle info display changes
 	uint32_t oldWavetable = 0xFFFFFFFF;
@@ -68,22 +69,38 @@ private:
 	// Struct to manage buttons with debounce and GPIO management
 	struct Btn {
 		GpioPin pin;
-		uint32_t down = 0;
-		uint32_t up = 0;
+		uint32_t down = 0;			// set to zero if button has been pressed and is subsequently released
+		uint32_t up = 0;			// Set to last release time
+		bool longPressed = false;
 
 		// Debounce button press mechanism
 		bool Pressed() {
-			if (pin.IsHigh() && down && SysTickVal > down + 100) {
+			// Has been pressed and now released
+			if (pin.IsHigh() && down && SysTickVal > up + 100) {		// IsHigh = button not pressed
 				down = 0;
 				up = SysTickVal;
+				if (longPressed) {
+					longPressed = false;
+					return false;
+				}
+				return true;
 			}
 
-			if (pin.IsLow() && down == 0 && SysTickVal > up + 100) {
+			if (pin.IsLow() && down == 0 && SysTickVal > up + 100) {	// IsLow  = button pressed
 				down = SysTickVal;
+				up = 0;
+			}
+			return false;
+		}
+
+		bool LongPress() {
+			if (pin.IsLow() && !longPressed && down && SysTickVal > down + 1000) {
+				longPressed = true;
 				return true;
 			}
 			return false;
 		}
+
 	};
 	struct {
 		Btn encoder;
