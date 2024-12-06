@@ -21,11 +21,11 @@ void UI::DrawWaveTable()
 			// Pixel order is across then down
 			uint32_t yPos = 160 * i;
 			if ((i & 1) == 0) {		// left harmonic
-				for (uint32_t x = 0; x < wavetable.drawData[0][i]; ++x) {
+				for (uint32_t x = 0; x < std::min(wavetable.drawData[0][i], (uint8_t)80); ++x) {
 					lcd.drawBuffer[activeDrawBuffer][yPos + 80 - x] = RGBColour::LightBlue;
 				}
 			} else {
-				for (uint32_t x = 0; x < wavetable.drawData[0][i]; ++x) {
+				for (uint32_t x = 0; x < std::min(wavetable.drawData[0][i], (uint8_t)80); ++x) {
 					lcd.drawBuffer[activeDrawBuffer][yPos + 80 + x] = RGBColour::Orange;
 				}
 			}
