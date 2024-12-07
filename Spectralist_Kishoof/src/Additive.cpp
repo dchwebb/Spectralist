@@ -98,8 +98,9 @@ void Additive::IdleJobs()
 	static constexpr float smoothNew = 1.0f - smoothOld;
 
 	if (lpf) {
-		static constexpr float slopeMult = smoothNew * (1.0f / 65535.0f);
-		filterSlope = filterSlope * smoothOld + adc.Wavetable_Pos_A_Trm * slopeMult;
+		static constexpr float slopeMult = (1.0f / 65535.0f);
+		float slope = adc.Wavetable_Pos_A_Trm * slopeMult;
+		filterSlope = filterSlope * smoothOld + (1.0f - (slope * slope)) * smoothNew;		// Square the slope to give better control at low settings
 
 		static constexpr float startMult = smoothNew * (200.0f / 65535.0f);
 
