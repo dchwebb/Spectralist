@@ -72,6 +72,12 @@ void Additive::CalcSample()
 }
 
 
+inline void Additive::Smooth(float& currentValue, const float newValue, const float fraction)
+{
+	currentValue = currentValue * fraction + (1.0f - fraction) * newValue;
+}
+
+
 float Additive::FastTanh(const float x)
 {
 	// Apply FastTan approximation to limit sample from -1 to +1
@@ -88,30 +94,33 @@ void Additive::IdleJobs()
 
 	bool lpf = !wavetable.cfg.octaveChnB;
 
-	if (lpf) {
-		static constexpr float slopeMult = 0.1f * (1.0f / 65535.0f);
-		filterSlope = filterSlope * 0.9f + adc.Wavetable_Pos_A_Trm * slopeMult;
+	static constexpr float smoothOld = 0.95f;
+	static constexpr float smoothNew = 1.0f - smoothOld;
 
-		static constexpr float startMult = 0.1f * (200.0f / 65535.0f);
+	if (lpf) {
+		static constexpr float slopeMult = smoothNew * (1.0f / 65535.0f);
+		filterSlope = filterSlope * smoothOld + adc.Wavetable_Pos_A_Trm * slopeMult;
+
+		static constexpr float startMult = smoothNew * (200.0f / 65535.0f);
 
 		const float cvA = std::max(61300.0f - adc.WavetablePosA_CV, 0.0f);		// Reduce to ensure can hit zero with noise
-		filterStart[0] = filterStart[0] * 0.9f + std::clamp((adc.Wavetable_Pos_A_Pot + cvA), 0.0f, 65535.0f) * startMult;
+		filterStart[0] = filterStart[0] * smoothOld + std::clamp((adc.Wavetable_Pos_A_Pot + cvA), 0.0f, 65535.0f) * startMult;
 
 		const float cvB = std::max(61300.0f - adc.WavetablePosB_CV, 0.0f);		// Reduce to ensure can hit zero with noise
-		filterStart[1] = filterStart[1] * 0.9f + std::clamp((adc.Wavetable_Pos_B_Pot + cvB), 0.0f, 65535.0f) * startMult;
+		filterStart[1] = filterStart[1] * smoothOld + std::clamp((adc.Wavetable_Pos_B_Pot + cvB), 0.0f, 65535.0f) * startMult;
 	} else {
 		// Comb filter
-		static constexpr float slopeMult = 0.1f * (0.1f / 65535.0f);
-		filterSlope = filterSlope * 0.9f + (adc.Wavetable_Pos_A_Trm + 5000) * slopeMult;
+		static constexpr float slopeMult = smoothNew * (0.1f / 65535.0f);
+		filterSlope = filterSlope * smoothOld + (adc.Wavetable_Pos_A_Trm + 5000) * slopeMult;
 
 		// Start becomes interval between comb frequencies
-		static constexpr float startMult = 0.1f * (50.0f / 65535.0f);
+		static constexpr float startMult = smoothNew * (50.0f / 65535.0f);
 
 		const float cvA = std::max(61300.0f - adc.WavetablePosA_CV, 0.0f);		// Reduce to ensure can hit zero with noise
-		filterStart[0] = filterStart[0] * 0.9f + std::clamp((adc.Wavetable_Pos_A_Pot + cvA), 0.0f, 65535.0f) * startMult;
+		filterStart[0] = filterStart[0] * smoothOld+ std::clamp((adc.Wavetable_Pos_A_Pot + cvA), 0.0f, 65535.0f) * startMult;
 
 		const float cvB = std::max(61300.0f - adc.WavetablePosB_CV, 0.0f);		// Reduce to ensure can hit zero with noise
-		filterStart[1] = filterStart[1] * 0.9f + std::clamp((adc.Wavetable_Pos_B_Pot + cvB), 0.0f, 65535.0f) * startMult;
+		filterStart[1] = filterStart[1] * smoothOld + std::clamp((adc.Wavetable_Pos_B_Pot + cvB), 0.0f, 65535.0f) * startMult;
 
 	}
 	uint32_t combPos[2] = {0, 0};
@@ -171,6 +180,8 @@ void Additive::IdleJobs()
 
 		multipliers[0] = startLevel[0];
 		multipliers[1] = startLevel[1];
+		wavetable.drawData[0][0] = 80;
+		wavetable.drawData[0][1] = 80;
 
 		float nextVal = 0.0f;		// For storing partial value when spread creates fractional harmonic
 
@@ -188,9 +199,11 @@ void Additive::IdleJobs()
 					spread += multGrow;
 				}
 
-				if ((uint32_t)spreadHarm > i + 1) {
+				// if increasing the spread skips the next harmonic then apply the residual fraction to the next harmonic here
+				if ((uint32_t)spreadHarm > i + 1 && i + 1 < maxHarmonics) {
 					wavetable.drawData[0][i] = 240 * multipliers[i];
 					++i;
+					FilterCalc(i, startLevel[i & 1], combPos[i & 1], combDir[i & 1], maxLevel);
 					multipliers[i] = nextVal * startLevel[i & 1];
 					nextVal = 0.0f;
 				}
@@ -209,6 +222,7 @@ void Additive::IdleJobs()
 inline void Additive::FilterCalc(uint32_t pos, float& scale, uint32_t& combPos, int32_t& combDir, float maxLevel)
 {
 	bool lpf = !wavetable.cfg.octaveChnB;
+	bool notch = false;
 
 	if (lpf) {						// Exponential LP filter
 		if (pos >= filterStart[pos & 1]) {
@@ -219,23 +233,47 @@ inline void Additive::FilterCalc(uint32_t pos, float& scale, uint32_t& combPos, 
 			}
 		}
 	} else {
-		// Comb filter - filterStart sets harmonics between combs; filterSlope sets slope of combs
-		++combPos;
-		if (combPos > filterStart[pos & 1]) {
-			if (combDir > 0) {				// falling
+		if (notch) {
+			// Repeating Notch filter - filterStart sets harmonics between combs; filterSlope sets slope of combs
+			++combPos;
+			if (combPos > std::round(filterStart[pos & 1])) {
+				if (combDir > 0) {				// falling
+					scale -= filterSlope;
+					if (scale <= 0) {
+						scale = 0;
+						combDir *= -1;
+					}
+				} else {						// rising
+					scale += filterSlope;
+					if (scale >= maxLevel) {
+						scale = maxLevel;
+						combDir *= -1;
+						combPos = 0;
+					}
+				}
+			}
+		} else {
+			// Comb filter
+			if (combDir > 0) {				// Start falling
 				scale -= filterSlope;
 				if (scale <= 0) {
 					scale = 0;
-					combDir *= -1;
+					combDir = 0;
 				}
-			} else {						// rising
+			} else if (combDir == 0) {		// Then wait until next spike
+				if (++combPos > std::round(filterStart[pos & 1])) {
+					combDir = -1;
+				}
+			} else {						// Then rising
 				scale += filterSlope;
 				if (scale >= maxLevel) {
 					scale = maxLevel;
-					combDir *= -1;
+					combDir = 1;
 					combPos = 0;
 				}
+
 			}
+
 		}
 	}
 }

@@ -35,6 +35,7 @@ public:
 private:
 	float FastTanh(const float x);
 	inline void FilterCalc(uint32_t pos, float& scale, uint32_t& combPos, int32_t& combDir, float maxLevel);
+	inline void Smooth(float& currentValue, const float newValue, const float fraction);
 
 	float outputSamples[2] = {0.0f, 0.0f};		// Preprepared samples sent to DAC on interrupt
 	float smoothedInc = 0.0f;
