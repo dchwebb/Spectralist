@@ -32,10 +32,8 @@ void Additive::CalcSample()
 		SPI2->TXDR = (int32_t)(outputSamples[1] * scaleOutput);
 	}
 
-
 	// Pitch calculations
 	const float octave = wavetable.octaveDown.IsHigh() ? 0.5 : 1.0f;
-
 	const uint32_t newInc = calib.pitchLUT[adc.Pitch_CV] * octave;
 
 	// Calculate the maximum harmonic before aliasing (experimenting shows we need to truncate slightly before the nyquist frequency)
@@ -46,15 +44,11 @@ void Additive::CalcSample()
 	prevIncErr = newInc - inc;				// To prevent errors compounding store the previous error to apply to the next increment
 	uint32_t incMult = inc;
 
-	//float amp = 0.3f;
-
 	float mixOut[2] = {0.0f, 0.0f};
-
 
 	for (uint32_t i = 0; i < aliasHarmonic; ++i) {
 		readPos[i] += incMult;
 		mixOut[i & 1] += sineLUT[readPos[i] >> 16] * multipliers[i];
-		//amp *= 0.95f;
 		incMult += inc;
 	}
 
@@ -138,8 +132,12 @@ void Additive::IdleJobs()
 		for (uint32_t i = 0; i < maxHarmonics; ++i) {
 			FilterCalc(i, sineScale[i & 1], combPos[i & 1], combDir[i & 1], maxLevel);
 
+			// Reduce the level of the last two harmonics to avoid glitching
+			if (i == maxHarmonics - 2) sineScale[i & 1] *= 0.5f;
+			if (i == maxHarmonics - 1) sineScale[i & 1] *= 0.25f;
+
 			multipliers[i] = sineScale[i & 1] * (1.0f + sineLUT[sinePos]);
-			if (spread + multGrow > 50.0f) {
+			if (spread + multGrow > 50.0f) {			// Check the sine wave position will increment enough
 				spread += multGrow;
 			}
 			sinePos += spread;
@@ -174,6 +172,10 @@ void Additive::IdleJobs()
 		for (uint32_t i = 2; i < maxHarmonics; ++i) {
 			FilterCalc(i, startLevel[i & 1], combPos[i & 1], combDir[i & 1], maxLevel);
 
+			// Reduce the level of the last two harmonics to avoid glitching
+			if (i == maxHarmonics - 2) startLevel[i & 1] *= 0.5f;
+			if (i == maxHarmonics - 1) startLevel[i & 1] *= 0.25f;
+
 			// Increase the spread of harmonics dividing fractional components between the current and next multiplier
 			uint32_t intPart = (uint32_t)spreadHarm;
 			if (intPart == i) {
@@ -185,14 +187,10 @@ void Additive::IdleJobs()
 					spread += multGrow;
 				}
 
+			} else if (intPart > i && nextVal > 0.0f) {
 				// if increasing the spread skips the next harmonic then apply the residual fraction to the next harmonic here
-				if ((uint32_t)spreadHarm > i + 1 && i + 1 < maxHarmonics) {
-					wavetable.drawData[0][i] = 240 * multipliers[i];
-					++i;
-					FilterCalc(i, startLevel[i & 1], combPos[i & 1], combDir[i & 1], maxLevel);
-					multipliers[i] = nextVal * startLevel[i & 1];
-					nextVal = 0.0f;
-				}
+				multipliers[i] = nextVal * startLevel[i & 1];
+				nextVal = 0.0f;
 
 			} else {
 				multipliers[i] = 0.0f;
