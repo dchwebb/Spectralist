@@ -96,60 +96,46 @@ void Additive::IdleJobs()
 
 	static constexpr float smoothOld = 0.95f;
 	static constexpr float smoothNew = 1.0f - smoothOld;
+	static constexpr float startMultLPF = smoothNew * (200.0f / 65535.0f);
+	static constexpr float startMultComb = smoothNew * (50.0f / 65535.0f);		// Start becomes interval between comb frequencies
 
 	if (lpf) {
 		static constexpr float slopeMult = (1.0f / 65535.0f);
 		float slope = adc.Wavetable_Pos_A_Trm * slopeMult;
 		filterSlope = filterSlope * smoothOld + (1.0f - (slope * slope)) * smoothNew;		// Square the slope to give better control at low settings
 
-		static constexpr float startMult = smoothNew * (200.0f / 65535.0f);
-
-		const float cvA = std::max(61300.0f - adc.WavetablePosA_CV, 0.0f);		// Reduce to ensure can hit zero with noise
-		filterStart[0] = filterStart[0] * smoothOld + std::clamp((adc.Wavetable_Pos_A_Pot + cvA), 0.0f, 65535.0f) * startMult;
-
-		const float cvB = std::max(61300.0f - adc.WavetablePosB_CV, 0.0f);		// Reduce to ensure can hit zero with noise
-		filterStart[1] = filterStart[1] * smoothOld + std::clamp((adc.Wavetable_Pos_B_Pot + cvB), 0.0f, 65535.0f) * startMult;
 	} else {
 		// Comb filter
 		static constexpr float slopeMult = smoothNew * (0.1f / 65535.0f);
 		filterSlope = filterSlope * smoothOld + (adc.Wavetable_Pos_A_Trm + 5000) * slopeMult;
-
-		// Start becomes interval between comb frequencies
-		static constexpr float startMult = smoothNew * (50.0f / 65535.0f);
-
-		const float cvA = std::max(61300.0f - adc.WavetablePosA_CV, 0.0f);		// Reduce to ensure can hit zero with noise
-		filterStart[0] = filterStart[0] * smoothOld+ std::clamp((adc.Wavetable_Pos_A_Pot + cvA), 0.0f, 65535.0f) * startMult;
-
-		const float cvB = std::max(61300.0f - adc.WavetablePosB_CV, 0.0f);		// Reduce to ensure can hit zero with noise
-		filterStart[1] = filterStart[1] * smoothOld + std::clamp((adc.Wavetable_Pos_B_Pot + cvB), 0.0f, 65535.0f) * startMult;
-
 	}
+
+	const float cvA = std::max(61300.0f - adc.WavetablePosA_CV, 0.0f);		// Reduce to ensure can hit zero with noise
+	const float cvB = std::max(61300.0f - adc.WavetablePosB_CV, 0.0f);		// Reduce to ensure can hit zero with noise
+	filterStart[0] = filterStart[0] * smoothOld + std::clamp((adc.Wavetable_Pos_A_Pot + cvA), 0.0f, 65535.0f) * (lpf ? startMultLPF : startMultComb);
+	filterStart[1] = filterStart[1] * smoothOld + std::clamp((adc.Wavetable_Pos_B_Pot + cvB), 0.0f, 65535.0f) * (lpf ? startMultLPF : startMultComb);
+
 	uint32_t combPos[2] = {0, 0};
 	int32_t combDir[2] = {1, 1};
 
 
-	if (wavetable.modeSwitch.IsHigh()) {
-		// Mode to scale multipliers according to a cosine wave shape
-
-		uint16_t sinePos = Additive::sinLUTSize / 4;		// Start at maximum (pi/2)
+	if (wavetable.modeSwitch.IsHigh()) {				// Mode to scale multipliers according to a cosine wave shape
 
 		const float maxLevel = 0.15f;
 		float sineScale[2] = {maxLevel, maxLevel};
-
+		uint16_t sinePos = Additive::sinLUTSize / 4;		// Start at maximum (pi/2)
 
 		// Calculate smoothed spread amount from pot and CV with trimmer controlling range of CV
-		static constexpr float spreadMult = 20000.0f / 65535.0f;
+		static constexpr float spreadMult = 10000.0f / 65535.0f;
 		const float cv = std::max(61300.0f - adc.WarpCV, 0.0f);		// Reduce to ensure can hit zero with noise
 
-		multSpread = (0.99f * multSpread) +
-				(0.01f * (100.0f + (adc.Warp_Amt_Pot + WaveTable::NormaliseADC(adc.Warp_Amt_Trm) * cv) * spreadMult));
+		Smooth(multSpread, 100.0f + (adc.Warp_Amt_Pot + (WaveTable::NormaliseADC(adc.Warp_Amt_Trm) * cv)) * spreadMult, 0.99f);
 		float spread = multSpread;
 
-		static constexpr float growMult = 30.0f / 65535.0f;
-		multGrow = multGrow * 0.95f + 0.05f * ((adc.Warp_Type_Pot - 32768) * growMult);
+		static constexpr float growMult = 0.05f * (30.0f / 65535.0f);
+		multGrow = multGrow * 0.95f + (adc.Warp_Type_Pot - 32768) * growMult;
 
 		for (uint32_t i = 0; i < maxHarmonics; ++i) {
-			// Use per channel exponentional filtering with slope configurable
 			FilterCalc(i, sineScale[i & 1], combPos[i & 1], combDir[i & 1], maxLevel);
 
 			multipliers[i] = sineScale[i & 1] * (1.0f + sineLUT[sinePos]);
@@ -161,20 +147,19 @@ void Additive::IdleJobs()
 			wavetable.drawData[0][i] = 240 * multipliers[i];
 		}
 
-	} else {
-		// Mode to spread individual harmonics
-		static constexpr float spreadMult = 10.0f / 65535.0f;
+	} else {								// Mode to spread individual harmonics
 
 		const float maxLevel = 0.3f;
 		float startLevel[2] = {maxLevel, maxLevel};
 
 		// Calculate smoothed spread amount from pot and CV with trimmer controlling range of CV
+		static constexpr float spreadMult = 10.0f / 65535.0f;
 		const float cv = std::max(61300.0f - adc.WarpCV, 0.0f);		// Reduce to ensure can hit zero with noise
 		multSpread = (0.99f * multSpread) +
 				(0.01f * (1.0f + (adc.Warp_Amt_Pot + WaveTable::NormaliseADC(adc.Warp_Amt_Trm) * cv) * spreadMult));
 
-		static constexpr float growMult = 1.0f / 65535.0f;
-		multGrow = multGrow * 0.95f + 0.05f * ((adc.Warp_Type_Pot - 32768) * growMult);
+		static constexpr float growMult = 0.05f * (1.0f / 65535.0f);
+		multGrow = multGrow * 0.95f + (adc.Warp_Type_Pot - 32768) * growMult;
 		float spread = multSpread;
 
 		float spreadHarm = 1.0f + spread;
