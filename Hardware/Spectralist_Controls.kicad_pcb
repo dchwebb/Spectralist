@@ -1139,17 +1139,16 @@
 			)
 		)
 	)
-	(footprint "Custom_Footprints:SPDT_Miniature"
+	(footprint "Custom_Footprints:SPDT_SubMiniature_Aligned"
 		(layer "F.Cu")
 		(uuid "329bec61-05ee-459e-be78-762a643f10e7")
 		(at 130 102 90)
 		(descr "SPDT Sub Miniature Switch")
 		(tags "Switch SPDT")
 		(property "Reference" "SW1"
-			(at 0 -4.6 90)
+			(at -1.14 -3.6 90)
 			(layer "F.SilkS")
-			(hide yes)
-			(uuid "85646194-bdfc-4bf8-82ab-4fbda4b49779")
+			(uuid "a6245d32-c3a6-45ab-a354-c0894997c186")
 			(effects
 				(font
 					(size 1 1)
@@ -1158,9 +1157,9 @@
 			)
 		)
 		(property "Value" "Harmonic_Switch"
-			(at 0 5.3 90)
+			(at 0 3.81 90)
 			(layer "F.Fab")
-			(uuid "ac0d8881-2211-49d7-94a9-b600151520d1")
+			(uuid "81c3da7e-7892-4053-aa6f-157b4f2e7c65")
 			(effects
 				(font
 					(size 1 1)
@@ -1168,11 +1167,11 @@
 				)
 			)
 		)
-		(property "Footprint" "Custom_Footprints:SPDT_Miniature"
+		(property "Footprint" "Custom_Footprints:SPDT_SubMiniature_Aligned"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "1aae8e3b-e30c-4495-85bc-15bc3c9b24ce")
+			(uuid "b37542fe-6c8f-4c9e-bf09-c3af9cafa29b")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1184,7 +1183,7 @@
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "025024ab-4dcd-4fd0-b739-c201200929ac")
+			(uuid "aa00e6ab-9119-4fb4-aa47-4ff89e7e23f6")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1196,7 +1195,7 @@
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "cb59a6c1-3963-4cc9-9ee0-a0319b943f3f")
+			(uuid "423e31cc-0c4b-457c-95ce-115d5bb2b80f")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1209,7 +1208,7 @@
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "52ff2b6c-8cd6-45fe-b244-27825fce30c5")
+			(uuid "0e844c48-eed4-49b2-b9c1-dcc7a57b2321")
 			(effects
 				(font
 					(size 1 1)
@@ -1221,44 +1220,120 @@
 		(sheetname "Root")
 		(sheetfile "Spectralist_Controls.kicad_sch")
 		(attr through_hole)
-		(fp_rect
-			(start -6.4 -3.45)
-			(end 6.4 3.45)
+		(fp_line
+			(start -4.1034 -2.681)
+			(end 4.064 -2.681)
 			(stroke
-				(width 0.12)
-				(type default)
+				(width 0.15)
+				(type solid)
 			)
-			(fill none)
 			(layer "F.SilkS")
-			(uuid "f23af952-7609-4a8e-acc2-d6eded370c74")
+			(uuid "a23c8717-bf6f-4e9c-bda7-bee8ea927b26")
 		)
-		(fp_circle
-			(center 0 0)
-			(end 3.175 0)
+		(fp_line
+			(start 1.714 2.681)
+			(end 4.014 2.681)
 			(stroke
-				(width 0.12)
-				(type default)
+				(width 0.15)
+				(type solid)
 			)
-			(fill none)
-			(layer "Dwgs.User")
-			(uuid "db092e5b-e565-42f2-ae57-c2ab6df83db1")
+			(layer "F.SilkS")
+			(uuid "4258368c-8849-4a43-bc93-b7b6281192dd")
 		)
-		(fp_rect
-			(start -6.5 -3.55)
-			(end 6.5 3.55)
+		(fp_line
+			(start -4.078 2.681)
+			(end -1.878 2.681)
 			(stroke
-				(width 0.12)
-				(type default)
+				(width 0.15)
+				(type solid)
 			)
-			(fill none)
+			(layer "F.SilkS")
+			(uuid "965ea3d9-a919-4104-9c02-01a5debb57c3")
+		)
+		(fp_line
+			(start 4.1948 -2.7254)
+			(end 4.191 2.763)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
 			(layer "F.CrtYd")
-			(uuid "5e4320f1-3c07-4cef-b988-0a4e3aa97844")
+			(uuid "36cd265c-9143-41d5-ac8e-27503a6e6905")
+		)
+		(fp_line
+			(start -4.1826 -2.7254)
+			(end 4.1948 -2.7254)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "5eecf36f-820b-4a86-9ce7-1e7b7219e1ff")
+		)
+		(fp_line
+			(start 4.191 2.763)
+			(end -4.1826 2.763)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "baaa4d39-f6d6-4b2b-a2bd-c0fac0c7ae19")
+		)
+		(fp_line
+			(start -4.1826 2.763)
+			(end -4.1826 -2.7254)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "33599844-714a-47cf-8e47-8f08096d564a")
+		)
+		(fp_line
+			(start 4.064 -2.54)
+			(end 4.064 2.54)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "68189e20-85b3-4b10-8b84-d872db751a98")
+		)
+		(fp_line
+			(start -4.064 -2.54)
+			(end 4.064 -2.54)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "4e65969e-d924-4877-b556-72e4488c9f77")
+		)
+		(fp_line
+			(start -4.064 -2.54)
+			(end -4.064 2.54)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "b15aa8bf-19be-4952-a822-1d75d1ae97c9")
+		)
+		(fp_line
+			(start -4.064 2.54)
+			(end 4.064 2.54)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "3543e8b8-1687-4645-bb08-6bdee93a62f2")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 2.6 90)
+			(at -0.24 1.7 90)
 			(layer "F.Fab")
-			(hide yes)
-			(uuid "afbb8918-1da0-40bb-b774-5e7a7345340d")
+			(uuid "8c0cf7e5-33db-4995-b31b-62ae3b067eba")
 			(effects
 				(font
 					(size 0.5 0.5)
@@ -1266,48 +1341,48 @@
 				)
 			)
 		)
-		(pad "1" thru_hole circle
-			(at -4.7 0 90)
-			(size 3 3)
-			(drill 1.85)
+		(pad "1" thru_hole rect
+			(at -2.54 0 90)
+			(size 1.5 2.5)
+			(drill 1.0922)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
 			(net 5 "+3.3V")
 			(pinfunction "A")
 			(pintype "passive")
-			(uuid "4e6c62a1-38c2-4019-a3b1-4d1c76d6b2ee")
+			(uuid "d6e3068d-72f2-4dca-accf-572155413d17")
 		)
-		(pad "2" thru_hole circle
+		(pad "2" thru_hole oval
 			(at 0 0 90)
-			(size 3 3)
-			(drill 1.85)
+			(size 1.5 2.5)
+			(drill 1.0922)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
 			(net 64 "/Harmonic_Mode")
 			(pinfunction "B")
 			(pintype "passive")
-			(uuid "68832716-d12d-4a38-a370-d0b6525045e0")
+			(uuid "98de6a66-36ae-4089-b02f-ca3e62cf6886")
 		)
-		(pad "3" thru_hole circle
-			(at 4.7 0 90)
-			(size 3 3)
-			(drill 1.85)
+		(pad "3" thru_hole oval
+			(at 2.54 0 90)
+			(size 1.5 2.5)
+			(drill 1.0922)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
 			(net 2 "GND")
 			(pinfunction "C")
 			(pintype "passive")
-			(uuid "39720381-f8ce-4c0f-b116-746ea7606d51")
+			(uuid "a8c47f21-47bd-4a51-bc7e-4018c37c622b")
 		)
-		(model "${CUSTOM_3D}/SPDT_Toggle_Switch.step"
+		(model "${CUSTOM_3D}/Toggle Switch Daily Well 1AS1T2B4M2QE.STEP"
 			(offset
-				(xyz 0 0 0)
+				(xyz 0 0 8)
 			)
 			(scale
-				(xyz 1 1 1)
+				(xyz 0.55 0.55 0.8)
 			)
 			(rotate
-				(xyz -90 0 0)
+				(xyz 0 0 0)
 			)
 		)
 	)
@@ -2084,7 +2159,7 @@
 		(descr "Potentiometer 9mm")
 		(tags "Potentiometer 9mm")
 		(property "Reference" "Stretch_Trim1"
-			(at -0.04 10.04 360)
+			(at -0.04 10.04 0)
 			(layer "F.SilkS")
 			(uuid "6bd2fe1d-7075-4845-b6eb-db4cf29eee33")
 			(effects
@@ -2095,7 +2170,7 @@
 			)
 		)
 		(property "Value" "B10k"
-			(at -0.2 -7.4 360)
+			(at -0.2 -7.4 0)
 			(layer "F.Fab")
 			(uuid "d0f9516f-a0f5-47ea-9a4c-1dbea315d0c2")
 			(effects
@@ -2106,7 +2181,7 @@
 			)
 		)
 		(property "Footprint" "Custom_Footprints:Alpha_9mm_Potentiometer_Aligned"
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "1b322463-06cb-470a-ad50-0409460ebacd")
@@ -2118,7 +2193,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "f4b3f1bb-d694-48cb-8134-5e086bcf57e2")
@@ -2130,7 +2205,7 @@
 			)
 		)
 		(property "Description" "Potentiometer"
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "61bb8316-e12a-4033-a3d2-b217687c9d5d")
@@ -3860,7 +3935,7 @@
 		(descr "LED, diameter 3.0mm, 2 pins")
 		(tags "LED diameter 3.0mm 2 pins")
 		(property "Reference" "D3"
-			(at 0 -2.96 360)
+			(at 0 -2.96 0)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "f986a85f-6685-42a6-a3b5-f8da4989a63f")
@@ -3872,7 +3947,7 @@
 			)
 		)
 		(property "Value" "OctLED"
-			(at 0 2.96 360)
+			(at 0 2.96 0)
 			(layer "F.Fab")
 			(uuid "5c2ee495-b4da-4f11-8ace-67253325b001")
 			(effects
@@ -3883,7 +3958,7 @@
 			)
 		)
 		(property "Footprint" "Custom_Footprints:LED_D3.0mm"
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "e8560aa6-5e71-4216-a7f8-fb0a33064efa")
@@ -3895,7 +3970,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "360b6177-0a88-4ce5-9d19-a0a0fc0c68fa")
@@ -3907,7 +3982,7 @@
 			)
 		)
 		(property "Description" "Light emitting diode, small symbol"
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "88760f4b-aa30-4db4-8cbf-bad7d6215a63")
@@ -7462,7 +7537,7 @@
 		(descr "https://www.omron.com/ecb/products/pdf/en-b3f.pdf")
 		(tags "tact sw push 6mm")
 		(property "Reference" "SW3"
-			(at 0 -4.25 360)
+			(at 0 -4.25 0)
 			(layer "F.SilkS")
 			(uuid "f6425a3e-6312-459d-a055-ebafda337826")
 			(effects
@@ -7473,7 +7548,7 @@
 			)
 		)
 		(property "Value" "B_Octave"
-			(at 0 5.45 360)
+			(at 0 5.45 0)
 			(layer "F.Fab")
 			(uuid "4e800da9-3c97-4ad4-a952-d4e204f782af")
 			(effects
@@ -7484,7 +7559,7 @@
 			)
 		)
 		(property "Footprint" "Custom_Footprints:SW_PUSH_6mm_aligned"
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "6366be9e-25df-48bc-8979-4b41a30020a5")
@@ -7496,7 +7571,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "5ce102ec-d16f-445b-aee4-6e06f2556759")
@@ -7508,7 +7583,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "2a1a74a0-c29c-466c-be68-1fadae0f6621")
@@ -11605,7 +11680,8 @@
 	)
 	(gr_poly
 		(pts
-			(xy 114 82) (xy 146 82) (xy 146 115) (xy 142 115) (xy 142 119) (xy 118 119) (xy 118 115) (xy 114 115)
+			(xy 110 101) (xy 114 101) (xy 114 92) (xy 114 82) (xy 146 82) (xy 146 101) (xy 150 101) (xy 150 115)
+			(xy 142 115) (xy 142 119) (xy 118 119) (xy 118 115) (xy 110 115)
 		)
 		(stroke
 			(width 0.05)

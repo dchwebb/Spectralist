@@ -1,4 +1,4 @@
-23933605292709152
+23935426851863541
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -54613,6 +54613,13 @@ FBGA-24
 0
 24
 24
+Custom_Footprints
+HTSSOP-38_4.4x9.7mm_P0.5mm
+TSSOP, 38 Pin (JEDEC MO-153 Var BD https://www.jedec.org/document_search?search_api_views_fulltext=MO-153), generated with kicad-footprint-generator ipc_gullwing_generator.py
+TSSOP SO
+0
+59
+39
 Custom_Footprints
 ICE40_QFN-48-1EP_7x7mm_Pitch0.5mm
 UK Package; 48-Lead Plastic QFN (7mm x 7mm); (see Linear Technology QFN_48_05-08-1704.pdf)

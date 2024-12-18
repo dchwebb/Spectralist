@@ -9779,7 +9779,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Custom_Footprints:SPDT_Miniature"
+		(property "Footprint" "Custom_Footprints:SPDT_SubMiniature_Aligned"
 			(at 38.1 167.64 0)
 			(effects
 				(font
