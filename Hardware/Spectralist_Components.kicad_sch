@@ -8350,6 +8350,12 @@
 		(uuid "2dc70c70-4dd8-46f3-96fa-774e0d3a23ea")
 	)
 	(junction
+		(at 196.85 128.27)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "32c51ac4-bad1-440d-a86b-5d2074654b5f")
+	)
+	(junction
 		(at 80.01 26.67)
 		(diameter 1.016)
 		(color 0 0 0 0)
@@ -9603,6 +9609,16 @@
 	)
 	(wire
 		(pts
+			(xy 195.58 139.7) (xy 200.66 139.7)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "25ca0b6a-7a7d-4416-a92c-d05ca35b929f")
+	)
+	(wire
+		(pts
 			(xy 36.83 29.21) (xy 36.83 26.67)
 		)
 		(stroke
@@ -9790,6 +9806,16 @@
 			(type dash)
 		)
 		(uuid "3274750a-9abc-409d-8609-918119b62946")
+	)
+	(wire
+		(pts
+			(xy 198.12 134.62) (xy 198.12 137.16)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "32e89f12-7d70-4b0b-b1e8-b7e95b6a21d7")
 	)
 	(wire
 		(pts
@@ -10303,6 +10329,16 @@
 	)
 	(wire
 		(pts
+			(xy 195.58 134.62) (xy 195.58 139.7)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "50fe2b27-7536-45bc-8a32-c641d5df60cd")
+	)
+	(wire
+		(pts
 			(xy 295.91 29.21) (xy 290.83 29.21)
 		)
 		(stroke
@@ -10380,6 +10416,16 @@
 			(type default)
 		)
 		(uuid "59391f05-79a8-486b-aaa6-d589e010005c")
+	)
+	(wire
+		(pts
+			(xy 196.85 127) (xy 196.85 128.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "594b83c5-f541-473c-983f-9e158160ba21")
 	)
 	(wire
 		(pts
@@ -10533,6 +10579,16 @@
 	)
 	(wire
 		(pts
+			(xy 196.85 128.27) (xy 195.58 128.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6240e47c-09d8-4fbc-ad8d-3b491a41fea1")
+	)
+	(wire
+		(pts
 			(xy 22.86 62.23) (xy 31.75 62.23)
 		)
 		(stroke
@@ -10570,6 +10626,16 @@
 			(type default)
 		)
 		(uuid "651c1844-3c67-41d4-b311-0d6b19f9862d")
+	)
+	(wire
+		(pts
+			(xy 198.12 137.16) (xy 200.66 137.16)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "65efc01b-f1f3-422d-89f8-e7e0f9a50771")
 	)
 	(wire
 		(pts
@@ -10660,6 +10726,16 @@
 			(type default)
 		)
 		(uuid "6a908708-1e65-4e1d-b5c3-409d991d838c")
+	)
+	(wire
+		(pts
+			(xy 195.58 128.27) (xy 195.58 129.54)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6abcd42d-b46c-4cd8-87a3-f4c9bf352f6a")
 	)
 	(wire
 		(pts
@@ -11623,6 +11699,16 @@
 	)
 	(wire
 		(pts
+			(xy 196.85 128.27) (xy 198.12 128.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "acf56b9c-1367-4298-b5e7-aebdd4b78a9f")
+	)
+	(wire
+		(pts
 			(xy 218.44 46.99) (xy 222.25 46.99)
 		)
 		(stroke
@@ -11880,6 +11966,16 @@
 			(type default)
 		)
 		(uuid "be827457-089d-4e6c-827e-06fe9735ff09")
+	)
+	(wire
+		(pts
+			(xy 198.12 128.27) (xy 198.12 129.54)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bf01117b-77a6-4832-802b-f9aa59fcebfb")
 	)
 	(wire
 		(pts
@@ -13258,6 +13354,17 @@
 		)
 		(uuid "722c4973-dd19-46cb-85c1-5480725fac5d")
 	)
+	(label "I2C5_SDA"
+		(at 200.66 137.16 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7318f810-6e29-4f2e-ad96-979251d573f2")
+	)
 	(label "SWCLK"
 		(at 271.78 168.91 0)
 		(fields_autoplaced yes)
@@ -13488,6 +13595,17 @@
 			(justify left bottom)
 		)
 		(uuid "ce2e3c2f-60a4-477c-9c7b-e725ca21ef06")
+	)
+	(label "I2C5_SCL"
+		(at 200.66 139.7 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d492f786-c2fa-47bd-b3c2-dfe2eb8f5edf")
 	)
 	(label "UART_TX"
 		(at 67.31 125.73 180)
@@ -16843,6 +16961,145 @@
 			(project "Kishoof_Components"
 				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
 					(reference "C38")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R_Small")
+		(at 198.12 132.08 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "2b290b1b-e2c5-435e-99b3-ebfb79b44a6a")
+		(property "Reference" "R15"
+			(at 201.93 130.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1k6"
+			(at 201.93 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 198.12 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 198.12 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor, small symbol"
+			(at 198.12 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Part_Number" "C4190"
+			(at 198.12 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "AVAILABILITY" ""
+			(at 198.12 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DESCRIPTION" ""
+			(at 198.12 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MF" ""
+			(at 198.12 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MP" ""
+			(at 198.12 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE" ""
+			(at 198.12 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PRICE" ""
+			(at 198.12 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PURCHASE-URL" ""
+			(at 198.12 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f470116f-0b9a-4aac-9bc1-b8cff19c08e6")
+		)
+		(pin "2"
+			(uuid "a0bccef7-c01f-434a-bd3b-899d5dae733f")
+		)
+		(instances
+			(project "Spectralist_Components"
+				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
+					(reference "R15")
 					(unit 1)
 				)
 			)
@@ -22368,6 +22625,72 @@
 			(project "Kishoof_Components"
 				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
 					(reference "C37")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3.3V")
+		(at 196.85 127 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "761115da-4091-41f3-a192-f402265ad49e")
+		(property "Reference" "#PWR043"
+			(at 196.85 130.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 196.85 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 196.85 127 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 196.85 127 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 196.85 127 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3397dcb0-3c12-4da2-8a58-ba3f35fd895b")
+		)
+		(instances
+			(project "Spectralist_Components"
+				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
+					(reference "#PWR043")
 					(unit 1)
 				)
 			)
@@ -29880,6 +30203,148 @@
 			(project "Kishoof_Components"
 				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
 					(reference "C11")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R_Small")
+		(at 195.58 132.08 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ce092c01-3eb7-44da-aaff-649201728ad8")
+		(property "Reference" "R28"
+			(at 193.04 130.8099 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "1k6"
+			(at 193.04 133.3499 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 195.58 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 195.58 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor, small symbol"
+			(at 195.58 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Part_Number" "C4190"
+			(at 195.58 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "AVAILABILITY" ""
+			(at 195.58 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DESCRIPTION" ""
+			(at 195.58 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MF" ""
+			(at 195.58 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MP" ""
+			(at 195.58 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE" ""
+			(at 195.58 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PRICE" ""
+			(at 195.58 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PURCHASE-URL" ""
+			(at 195.58 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4936f920-8e71-4df8-8283-6a174873bc46")
+		)
+		(pin "2"
+			(uuid "d742b3ba-276b-406a-b511-0505cf433b2a")
+		)
+		(instances
+			(project "Spectralist_Components"
+				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
+					(reference "R28")
 					(unit 1)
 				)
 			)
