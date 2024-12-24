@@ -2,12 +2,10 @@
   "board": {
     "active_layer": 31,
     "active_layer_preset": "",
-    "auto_track_width": true,
+    "auto_track_width": false,
     "hidden_netclasses": [],
     "hidden_nets": [
-      "GND",
-      "+3.3VA",
-      "+3.3V"
+      "GND"
     ],
     "high_contrast_mode": 0,
     "net_color_mode": 2,
