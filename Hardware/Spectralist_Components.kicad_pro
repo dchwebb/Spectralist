@@ -179,6 +179,7 @@
       ],
       "track_widths": [
         0.0,
+        0.25,
         0.3,
         0.4
       ],
@@ -231,7 +232,9 @@
     "equivalence_files": []
   },
   "erc": {
-    "erc_exclusions": [],
+    "erc_exclusions": [
+      "pin_to_pin|-63500|1765300|5c93829f-e446-426f-b6b2-78bd800e4410|b1586226-4621-47c7-be46-fa570c1e7c2a|/00778401-a8b8-4a7c-bae7-c4fa7505df01|/00778401-a8b8-4a7c-bae7-c4fa7505df01|/00778401-a8b8-4a7c-bae7-c4fa7505df01"
+    ],
     "meta": {
       "version": 0
     },

@@ -372,6 +372,412 @@
 				)
 			)
 		)
+		(symbol "Connector:Conn_01x08_Pin"
+			(pin_names
+				(offset 1.016) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at 0 10.16 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Conn_01x08_Pin"
+				(at 0 -12.7 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Generic connector, single row, 01x08, script generated"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_locked" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "connector"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Connector*:*_1x??_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Conn_01x08_Pin_1_1"
+				(polyline
+					(pts
+						(xy 1.27 -10.16) (xy 0.8636 -10.16)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -7.62) (xy 0.8636 -7.62)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -5.08) (xy 0.8636 -5.08)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -2.54) (xy 0.8636 -2.54)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 0) (xy 0.8636 0)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 2.54) (xy 0.8636 2.54)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 5.08) (xy 0.8636 5.08)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 7.62) (xy 0.8636 7.62)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start 0.8636 -10.033)
+					(end 0 -10.287)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 -7.493)
+					(end 0 -7.747)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 -4.953)
+					(end 0 -5.207)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 -2.413)
+					(end 0 -2.667)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 0.127)
+					(end 0 -0.127)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 2.667)
+					(end 0 2.413)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 5.207)
+					(end 0 4.953)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 7.747)
+					(end 0 7.493)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(pin passive line
+					(at 5.08 7.62 180)
+					(length 3.81)
+					(name "Pin_1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 5.08 180)
+					(length 3.81)
+					(name "Pin_2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 2.54 180)
+					(length 3.81)
+					(name "Pin_3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 0 180)
+					(length 3.81)
+					(name "Pin_4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -2.54 180)
+					(length 3.81)
+					(name "Pin_5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -5.08 180)
+					(length 3.81)
+					(name "Pin_6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -7.62 180)
+					(length 3.81)
+					(name "Pin_7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -10.16 180)
+					(length 3.81)
+					(name "Pin_8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
 		(symbol "Connector:Conn_01x10_Pin"
 			(pin_names
 				(offset 1.016) hide)
@@ -3363,8 +3769,8 @@
 		)
 		(uuid "f6352292-54f2-4f5a-bb2a-3f5633c2f850")
 	)
-	(label "Harmonic_Stretch"
-		(at 115.57 101.6 0)
+	(label "Filter_Slope_Pot"
+		(at 115.57 76.2 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3372,40 +3778,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "05151358-d7f0-429e-b162-50e697b42a7d")
-	)
-	(label "Filter_A_Cutoff"
-		(at 115.57 29.21 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "055b115a-7ca1-47f6-82c1-495997f7292e")
-	)
-	(label "Channel_B_Out"
-		(at 68.58 95.25 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "05e26f02-629d-4d8e-8460-131e87a5f5b1")
-	)
-	(label "Stretch_In"
-		(at 35.56 118.11 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "06f493f3-6a09-47a1-a3c4-6725e84a2749")
+		(uuid "049ae029-1c9b-441e-9c2a-8e9d78f0a600")
 	)
 	(label "LED_SCL"
 		(at 199.39 43.18 0)
@@ -3418,8 +3791,8 @@
 		)
 		(uuid "0ce5cc37-c1e8-4b11-be1b-c9fa2e0068c4")
 	)
-	(label "Filter_B_Cutoff"
-		(at 115.57 52.07 0)
+	(label "Harm_Warp_CV_In"
+		(at 265.43 81.28 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3427,21 +3800,10 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "0e155ded-1d2e-4350-9717-68beff2f6985")
+		(uuid "10fecbce-9b35-4cb0-acce-b99f9101a148")
 	)
-	(label "Filter_B_LED"
-		(at 205.74 149.86 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "1e1d09f1-9d9c-4bbd-8d61-bb5b1b7c94c9")
-	)
-	(label "Stretch_In"
-		(at 35.56 29.21 0)
+	(label "LED_Oct_Out"
+		(at 226.06 48.26 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3449,7 +3811,62 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "36b754de-f5a4-4f9c-b430-c3cf765f16bd")
+		(uuid "157439c1-e81c-4af6-9a28-a560aa62e0fe")
+	)
+	(label "Filter_A_Pot"
+		(at 115.57 29.21 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1626f70c-96d1-4a8d-8a0e-814cc72e5aac")
+	)
+	(label "Harm_Warp_CV_In"
+		(at 35.56 71.12 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1b802bf5-b74c-4234-aef3-2a5557125460")
+	)
+	(label "Filter_A_CV_In"
+		(at 68.58 29.21 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "22b0da7b-4285-4e37-a329-dda2cbba11b5")
+	)
+	(label "Harm_Stretch_Trm"
+		(at 160.02 80.01 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "28d020dd-ab53-4e02-bc9d-e3417d352dac")
+	)
+	(label "Filter_B_CV_In"
+		(at 68.58 50.8 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2f03ec67-33c1-4e52-b459-639586775194")
 	)
 	(label "Octave_Btn"
 		(at 109.22 167.64 180)
@@ -3462,8 +3879,8 @@
 		)
 		(uuid "3b55a268-d23a-462b-aaa6-81afdd8a8712")
 	)
-	(label "LED_Filter_A_Out"
-		(at 266.7 92.71 0)
+	(label "Filter_Mode"
+		(at 262.89 40.64 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3471,42 +3888,9 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "42248aa2-a7ee-42d4-a4b1-4b640d50152f")
-	)
-	(label "Filter_B_Pot"
-		(at 227.33 46.99 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "4bc29228-d892-4338-9d05-828026dd4337")
-	)
-	(label "Harm_Warp_Pot"
-		(at 229.87 87.63 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "501a4693-b772-4bb3-b741-97cfeb933bfb")
+		(uuid "3deb715d-3fec-47a5-8b3d-8115d4245705")
 	)
 	(label "Filter_Mode"
-		(at 264.16 44.45 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "571bb017-1d77-4696-9683-390f576329f4")
-	)
-	(label "Filter_Type"
 		(at 63.5 167.64 180)
 		(fields_autoplaced yes)
 		(effects
@@ -3515,10 +3899,10 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "5d71a10e-3490-4084-a98d-8e69d2b4927c")
+		(uuid "4a89d1e9-1410-4ca1-b1b3-3bd36a311314")
 	)
-	(label "Harm_Warp_CV_In"
-		(at 229.87 90.17 0)
+	(label "Pan_CV_In"
+		(at 35.56 95.25 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3526,10 +3910,10 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "5f00b7f6-44d2-42e6-8721-6c905a4a2921")
+		(uuid "4ce98ec9-cc47-4023-82c1-305788d51a5d")
 	)
-	(label "I2C5_SCL"
-		(at 264.16 54.61 0)
+	(label "Harm_Stretch_CV_In"
+		(at 265.43 99.06 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3537,7 +3921,40 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "5ff8e391-7f14-460a-bebe-f69c99db781c")
+		(uuid "50028f7c-b819-4236-86cc-2b7a44e537f3")
+	)
+	(label "Harm_Stretch_Pot"
+		(at 115.57 101.6 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "504ef7b3-cfe7-4a38-af6b-e052d5ddc57c")
+	)
+	(label "LED_Filter_B_Out"
+		(at 205.74 149.86 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "5b919192-30a8-463a-bf11-2cab4218acd0")
+	)
+	(label "Harm_Stretch_Pot"
+		(at 228.6 99.06 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "5dbc0e67-a117-418d-acbc-ba4092e003d8")
 	)
 	(label "Harmonic_Mode"
 		(at 30.48 167.64 180)
@@ -3550,8 +3967,8 @@
 		)
 		(uuid "64b21577-f3cb-408d-92b0-47709ed9084d")
 	)
-	(label "Harm_Stretch_CV_In"
-		(at 229.87 82.55 0)
+	(label "Audio_Out_R"
+		(at 68.58 95.25 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3559,10 +3976,10 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "6bfbb988-b9cc-4071-a432-4d3c450f7e36")
+		(uuid "667c9e7d-fe89-4f61-b096-a4a0e5bafddd")
 	)
-	(label "Filter_A_In"
-		(at 68.58 29.21 0)
+	(label "Filter_B_Trm"
+		(at 228.6 78.74 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3570,31 +3987,20 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "6ce83d2e-6351-4b33-a65c-351c1134fef0")
+		(uuid "680ef97d-53f5-48c2-826f-8fb43cc17159")
 	)
-	(label "Filter_B_In"
-		(at 68.58 50.8 0)
+	(label "LED_Filter_A_Out"
+		(at 205.74 143.51 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
-		(uuid "6e170dcd-8e93-4f88-9b43-a39dd60d0f89")
+		(uuid "6d1931f0-d8cb-4b66-bbfa-90d7f1b03dca")
 	)
-	(label "Pan_CV_In"
-		(at 229.87 95.25 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "6eef305a-f7a0-48b0-b147-3af85eed6cf5")
-	)
-	(label "Filter_A_Trim"
+	(label "Filter_A_Trm"
 		(at 160.02 30.48 0)
 		(fields_autoplaced yes)
 		(effects
@@ -3605,8 +4011,8 @@
 		)
 		(uuid "6f0d4089-08ea-44a8-bba7-75ace38ada86")
 	)
-	(label "Filter_A_Trm"
-		(at 227.33 44.45 0)
+	(label "Octave_Btn"
+		(at 262.89 48.26 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3614,10 +4020,10 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "74e6cab4-b8c1-4891-a2be-15eeffa919dd")
+		(uuid "82457211-fdf3-4fdf-bba7-89566b15ac30")
 	)
 	(label "Filter_A_Pot"
-		(at 264.16 36.83 0)
+		(at 262.89 50.8 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3625,65 +4031,10 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "7f8eaf5c-e54d-436c-8f3b-cd0c598786c8")
-	)
-	(label "Stretch_Trim"
-		(at 160.02 80.01 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "8b394d6e-d82d-4606-a601-713de81bd689")
-	)
-	(label "Warp_In"
-		(at 35.56 71.12 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "8f4321dc-4a63-4e51-ad47-e43203865417")
-	)
-	(label "Pitch_CV_In"
-		(at 266.7 85.09 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "8f44ba1b-84af-4ac6-b507-868b3affa2c3")
-	)
-	(label "I2C5_SDA"
-		(at 264.16 52.07 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "97fd9915-a46e-46cd-8c25-56298e93656c")
-	)
-	(label "Filter_A_LED"
-		(at 205.74 143.51 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "9eee4d45-98c0-46e8-a9f5-7f44a00692fc")
+		(uuid "898377ba-d36b-4a46-97d2-abca3ce04171")
 	)
 	(label "Filter_A_CV_In"
-		(at 227.33 41.91 0)
+		(at 265.43 101.6 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3691,21 +4042,10 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "a12511d8-65dc-4310-9d25-36dc8bf0a892")
+		(uuid "8a07068a-e9ae-499e-ab6e-7de994c33d25")
 	)
-	(label "Octave_LED"
-		(at 205.74 156.21 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "a4745f5c-4a22-459c-8d57-2ed444221b6e")
-	)
-	(label "Harmonic_Warp"
-		(at 115.57 125.73 0)
+	(label "Filter_B_Pot"
+		(at 228.6 91.44 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3713,10 +4053,10 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "a500dea8-72c3-46c8-b4f3-6ca7022dddb0")
+		(uuid "8c897b74-acc1-4a3f-9b5b-71aad6e865cb")
 	)
-	(label "Filter_B_CV_In"
-		(at 227.33 52.07 0)
+	(label "LED_Filter_A_Out"
+		(at 226.06 45.72 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3724,10 +4064,10 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "a57bd17d-44ec-4ba3-90e2-89b8ec00da17")
+		(uuid "912b80f8-d310-449c-ac88-d7126696dd14")
 	)
-	(label "Octave_Btn"
-		(at 266.7 80.01 0)
+	(label "LED_Filter_B_Out"
+		(at 226.06 53.34 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3735,53 +4075,9 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "a7f4e839-8f9c-4bce-9bcc-d2958dcb4ff8")
+		(uuid "945d8681-893a-45da-bc71-7452968bb727")
 	)
-	(label "Warp_Mode"
-		(at 264.16 46.99 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "b932cf54-9f98-4118-9508-aeeeef887bc5")
-	)
-	(label "V_Oct_In"
-		(at 35.56 50.8 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "bb29db31-5045-4160-a8d0-86561ede04f3")
-	)
-	(label "Harm_Stretch_Pot"
-		(at 266.7 82.55 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "bc06cdec-52b7-43e0-9e97-af1d58632436")
-	)
-	(label "Filter_B_Trm"
-		(at 227.33 54.61 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "bdda754d-829f-4da1-a04f-a6bd8d3eef71")
-	)
-	(label "Channel_A_Out"
+	(label "Audio_Out_L"
 		(at 68.58 71.12 0)
 		(fields_autoplaced yes)
 		(effects
@@ -3790,10 +4086,10 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "c4f3a19d-90b7-4ba6-a070-4c6e6238a24c")
+		(uuid "948ef7a1-0ed7-45f9-bf33-3a56948f1422")
 	)
-	(label "Filter_Slope_Pot"
-		(at 227.33 36.83 0)
+	(label "Harm_Warp_Pot"
+		(at 115.57 125.73 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3801,7 +4097,62 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "c60c51c1-8782-4007-bcc8-793759793a4f")
+		(uuid "98d74a94-5f0b-4052-b4a9-1176fcd4bcbc")
+	)
+	(label "Filter_B_Pot"
+		(at 115.57 52.07 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a14a959c-d504-44db-a12a-1511e2fdab6b")
+	)
+	(label "LED_SCL"
+		(at 226.06 38.1 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "aae5b0c8-41ee-44e6-828a-1a597efb7bba")
+	)
+	(label "Harm_Warp_Pot"
+		(at 228.6 101.6 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "bf3ba972-e729-448b-92bf-e2c8f228b28f")
+	)
+	(label "Pan_CV_In"
+		(at 265.43 91.44 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c1909e0b-48b0-4fc3-b999-b72871755221")
+	)
+	(label "Harm_Stretch_CV_In"
+		(at 35.56 29.21 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c2d3ea53-d97f-4b9f-b444-a2ea148b7a81")
 	)
 	(label "LED_SDA"
 		(at 199.39 48.26 0)
@@ -3814,8 +4165,8 @@
 		)
 		(uuid "caa1e68e-cb7d-412e-9ab2-8579059419ac")
 	)
-	(label "Harm_Stretch_Trm"
-		(at 229.87 80.01 0)
+	(label "Filter_B_CV_In"
+		(at 265.43 83.82 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3823,10 +4174,10 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "d4349d73-3165-41c3-80e7-1bf4fb39230b")
+		(uuid "ce77281a-f71f-424a-b8d1-6f6c49f84d20")
 	)
-	(label "Filter_Slope"
-		(at 115.57 76.2 0)
+	(label "Filter_A_Trm"
+		(at 262.89 53.34 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3834,32 +4185,10 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "d506cb6e-4194-48e8-b85c-4a63541b4d46")
-	)
-	(label "Pan_In"
-		(at 35.56 95.25 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "dba129e4-d1be-4d3e-9a60-af870a6da00b")
-	)
-	(label "LED_Filter_B_Out"
-		(at 266.7 95.25 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "dc345625-e562-4cd9-8344-09424d8f8e58")
+		(uuid "d5e1636e-9d4a-4fd5-aff9-7fee06e447f7")
 	)
 	(label "Filter_Slope_CV_In"
-		(at 229.87 92.71 0)
+		(at 265.43 88.9 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3867,10 +4196,65 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "e312047e-aa9c-4d86-af96-e82530a47ea4")
+		(uuid "d64c9529-7da7-4cfa-a846-4116e6a13b1c")
+	)
+	(label "Filter_Slope_Pot"
+		(at 228.6 88.9 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d698d6a4-2def-4b42-b719-cb37d62e1670")
+	)
+	(label "LED_SDA"
+		(at 226.06 40.64 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "df53ad2f-10de-4f22-948f-e140de8d4cc5")
+	)
+	(label "Pitch_CV_In"
+		(at 265.43 96.52 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e5e9efa8-b613-49a5-93e6-0b75bfcd2942")
+	)
+	(label "Filter_Slope_CV_In"
+		(at 35.56 118.11 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "eb767274-46f9-48fd-acd6-9031714a1eae")
 	)
 	(label "LED_Oct_Out"
-		(at 266.7 90.17 0)
+		(at 205.74 156.21 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "ecfb82d9-199f-4267-95b9-c1ba81aae51d")
+	)
+	(label "Harm_Stretch_Trm"
+		(at 228.6 96.52 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3878,9 +4262,31 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "f391a31b-319c-4623-83a8-853473847f50")
+		(uuid "ef2dc8a6-e597-4539-ba00-b3c0ef2e1f5c")
 	)
-	(label "Filter_B_Trim"
+	(label "Audio_Out_L"
+		(at 228.6 81.28 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "efdd9985-79b7-4d1e-98d6-276af9209ad7")
+	)
+	(label "Pitch_CV_In"
+		(at 35.56 50.8 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "fc5c3295-7b9f-4b2d-839e-bf3472ac8ef4")
+	)
+	(label "Filter_B_Trm"
 		(at 160.02 53.34 0)
 		(fields_autoplaced yes)
 		(effects
@@ -3890,6 +4296,28 @@
 			(justify left bottom)
 		)
 		(uuid "fd27a601-f24e-45e4-84d8-5c41d7a5a40e")
+	)
+	(label "Audio_Out_R"
+		(at 228.6 86.36 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "fec18e62-94b9-4d3e-a630-4483055ea46d")
+	)
+	(label "Harmonic_Mode"
+		(at 262.89 43.18 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "fff9a7e6-da51-4889-a417-f43e43157f31")
 	)
 	(symbol
 		(lib_id "power:GND")
@@ -4022,73 +4450,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+12V")
-		(at 264.16 41.91 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "03796ecf-aba9-4d64-8c51-4c922f9b6822")
-		(property "Reference" "#PWR020"
-			(at 260.35 41.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+12V"
-			(at 269.24 41.9099 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 264.16 41.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 264.16 41.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+12V\""
-			(at 264.16 41.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "e2d26780-7939-4d22-b11a-e5e20a224981")
-		)
-		(instances
-			(project "Spectralist_Controls"
-				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
-					(reference "#PWR020")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:+3.3VA")
 		(at 109.22 71.12 0)
 		(unit 1)
@@ -4156,6 +4517,73 @@
 	)
 	(symbol
 		(lib_id "power:GND")
+		(at 265.43 86.36 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "0b78783b-7e30-49f3-9dcf-77b04da30957")
+		(property "Reference" "#PWR029"
+			(at 271.78 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 268.478 85.598 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 265.43 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 265.43 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 265.43 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "16dedbac-edc5-47c4-88e6-67f28652bc5d")
+		)
+		(instances
+			(project "Spectralist_Controls"
+				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
+					(reference "#PWR029")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
 		(at 33.02 99.06 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4214,6 +4642,73 @@
 			(project "Sinosaur_Controls"
 				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
 					(reference "#PWR0109")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 265.43 78.74 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "0e8049a5-d14d-4131-9849-02c4bfa3c59f")
+		(property "Reference" "#PWR030"
+			(at 271.78 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 268.478 77.978 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 265.43 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 265.43 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 265.43 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "935b9d08-2980-4b22-8633-b35a84e5ae51")
+		)
+		(instances
+			(project "Spectralist_Controls"
+				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
+					(reference "#PWR030")
 					(unit 1)
 				)
 			)
@@ -4504,160 +4999,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector:Conn_01x10_Pin")
-		(at 224.79 90.17 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "142cf483-9e29-4245-bc11-9f5e40e2962e")
-		(property "Reference" "J3"
-			(at 232.41 71.628 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "Conn_01x10_Pin"
-			(at 232.41 74.168 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x10_P2.54mm_Vertical"
-			(at 224.79 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 224.79 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x10, script generated"
-			(at 224.79 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "AVAILABILITY" ""
-			(at 224.79 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "DESCRIPTION" ""
-			(at 224.79 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MF" ""
-			(at 224.79 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MP" ""
-			(at 224.79 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "PACKAGE" ""
-			(at 224.79 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "PRICE" ""
-			(at 224.79 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "PURCHASE-URL" ""
-			(at 224.79 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "5"
-			(uuid "95105033-8ad8-4029-a9b4-c6bc90836454")
-		)
-		(pin "3"
-			(uuid "43fb1a6c-23ab-4e1d-a0f0-ddc8574fcd0f")
-		)
-		(pin "2"
-			(uuid "150db13b-1d36-4ae3-875a-6bf1d250e4fc")
-		)
-		(pin "4"
-			(uuid "0f8eb8fb-16e3-4b3e-aab0-b9b9037acd02")
-		)
-		(pin "6"
-			(uuid "bf845fb7-4bce-486b-b471-3f239e9b919b")
-		)
-		(pin "7"
-			(uuid "a86b35cd-fea5-4963-8f4f-c397b80fdab6")
-		)
-		(pin "1"
-			(uuid "59fc435c-1817-42fe-a56f-53acf297f656")
-		)
-		(pin "8"
-			(uuid "e3f26b04-972b-4d28-9656-6232716b3813")
-		)
-		(pin "10"
-			(uuid "97741c8b-e5ef-45cc-96b2-d9b8657515ed")
-		)
-		(pin "9"
-			(uuid "6591923f-e795-45b9-9c85-60953bf1376c")
-		)
-		(instances
-			(project "Spectralist_Controls"
-				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
-					(reference "J3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:+3.3VA")
 		(at 109.22 120.65 0)
 		(unit 1)
@@ -4718,160 +5059,6 @@
 			(project "Spectralist_Controls"
 				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
 					(reference "#PWR018")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector:Conn_01x10_Pin")
-		(at 259.08 46.99 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "173b9ad1-8388-46bd-b1cf-0810ee04f6cd")
-		(property "Reference" "J2"
-			(at 266.7 28.448 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "Conn_01x10_Pin"
-			(at 266.7 30.988 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x10_P2.54mm_Vertical"
-			(at 259.08 46.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 259.08 46.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x10, script generated"
-			(at 259.08 46.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "AVAILABILITY" ""
-			(at 259.08 46.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "DESCRIPTION" ""
-			(at 259.08 46.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MF" ""
-			(at 259.08 46.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MP" ""
-			(at 259.08 46.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "PACKAGE" ""
-			(at 259.08 46.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "PRICE" ""
-			(at 259.08 46.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "PURCHASE-URL" ""
-			(at 259.08 46.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "5"
-			(uuid "2a9dbbd4-e64c-4eca-995c-8d5a26c13bff")
-		)
-		(pin "3"
-			(uuid "786ed996-b5f2-475a-84a8-7264123618c3")
-		)
-		(pin "2"
-			(uuid "ad121d29-6277-48d1-8f62-a381a4c8768b")
-		)
-		(pin "4"
-			(uuid "24d2a159-596b-463c-8a7b-ac32927a4985")
-		)
-		(pin "6"
-			(uuid "65375337-39f4-46ef-a447-957c2c4ee06e")
-		)
-		(pin "7"
-			(uuid "4b78ec4f-739f-4a46-8f6b-0876f3a7f56d")
-		)
-		(pin "1"
-			(uuid "0610a88a-66b8-48e7-978f-f1e59bf05642")
-		)
-		(pin "8"
-			(uuid "7787c3a5-c975-4d8f-98b0-1413dde8a22e")
-		)
-		(pin "10"
-			(uuid "82ad65e5-ea5a-42e7-8ee8-685916033459")
-		)
-		(pin "9"
-			(uuid "72d59d8a-cebb-4e5f-ae73-971132c9151b")
-		)
-		(instances
-			(project "Spectralist_Controls"
-				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
-					(reference "J2")
 					(unit 1)
 				)
 			)
@@ -5229,6 +5416,154 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:Conn_01x08_Pin")
+		(at 257.81 45.72 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "2084af98-d0aa-432b-a3fd-39118444794c")
+		(property "Reference" "J2"
+			(at 265.43 27.178 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_01x8_Pin"
+			(at 265.43 29.718 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical"
+			(at 257.81 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 257.81 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x08, script generated"
+			(at 257.81 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "AVAILABILITY" ""
+			(at 257.81 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DESCRIPTION" ""
+			(at 257.81 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MF" ""
+			(at 257.81 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MP" ""
+			(at 257.81 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE" ""
+			(at 257.81 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PRICE" ""
+			(at 257.81 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PURCHASE-URL" ""
+			(at 257.81 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "5"
+			(uuid "c816d538-4730-4e29-b829-f31e1c58d599")
+		)
+		(pin "3"
+			(uuid "6ad16e0b-2994-4188-9fd0-a0a8c4e62d95")
+		)
+		(pin "2"
+			(uuid "abc6a651-7ecf-4194-a358-d7aedd6c8b20")
+		)
+		(pin "4"
+			(uuid "f97e52b5-a50f-42b4-ad87-76a62516c578")
+		)
+		(pin "6"
+			(uuid "3eea8ded-3aee-4d9c-9bd6-614418f10514")
+		)
+		(pin "7"
+			(uuid "4e21bfd8-70bf-447b-b379-d59620e2ddaf")
+		)
+		(pin "1"
+			(uuid "5ea39535-064b-401b-825f-f7f25e373ead")
+		)
+		(pin "8"
+			(uuid "18dde58b-4277-4c28-8a4b-2907125f64cd")
+		)
+		(instances
+			(project "Spectralist_Controls"
+				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
+					(reference "J2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "thonkiconn:AudioJack2_Ground_Switch")
 		(at 25.4 118.11 0)
 		(unit 1)
@@ -5246,7 +5581,7 @@
 				)
 			)
 		)
-		(property "Value" "StretchCV"
+		(property "Value" "SlopeCV"
 			(at 24.13 111.76 0)
 			(effects
 				(font
@@ -5815,6 +6150,227 @@
 			(project "Kishoof_Controls"
 				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
 					(reference "#PWR0101")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 228.6 83.82 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "2c2b7727-bff7-4224-8327-a44558e8251b")
+		(property "Reference" "#PWR026"
+			(at 234.95 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 231.648 83.058 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 228.6 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 228.6 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 228.6 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "8545c4f6-8235-46e2-9e02-6e7904b1c380")
+		)
+		(instances
+			(project "Spectralist_Controls"
+				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
+					(reference "#PWR026")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Conn_01x10_Pin")
+		(at 223.52 88.9 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "2decdb16-3892-4b62-b66f-af79c7ced247")
+		(property "Reference" "J3"
+			(at 231.14 70.358 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_01x10_Pin"
+			(at 231.14 72.898 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x10_P2.54mm_Vertical"
+			(at 223.52 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 223.52 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x10, script generated"
+			(at 223.52 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "AVAILABILITY" ""
+			(at 223.52 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DESCRIPTION" ""
+			(at 223.52 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MF" ""
+			(at 223.52 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MP" ""
+			(at 223.52 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE" ""
+			(at 223.52 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PRICE" ""
+			(at 223.52 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PURCHASE-URL" ""
+			(at 223.52 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "5"
+			(uuid "41d02556-c3c2-46a0-9910-22ca4e0ffcee")
+		)
+		(pin "3"
+			(uuid "5e6aa0e6-dfef-45e3-a92d-8ae1ca53d6ca")
+		)
+		(pin "2"
+			(uuid "80446c29-f5a5-44ab-b506-3ff6f83be3d0")
+		)
+		(pin "4"
+			(uuid "ced7215c-6d75-4945-8adf-94963807b30f")
+		)
+		(pin "6"
+			(uuid "2b5803f9-a56e-4beb-97cb-4ff30114731f")
+		)
+		(pin "7"
+			(uuid "14c86ab6-e9bb-41fe-ab95-cb62371643a3")
+		)
+		(pin "1"
+			(uuid "96590658-43dc-4e71-ba08-89082fccfc1f")
+		)
+		(pin "8"
+			(uuid "7c37c384-0617-46b8-9c26-36cb258ee29e")
+		)
+		(pin "10"
+			(uuid "84cfefa3-422f-47ad-9729-1a8dd617db26")
+		)
+		(pin "9"
+			(uuid "8f86134a-99e9-420f-8e4c-d003f4d093c7")
+		)
+		(instances
+			(project "Spectralist_Controls"
+				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
+					(reference "J3")
 					(unit 1)
 				)
 			)
@@ -6915,6 +7471,72 @@
 		)
 	)
 	(symbol
+		(lib_id "power:+12V")
+		(at 262.89 55.88 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6255e0e2-8b0b-4f4d-80dd-2760ac53d37c")
+		(property "Reference" "#PWR03"
+			(at 259.08 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+12V"
+			(at 267.208 55.372 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 262.89 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 262.89 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+12V\""
+			(at 262.89 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "32d92290-0188-484e-8c13-19dc16efb0a1")
+		)
+		(instances
+			(project "Spectralist_Controls"
+				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
+					(reference "#PWR03")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "thonkiconn:AudioJack2_Ground_Switch")
 		(at 59.69 71.12 0)
 		(unit 1)
@@ -7061,73 +7683,6 @@
 			(project "Sinosaur_Controls"
 				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
 					(reference "J12")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 227.33 39.37 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "73aee9d3-0c7a-4bef-b5a0-0664948d8044")
-		(property "Reference" "#PWR01"
-			(at 233.68 39.37 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 230.378 38.354 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-		(property "Footprint" ""
-			(at 227.33 39.37 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 227.33 39.37 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 227.33 39.37 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "38948477-7339-40c9-92d9-15e80f2d56c9")
-		)
-		(instances
-			(project "Spectralist_Controls"
-				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
-					(reference "#PWR01")
 					(unit 1)
 				)
 			)
@@ -7350,6 +7905,73 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 262.89 45.72 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7e39798d-6daf-4a48-b29e-56643a139b8c")
+		(property "Reference" "#PWR021"
+			(at 269.24 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 265.938 44.45 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 262.89 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 262.89 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 262.89 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "99a1ff58-50c1-4439-930a-5314dd9a49f1")
+		)
+		(instances
+			(project "Spectralist_Controls"
+				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
+					(reference "#PWR021")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:+3.3VA")
 		(at 153.67 48.26 0)
 		(unit 1)
@@ -7410,6 +8032,73 @@
 			(project "Spectralist_Controls"
 				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
 					(reference "#PWR035")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 226.06 35.56 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "84363d12-3b7a-46a6-b3cf-cdf1bc830d5f")
+		(property "Reference" "#PWR01"
+			(at 232.41 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 229.108 34.798 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 226.06 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 226.06 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 226.06 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "87db1c46-776b-4371-94c9-bb73e6687747")
+		)
+		(instances
+			(project "Spectralist_Controls"
+				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
+					(reference "#PWR01")
 					(unit 1)
 				)
 			)
@@ -7558,6 +8247,72 @@
 			(project "Sinosaur_Controls"
 				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
 					(reference "D3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3.3V")
+		(at 262.89 38.1 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "867b8b66-93f4-4567-9790-28cf6b16136f")
+		(property "Reference" "#PWR020"
+			(at 259.08 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 266.7 37.084 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 262.89 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 262.89 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 262.89 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "675e972a-8ca1-4a99-ab6d-c768698f7ad2")
+		)
+		(instances
+			(project "Spectralist_Controls"
+				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
+					(reference "#PWR020")
 					(unit 1)
 				)
 			)
@@ -8706,17 +9461,16 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+3.3V")
-		(at 264.16 39.37 270)
+		(lib_id "power:GND")
+		(at 226.06 43.18 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "a2ff594a-c710-4e22-b204-9e89fe64f5f7")
-		(property "Reference" "#PWR03"
-			(at 260.35 39.37 0)
+		(uuid "a5e13ce8-3650-4076-ae96-a173ef7a9a27")
+		(property "Reference" "#PWR02"
+			(at 232.41 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8724,17 +9478,18 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "+3.3V"
-			(at 269.24 39.3699 90)
+		(property "Value" "GND"
+			(at 229.108 42.164 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
+				(hide yes)
 			)
 		)
 		(property "Footprint" ""
-			(at 264.16 39.37 0)
+			(at 226.06 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8743,7 +9498,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 264.16 39.37 0)
+			(at 226.06 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8751,8 +9506,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 264.16 39.37 0)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 226.06 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8761,12 +9516,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "30993e0e-634f-4cda-8f3a-d1c4bdb2de94")
+			(uuid "d3ace460-9e75-4077-9e91-e20edd0ea016")
 		)
 		(instances
 			(project "Spectralist_Controls"
 				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
-					(reference "#PWR03")
+					(reference "#PWR02")
 					(unit 1)
 				)
 			)
@@ -8990,160 +9745,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector:Conn_01x10_Pin")
-		(at 261.62 90.17 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "ad684859-7ca4-4d13-b5e5-d1b08bf2713d")
-		(property "Reference" "J4"
-			(at 269.24 71.628 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "Conn_01x10_Pin"
-			(at 269.24 74.168 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x10_P2.54mm_Vertical"
-			(at 261.62 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 261.62 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x10, script generated"
-			(at 261.62 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "AVAILABILITY" ""
-			(at 261.62 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "DESCRIPTION" ""
-			(at 261.62 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MF" ""
-			(at 261.62 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MP" ""
-			(at 261.62 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "PACKAGE" ""
-			(at 261.62 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "PRICE" ""
-			(at 261.62 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "PURCHASE-URL" ""
-			(at 261.62 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "5"
-			(uuid "bf4e18fe-c9b1-442d-8b3f-d8be400bbf5d")
-		)
-		(pin "3"
-			(uuid "b5982334-e72c-411f-8e93-17b2ad068987")
-		)
-		(pin "2"
-			(uuid "c6162f26-3c61-47be-a88a-fbe8f5dee4af")
-		)
-		(pin "4"
-			(uuid "00adff10-02b7-4a70-adf6-e839198f8c88")
-		)
-		(pin "6"
-			(uuid "b70ae1c3-e434-45a1-bc30-247ead59ea9e")
-		)
-		(pin "7"
-			(uuid "4b92abe8-b08d-4f81-a02a-efecaa764368")
-		)
-		(pin "1"
-			(uuid "50f6a8b9-b84f-400d-9128-3671f2096700")
-		)
-		(pin "8"
-			(uuid "6a918cd9-e41e-4f54-9d30-022c528d1337")
-		)
-		(pin "10"
-			(uuid "08b4debd-7245-4427-8343-d361abbc3477")
-		)
-		(pin "9"
-			(uuid "a7e5a890-9048-4d31-9482-bfb567052ce3")
-		)
-		(instances
-			(project "Spectralist_Controls"
-				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
-					(reference "J4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 33.02 123.19 0)
 		(unit 1)
@@ -9203,6 +9804,73 @@
 			(project "Kishoof_Controls"
 				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
 					(reference "#PWR0110")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 228.6 93.98 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b16c2b26-19eb-48ef-92c5-6aa8f2a9883d")
+		(property "Reference" "#PWR023"
+			(at 234.95 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 231.648 93.218 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 228.6 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 228.6 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 228.6 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "051155bf-4354-42f3-8470-c347237384e7")
+		)
+		(instances
+			(project "Spectralist_Controls"
+				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
+					(reference "#PWR023")
 					(unit 1)
 				)
 			)
@@ -9335,6 +10003,308 @@
 			(project "Spectralist_Controls"
 				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
 					(reference "#PWR042")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Conn_01x10_Pin")
+		(at 260.35 88.9 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b9a2ea46-1d0e-48fb-a33f-c2d6f3f92bc5")
+		(property "Reference" "J4"
+			(at 267.97 70.358 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_01x10_Pin"
+			(at 267.97 72.898 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x10_P2.54mm_Vertical"
+			(at 260.35 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 260.35 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x10, script generated"
+			(at 260.35 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "AVAILABILITY" ""
+			(at 260.35 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DESCRIPTION" ""
+			(at 260.35 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MF" ""
+			(at 260.35 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MP" ""
+			(at 260.35 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE" ""
+			(at 260.35 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PRICE" ""
+			(at 260.35 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PURCHASE-URL" ""
+			(at 260.35 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "5"
+			(uuid "e11d23df-07c3-4b7c-9ff8-3e805aaf7acb")
+		)
+		(pin "3"
+			(uuid "c5c7667f-6051-4803-b63b-73dfcb6858c8")
+		)
+		(pin "2"
+			(uuid "9b2c63b7-34a4-45f3-b31b-626a300e3007")
+		)
+		(pin "4"
+			(uuid "7a6e7e9d-9efa-47ca-97ce-9cbaa1f20903")
+		)
+		(pin "6"
+			(uuid "0bb9f65a-195f-4009-8e8d-c59a86ca4177")
+		)
+		(pin "7"
+			(uuid "d324a6e3-d04e-4a37-87bf-023507147001")
+		)
+		(pin "1"
+			(uuid "e475b39b-c6be-4c16-b71e-c31c43544a75")
+		)
+		(pin "8"
+			(uuid "b45d9c97-ebc4-47a0-8cbd-a607c04f54f5")
+		)
+		(pin "10"
+			(uuid "b005580a-20a0-45d1-af58-1d18c8507b44")
+		)
+		(pin "9"
+			(uuid "f4195625-84cf-4c65-a72f-a1f8172640af")
+		)
+		(instances
+			(project "Spectralist_Controls"
+				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
+					(reference "J4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Conn_01x08_Pin")
+		(at 220.98 43.18 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b9be9b34-965b-4cf7-89a0-cf795517f5c4")
+		(property "Reference" "J1"
+			(at 228.6 24.638 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_01x8_Pin"
+			(at 228.6 27.178 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical"
+			(at 220.98 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 220.98 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x08, script generated"
+			(at 220.98 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "AVAILABILITY" ""
+			(at 220.98 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DESCRIPTION" ""
+			(at 220.98 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MF" ""
+			(at 220.98 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MP" ""
+			(at 220.98 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE" ""
+			(at 220.98 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PRICE" ""
+			(at 220.98 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PURCHASE-URL" ""
+			(at 220.98 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "5"
+			(uuid "ed6bb8b1-0a29-4f4a-a670-02f169762290")
+		)
+		(pin "3"
+			(uuid "4e69f6d5-bea4-4772-85cb-acaa95315c6c")
+		)
+		(pin "2"
+			(uuid "bc39d58e-7703-4f30-bcdd-73089730cd9b")
+		)
+		(pin "4"
+			(uuid "0921f3ce-efbd-42b4-9328-3c1eabb8b692")
+		)
+		(pin "6"
+			(uuid "249b899c-c573-43a1-8d69-0931d4c3968a")
+		)
+		(pin "7"
+			(uuid "a8420b9e-520b-4b44-b251-2dc317059ba8")
+		)
+		(pin "1"
+			(uuid "6984b210-89a0-4992-8815-120b3f993115")
+		)
+		(pin "8"
+			(uuid "2cf03a84-08e1-4336-86b3-e91f0ba0f074")
+		)
+		(instances
+			(project "Spectralist_Controls"
+				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
+					(reference "J1")
 					(unit 1)
 				)
 			)
@@ -9810,6 +10780,73 @@
 			(project "Spectralist_Controls"
 				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
 					(reference "#PWR044")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 265.43 93.98 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d8912016-30d0-4ea9-8ca1-3f740a6f61da")
+		(property "Reference" "#PWR027"
+			(at 271.78 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 268.478 93.218 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 265.43 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 265.43 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 265.43 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "bdccedb4-42d5-4a0a-9388-5c5a553d9d41")
+		)
+		(instances
+			(project "Spectralist_Controls"
+				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
+					(reference "#PWR027")
 					(unit 1)
 				)
 			)
@@ -10489,73 +11526,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 264.16 49.53 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "f1a17bcb-cd3b-4c5c-a8bd-ab0a80bbfe7c")
-		(property "Reference" "#PWR021"
-			(at 270.51 49.53 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 267.208 48.26 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-		(property "Footprint" ""
-			(at 264.16 49.53 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 264.16 49.53 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 264.16 49.53 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "c0369b0f-c063-4334-b4cf-46fd13c9dcff")
-		)
-		(instances
-			(project "Spectralist_Controls"
-				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
-					(reference "#PWR021")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R_Potentiometer")
 		(at 109.22 29.21 0)
 		(unit 1)
@@ -10710,6 +11680,73 @@
 	)
 	(symbol
 		(lib_id "power:GND")
+		(at 226.06 50.8 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f78cff76-739f-42a9-b97c-5141a31f323d")
+		(property "Reference" "#PWR022"
+			(at 232.41 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 229.108 50.038 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 226.06 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 226.06 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 226.06 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b58736f0-8cfa-437c-9f70-6cc465f331db")
+		)
+		(instances
+			(project "Spectralist_Controls"
+				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
+					(reference "#PWR022")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
 		(at 67.31 99.06 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -10768,227 +11805,6 @@
 			(project "Sinosaur_Controls"
 				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
 					(reference "#PWR0108")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 227.33 49.53 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "f9608fbe-cb41-4dfd-8f09-c456eff0c46f")
-		(property "Reference" "#PWR02"
-			(at 233.68 49.53 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 230.378 48.768 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-		(property "Footprint" ""
-			(at 227.33 49.53 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 227.33 49.53 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 227.33 49.53 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "04d125e6-59d8-4c57-9758-1093087c8a5b")
-		)
-		(instances
-			(project "Spectralist_Controls"
-				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
-					(reference "#PWR02")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector:Conn_01x10_Pin")
-		(at 222.25 46.99 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "f96bc757-c9cb-4d0c-a4eb-8bff1ed36d18")
-		(property "Reference" "J1"
-			(at 229.87 28.448 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "Conn_01x10_Pin"
-			(at 229.87 30.988 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x10_P2.54mm_Vertical"
-			(at 222.25 46.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 222.25 46.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x10, script generated"
-			(at 222.25 46.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "AVAILABILITY" ""
-			(at 222.25 46.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "DESCRIPTION" ""
-			(at 222.25 46.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MF" ""
-			(at 222.25 46.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MP" ""
-			(at 222.25 46.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "PACKAGE" ""
-			(at 222.25 46.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "PRICE" ""
-			(at 222.25 46.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "PURCHASE-URL" ""
-			(at 222.25 46.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "5"
-			(uuid "e1a7d7cc-f582-42d5-b945-d14d9ea91d7d")
-		)
-		(pin "3"
-			(uuid "6a3f56e5-86dc-4c34-a621-ee14dd1351be")
-		)
-		(pin "2"
-			(uuid "ebc91d41-cc85-4d43-b503-c40d1b51a287")
-		)
-		(pin "4"
-			(uuid "97bc0a2b-52da-4a02-a461-1023499d3025")
-		)
-		(pin "6"
-			(uuid "56ef79cd-dcb0-44a2-be65-c7aeabac30af")
-		)
-		(pin "7"
-			(uuid "6f3fb090-8c17-4bc6-95ac-7ce1b3ec9f48")
-		)
-		(pin "1"
-			(uuid "d8d78b30-8c3b-479e-940a-2a21c7eab2c9")
-		)
-		(pin "8"
-			(uuid "046381d3-3dbd-40ba-aea7-02342fa42e9a")
-		)
-		(pin "10"
-			(uuid "0b01c13d-80ed-4926-a12c-38baeb044eff")
-		)
-		(pin "9"
-			(uuid "5ce0c0e3-653b-499e-bfc2-de343d6d7e49")
-		)
-		(instances
-			(project "Spectralist_Controls"
-				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
-					(reference "J1")
 					(unit 1)
 				)
 			)
