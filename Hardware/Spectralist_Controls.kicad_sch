@@ -3979,7 +3979,7 @@
 		(uuid "667c9e7d-fe89-4f61-b096-a4a0e5bafddd")
 	)
 	(label "Filter_B_Trm"
-		(at 228.6 78.74 0)
+		(at 228.6 91.44 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4045,7 +4045,7 @@
 		(uuid "8a07068a-e9ae-499e-ab6e-7de994c33d25")
 	)
 	(label "Filter_B_Pot"
-		(at 228.6 91.44 0)
+		(at 228.6 78.74 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4100,7 +4100,7 @@
 		(uuid "98d74a94-5f0b-4052-b4a9-1176fcd4bcbc")
 	)
 	(label "Filter_B_Pot"
-		(at 115.57 52.07 0)
+		(at 160.02 53.34 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4287,7 +4287,7 @@
 		(uuid "fc5c3295-7b9f-4b2d-839e-bf3472ac8ef4")
 	)
 	(label "Filter_B_Trm"
-		(at 160.02 53.34 0)
+		(at 115.57 52.07 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6747,7 +6747,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "509568c9-6716-4247-922f-c914cd52c7e9")
-		(property "Reference" "Filter_B_Cutoff1"
+		(property "Reference" "Filter_B_Trim1"
 			(at 107.4674 50.9016 0)
 			(effects
 				(font
@@ -6885,7 +6885,7 @@
 		(instances
 			(project "Kishoof_Controls"
 				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
-					(reference "Filter_B_Cutoff1")
+					(reference "Filter_B_Trim1")
 					(unit 1)
 				)
 			)
@@ -8834,7 +8834,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "8c8fe6e5-e2c2-4660-a07f-c190af5ca78c")
-		(property "Reference" "Filter_B_Trim1"
+		(property "Reference" "Filter_B_Cutoff1"
 			(at 151.9174 52.1716 0)
 			(effects
 				(font
@@ -8972,7 +8972,7 @@
 		(instances
 			(project "Spectralist_Controls"
 				(path "/00778401-a8b8-4a7c-bae7-c4fa7505df01"
-					(reference "Filter_B_Trim1")
+					(reference "Filter_B_Cutoff1")
 					(unit 1)
 				)
 			)

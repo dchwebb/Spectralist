@@ -9009,7 +9009,7 @@
 			(uuid "7e7bebaa-a47c-4549-b451-4026891842a0")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 -2.54 360)
+			(at 0 -2.54 0)
 			(layer "B.Fab")
 			(uuid "877c67a4-8599-427f-9ad4-0906b01e1a2d")
 			(effects
@@ -9086,6 +9086,17 @@
 		(fill none)
 		(layer "Dwgs.User")
 		(uuid "d2920fef-bd66-40e3-b1e5-8fe4f918b6e9")
+	)
+	(gr_circle
+		(center 130 102)
+		(end 141.94 102)
+		(stroke
+			(width 2)
+			(type default)
+		)
+		(fill none)
+		(layer "Dwgs.User")
+		(uuid "d754d6bb-ec37-4642-958f-ad650c7b2e3d")
 	)
 	(gr_line
 		(start 130 79)
