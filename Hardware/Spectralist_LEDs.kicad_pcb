@@ -9089,7 +9089,7 @@
 	)
 	(gr_circle
 		(center 130 102)
-		(end 141.94 102)
+		(end 142 102)
 		(stroke
 			(width 2)
 			(type default)

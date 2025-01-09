@@ -465,8 +465,8 @@
     "last_paths": {
       "gencad": "",
       "idf": "",
-      "netlist": "",
-      "plot": "Gerbers/Sinosaur_Panel/",
+      "netlist": "Spectralist_Panel.net",
+      "plot": "Gerbers/Spectralist_Panel/",
       "pos_files": "",
       "specctra_dsn": "",
       "step": "Kishoof_Panel.step",
@@ -562,7 +562,7 @@
     "meta": {
       "version": 1
     },
-    "net_format_name": "",
+    "net_format_name": "KiCad",
     "page_layout_descr_file": "",
     "plot_directory": "",
     "spice_current_sheet_as_root": false,
@@ -574,6 +574,11 @@
     "subpart_first_id": 65,
     "subpart_id_separator": 0
   },
-  "sheets": [],
+  "sheets": [
+    [
+      "8ad97584-63d1-4467-a3e5-a5d7c067102e",
+      ""
+    ]
+  ],
   "text_variables": {}
 }

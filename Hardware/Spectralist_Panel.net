@@ -1,0 +1,57 @@
+(export (version "E")
+  (design
+    (source "D:\\Eurorack\\Spectralist\\Hardware\\Spectralist_Panel.kicad_sch")
+    (date "2025-01-09T18:28:38+0000")
+    (tool "Eeschema 8.0.5")
+    (sheet (number "1") (name "/") (tstamps "/")
+      (title_block
+        (title)
+        (company)
+        (rev)
+        (date)
+        (source "Spectralist_Panel.kicad_sch")
+        (comment (number "1") (value ""))
+        (comment (number "2") (value ""))
+        (comment (number "3") (value ""))
+        (comment (number "4") (value ""))
+        (comment (number "5") (value ""))
+        (comment (number "6") (value ""))
+        (comment (number "7") (value ""))
+        (comment (number "8") (value ""))
+        (comment (number "9") (value "")))))
+  (components
+    (comp (ref "TP1")
+      (value "TestPoint")
+      (description "test point")
+      (fields
+        (field (name "Footprint"))
+        (field (name "Datasheet"))
+        (field (name "Description") "test point"))
+      (libsource (lib "Connector") (part "TestPoint") (description "test point"))
+      (property (name "Sheetname") (value ""))
+      (property (name "Sheetfile") (value ""))
+      (property (name "ki_keywords") (value "test point tp"))
+      (property (name "ki_fp_filters") (value "Pin* Test*"))
+      (sheetpath (names "/") (tstamps "/"))
+      (tstamps "66338053-1654-46e1-ab24-02f51bf89f5b")))
+  (libparts
+    (libpart (lib "Connector") (part "TestPoint")
+      (description "test point")
+      (docs "~")
+      (footprints
+        (fp "Pin*")
+        (fp "Test*"))
+      (fields
+        (field (name "Reference") "TP")
+        (field (name "Value") "TestPoint")
+        (field (name "Footprint"))
+        (field (name "Datasheet") "~")
+        (field (name "Description") "test point"))
+      (pins
+        (pin (num "1") (name "1") (type "passive")))))
+  (libraries
+    (library (logical "Connector")
+      (uri "C:\\Program Files\\KiCad\\8.0\\share\\kicad\\symbols\\/Connector.kicad_sym")))
+  (nets
+    (net (code "1") (name "GND")
+      (node (ref "TP1") (pin "1") (pinfunction "1") (pintype "passive")))))
