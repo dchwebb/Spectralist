@@ -233,7 +233,9 @@
   },
   "erc": {
     "erc_exclusions": [
-      "pin_to_pin|-63500|1765300|5c93829f-e446-426f-b6b2-78bd800e4410|b1586226-4621-47c7-be46-fa570c1e7c2a|/00778401-a8b8-4a7c-bae7-c4fa7505df01|/00778401-a8b8-4a7c-bae7-c4fa7505df01|/00778401-a8b8-4a7c-bae7-c4fa7505df01"
+      "lib_symbol_issues|952500|1104900|98734adb-97e0-438c-be18-ce0e06bb63e1|00000000-0000-0000-0000-000000000000|||",
+      "pin_to_pin|-63500|1765300|5c93829f-e446-426f-b6b2-78bd800e4410|b1586226-4621-47c7-be46-fa570c1e7c2a|/00778401-a8b8-4a7c-bae7-c4fa7505df01|/00778401-a8b8-4a7c-bae7-c4fa7505df01|/00778401-a8b8-4a7c-bae7-c4fa7505df01",
+      "pin_to_pin|2298700|1663700|5c93829f-e446-426f-b6b2-78bd800e4410|b1586226-4621-47c7-be46-fa570c1e7c2a|/00778401-a8b8-4a7c-bae7-c4fa7505df01|/00778401-a8b8-4a7c-bae7-c4fa7505df01|/00778401-a8b8-4a7c-bae7-c4fa7505df01"
     ],
     "meta": {
       "version": 0
@@ -676,7 +678,7 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "gerbers/Kishoof_Components/",
+      "plot": "gerbers/Spectralist_Components/",
       "pos_files": "",
       "specctra_dsn": "",
       "step": "Kishoof_Components.step",

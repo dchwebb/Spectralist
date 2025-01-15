@@ -26,4 +26,9 @@
 
 Hardware/_autosave*
 Hardware/\#auto_saved_files\#
-Hardware/jlcpcb/*
+Hardware/jlcpcb/gerber/*
+Hardware/LED_Test.pdf
+Hardware/Panel_Test.pdf
+Hardware/Components_test.pdf
+Hardware/Controls_Test.pdf
+/Hardware/jlcpcb/bu
