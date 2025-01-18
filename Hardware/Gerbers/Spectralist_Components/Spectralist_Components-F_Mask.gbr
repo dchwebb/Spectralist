@@ -1,12 +1,12 @@
-%TF.GenerationSoftware,KiCad,Pcbnew,8.0.7*%
-%TF.CreationDate,2025-01-14T15:56:34+00:00*%
+%TF.GenerationSoftware,KiCad,Pcbnew,8.0.8*%
+%TF.CreationDate,2025-01-17T17:44:18+00:00*%
 %TF.ProjectId,Spectralist_Components,53706563-7472-4616-9c69-73745f436f6d,rev?*%
 %TF.SameCoordinates,Original*%
 %TF.FileFunction,Soldermask,Top*%
 %TF.FilePolarity,Negative*%
 %FSLAX46Y46*%
 G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
-G04 Created by KiCad (PCBNEW 8.0.7) date 2025-01-14 15:56:34*
+G04 Created by KiCad (PCBNEW 8.0.8) date 2025-01-17 17:44:18*
 %MOMM*%
 %LPD*%
 G01*
@@ -18,6 +18,13 @@ G04 APERTURE LIST*
 %ADD14O,1.000000X1.550000*%
 %ADD15C,1.700000*%
 G04 APERTURE END LIST*
+D10*
+%TO.C,J7*%
+X128725000Y-78200000D03*
+D11*
+X131265000Y-78200000D03*
+X133805000Y-78200000D03*
+%TD*%
 D10*
 %TO.C,J2*%
 X158000000Y-58000000D03*
@@ -80,13 +87,6 @@ X145000000Y-57000000D03*
 %TO.C,TP5*%
 X153000000Y-57000000D03*
 %TD*%
-D10*
-%TO.C,J7*%
-X128725000Y-78200000D03*
-D11*
-X131265000Y-78200000D03*
-%TD*%
-D12*
 %TO.C,TP2*%
 X149000000Y-57000000D03*
 %TD*%

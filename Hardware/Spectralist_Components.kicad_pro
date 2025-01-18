@@ -681,7 +681,7 @@
       "plot": "gerbers/Spectralist_Components/",
       "pos_files": "",
       "specctra_dsn": "",
-      "step": "Kishoof_Components.step",
+      "step": "Spectralist_Components.step",
       "svg": "",
       "vrml": ""
     },

@@ -32,3 +32,4 @@ Hardware/Panel_Test.pdf
 Hardware/Components_test.pdf
 Hardware/Controls_Test.pdf
 /Hardware/jlcpcb/bu
+*.kicad_sch_old

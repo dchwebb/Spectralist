@@ -509,10 +509,10 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "",
+      "plot": "Gerbers/Spectralist_LEDs",
       "pos_files": "",
       "specctra_dsn": "",
-      "step": "",
+      "step": "Spectralist_LEDs.step",
       "svg": "",
       "vrml": ""
     },

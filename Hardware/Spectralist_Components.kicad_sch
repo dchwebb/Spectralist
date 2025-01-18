@@ -653,21 +653,21 @@
 				)
 			)
 		)
-		(symbol "Connector:Conn_01x02_Pin"
+		(symbol "Connector:Conn_01x03_Pin"
 			(pin_names
 				(offset 1.016) hide)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "J"
-				(at 0 2.54 0)
+				(at 0 5.08 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
 				)
 			)
-			(property "Value" "Conn_01x02_Pin"
+			(property "Value" "Conn_01x03_Pin"
 				(at 0 -5.08 0)
 				(effects
 					(font
@@ -693,7 +693,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "Generic connector, single row, 01x02, script generated"
+			(property "Description" "Generic connector, single row, 01x03, script generated"
 				(at 0 0 0)
 				(effects
 					(font
@@ -728,7 +728,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "Conn_01x02_Pin_1_1"
+			(symbol "Conn_01x03_Pin_1_1"
 				(polyline
 					(pts
 						(xy 1.27 -2.54) (xy 0.8636 -2.54)
@@ -744,6 +744,18 @@
 				(polyline
 					(pts
 						(xy 1.27 0) (xy 0.8636 0)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 2.54) (xy 0.8636 2.54)
 					)
 					(stroke
 						(width 0.1524)
@@ -775,8 +787,19 @@
 						(type outline)
 					)
 				)
+				(rectangle
+					(start 0.8636 2.667)
+					(end 0 2.413)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
 				(pin passive line
-					(at 5.08 0 180)
+					(at 5.08 2.54 180)
 					(length 3.81)
 					(name "Pin_1"
 						(effects
@@ -794,7 +817,7 @@
 					)
 				)
 				(pin passive line
-					(at 5.08 -2.54 180)
+					(at 5.08 0 180)
 					(length 3.81)
 					(name "Pin_2"
 						(effects
@@ -804,6 +827,24 @@
 						)
 					)
 					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -2.54 180)
+					(length 3.81)
+					(name "Pin_3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -8977,10 +9018,6 @@
 		(uuid "4326bc53-51ab-4267-adeb-38cd6fffffbc")
 	)
 	(no_connect
-		(at 120.65 85.09)
-		(uuid "470edc28-c5c4-436a-9214-2a7334526c36")
-	)
-	(no_connect
 		(at 120.65 100.33)
 		(uuid "4f337e8f-845b-48d7-98c5-254201774f5d")
 	)
@@ -10204,6 +10241,16 @@
 	)
 	(wire
 		(pts
+			(xy 120.65 85.09) (xy 123.19 85.09)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3de9e5b8-c9d1-4dde-a299-14fa60f642bf")
+	)
+	(wire
+		(pts
 			(xy 214.63 27.94) (xy 224.79 27.94)
 		)
 		(stroke
@@ -10404,7 +10451,7 @@
 	)
 	(wire
 		(pts
-			(xy 189.23 125.73) (xy 191.77 125.73)
+			(xy 189.23 124.46) (xy 191.77 124.46)
 		)
 		(stroke
 			(width 0)
@@ -10824,7 +10871,7 @@
 	)
 	(wire
 		(pts
-			(xy 189.23 121.92) (xy 191.77 121.92)
+			(xy 189.23 120.65) (xy 191.77 120.65)
 		)
 		(stroke
 			(width 0)
@@ -10904,7 +10951,7 @@
 	)
 	(wire
 		(pts
-			(xy 182.88 125.73) (xy 184.15 125.73)
+			(xy 182.88 124.46) (xy 184.15 124.46)
 		)
 		(stroke
 			(width 0)
@@ -12154,7 +12201,7 @@
 	)
 	(wire
 		(pts
-			(xy 182.88 121.92) (xy 184.15 121.92)
+			(xy 182.88 120.65) (xy 184.15 120.65)
 		)
 		(stroke
 			(width 0)
@@ -13180,7 +13227,6 @@
 	)
 	(label "Pitch_CV_In"
 		(at 67.31 254 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13191,7 +13237,6 @@
 	)
 	(label "UART_RX"
 		(at 67.31 128.27 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13202,7 +13247,6 @@
 	)
 	(label "LED_Oct_Out"
 		(at 190.5 139.7 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13213,7 +13257,6 @@
 	)
 	(label "USB_DM"
 		(at 203.2 170.18 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13224,7 +13267,6 @@
 	)
 	(label "Harm_Stretch_Pot"
 		(at 123.19 64.77 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13235,7 +13277,6 @@
 	)
 	(label "USB_D-"
 		(at 185.42 170.18 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13246,7 +13287,6 @@
 	)
 	(label "USB_VBUS"
 		(at 229.87 166.37 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13257,7 +13297,6 @@
 	)
 	(label "-12V_IN"
 		(at 125.73 226.06 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13266,9 +13305,18 @@
 		)
 		(uuid "16e9ef35-d289-4810-9d12-0d4901aab20e")
 	)
+	(label "SPI3_NSS"
+		(at 226.06 119.38 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "17fd2f82-f148-4972-b55b-5f39a24dcdee")
+	)
 	(label "DAC_DATA"
 		(at 189.23 46.99 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13279,7 +13327,6 @@
 	)
 	(label "+12V_IN"
 		(at 125.73 205.74 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13290,7 +13337,6 @@
 	)
 	(label "Filter_Mode"
 		(at 67.31 209.55 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13301,7 +13347,6 @@
 	)
 	(label "DAC_BCLK"
 		(at 189.23 49.53 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13312,7 +13357,6 @@
 	)
 	(label "USB_DM"
 		(at 123.19 74.93 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13323,7 +13367,6 @@
 	)
 	(label "-5V_REF"
 		(at 280.67 60.96 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13334,7 +13377,6 @@
 	)
 	(label "USB_D+"
 		(at 185.42 166.37 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13345,7 +13387,6 @@
 	)
 	(label "Filter_A_Trm"
 		(at 123.19 49.53 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13356,7 +13397,6 @@
 	)
 	(label "LED_Filter_A_Out"
 		(at 29.21 217.17 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13367,7 +13407,6 @@
 	)
 	(label "Filter_A_CV_In"
 		(at 67.31 261.62 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13378,7 +13417,6 @@
 	)
 	(label "Harmonic_Mode"
 		(at 67.31 77.47 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13389,7 +13427,6 @@
 	)
 	(label "Harm_Warp_Pot"
 		(at 29.21 264.16 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13400,7 +13437,6 @@
 	)
 	(label "CB"
 		(at 203.2 255.27 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13411,7 +13447,6 @@
 	)
 	(label "LED_Oct"
 		(at 181.61 139.7 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13422,7 +13457,6 @@
 	)
 	(label "DAC_LRCLK"
 		(at 123.19 120.65 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13433,7 +13467,6 @@
 	)
 	(label "USB_D+"
 		(at 229.87 171.45 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13444,7 +13477,6 @@
 	)
 	(label "SWIO"
 		(at 123.19 80.01 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13455,7 +13487,6 @@
 	)
 	(label "-5V_REF"
 		(at 229.87 214.63 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13466,7 +13497,6 @@
 	)
 	(label "LED_SCL"
 		(at 123.19 161.29 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13477,7 +13507,6 @@
 	)
 	(label "DAC_BCLK"
 		(at 123.19 123.19 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13488,7 +13517,6 @@
 	)
 	(label "DAC_Out_L"
 		(at 222.25 44.45 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13499,7 +13527,6 @@
 	)
 	(label "Filter_B_CV"
 		(at 309.88 38.1 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13509,8 +13536,7 @@
 		(uuid "3c4c9c57-f810-4017-8b00-69daa1e8382e")
 	)
 	(label "LED_SCL"
-		(at 191.77 125.73 0)
-		(fields_autoplaced yes)
+		(at 191.77 124.46 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13521,7 +13547,6 @@
 	)
 	(label "Filter_Slope_CV"
 		(at 123.19 54.61 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13532,7 +13557,6 @@
 	)
 	(label "DAC_LRCLK"
 		(at 189.23 44.45 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13543,7 +13567,6 @@
 	)
 	(label "USB_VBUS"
 		(at 123.19 69.85 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13554,7 +13577,6 @@
 	)
 	(label "LED_Oct"
 		(at 67.31 148.59 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13565,7 +13587,6 @@
 	)
 	(label "Filter_B_Pot"
 		(at 123.19 92.71 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13576,7 +13597,6 @@
 	)
 	(label "Harm_Warp_Pot"
 		(at 123.19 146.05 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13587,7 +13607,6 @@
 	)
 	(label "Filter_Slope_CV_In"
 		(at 67.31 256.54 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13598,7 +13617,6 @@
 	)
 	(label "LED_Filter_A_Out"
 		(at 190.5 146.05 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13608,8 +13626,7 @@
 		(uuid "5694a083-2f7c-49ca-800f-1aa513dd8259")
 	)
 	(label "UART_RX"
-		(at 226.06 123.19 0)
-		(fields_autoplaced yes)
+		(at 226.06 124.46 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13620,7 +13637,6 @@
 	)
 	(label "Pitch_CV_In"
 		(at 350.52 35.56 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13631,7 +13647,6 @@
 	)
 	(label "Audio_Out_R"
 		(at 389.89 204.47 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13642,7 +13657,6 @@
 	)
 	(label "Filter_A_Trm"
 		(at 67.31 222.25 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13653,7 +13667,6 @@
 	)
 	(label "LED_Filter_A"
 		(at 181.61 146.05 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13664,7 +13677,6 @@
 	)
 	(label "DAC_Out_R"
 		(at 222.25 46.99 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13675,7 +13687,6 @@
 	)
 	(label "-12V_IN"
 		(at 274.32 247.65 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13686,7 +13697,6 @@
 	)
 	(label "Filter_B_Trm"
 		(at 29.21 246.38 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13697,7 +13707,6 @@
 	)
 	(label "Filter_A_Pot"
 		(at 123.19 46.99 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13708,7 +13717,6 @@
 	)
 	(label "SWCLK"
 		(at 227.33 147.32 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13719,7 +13727,6 @@
 	)
 	(label "Filter_B_Pot"
 		(at 29.21 256.54 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13730,7 +13737,6 @@
 	)
 	(label "Harmonic_Mode"
 		(at 67.31 212.09 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13741,7 +13747,6 @@
 	)
 	(label "-5V_REF"
 		(at 279.4 95.25 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13752,7 +13757,6 @@
 	)
 	(label "Pitch_CV_Scaled"
 		(at 123.19 52.07 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13763,7 +13767,6 @@
 	)
 	(label "Filter_B_CV_In"
 		(at 67.31 269.24 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13774,7 +13777,6 @@
 	)
 	(label "-5V_REF"
 		(at 351.79 29.21 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13785,7 +13787,6 @@
 	)
 	(label "-5V_REF"
 		(at 351.79 60.96 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13796,7 +13797,6 @@
 	)
 	(label "Harm_Stretch_Trm"
 		(at 123.19 143.51 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13807,7 +13807,6 @@
 	)
 	(label "Filter_B_CV_In"
 		(at 279.4 35.56 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13818,7 +13817,6 @@
 	)
 	(label "Filter_Mode"
 		(at 67.31 74.93 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13829,7 +13827,6 @@
 	)
 	(label "LED_Filter_B_Out"
 		(at 190.5 152.4 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13840,7 +13837,6 @@
 	)
 	(label "LED_Filter_B"
 		(at 67.31 146.05 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13851,7 +13847,6 @@
 	)
 	(label "Pitch_CV_Scaled"
 		(at 381 38.1 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13862,7 +13857,6 @@
 	)
 	(label "Harm_Stretch_Pot"
 		(at 29.21 269.24 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13873,7 +13867,6 @@
 	)
 	(label "Filter_A_CV_In"
 		(at 350.52 101.6 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13884,7 +13877,6 @@
 	)
 	(label "LED_Filter_B_Out"
 		(at 29.21 224.79 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13895,7 +13887,6 @@
 	)
 	(label "-5V_REF"
 		(at 351.79 95.25 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13906,7 +13897,6 @@
 	)
 	(label "Harm_Warp_CV_In"
 		(at 67.31 264.16 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13917,7 +13907,6 @@
 	)
 	(label "Filter_B_Trm"
 		(at 123.19 133.35 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13928,7 +13917,6 @@
 	)
 	(label "Harm_Warp_CV"
 		(at 309.88 69.85 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13939,7 +13927,6 @@
 	)
 	(label "LED_Filter_B"
 		(at 181.61 152.4 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13950,7 +13937,6 @@
 	)
 	(label "Audio_Out_L"
 		(at 312.42 204.47 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13961,7 +13947,6 @@
 	)
 	(label "Filter_B_CV"
 		(at 123.19 62.23 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13972,7 +13957,6 @@
 	)
 	(label "Filter_Slope_CV_In"
 		(at 278.13 101.6 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13981,9 +13965,18 @@
 		)
 		(uuid "b0b53e29-abf8-4706-a2c8-02d896900824")
 	)
+	(label "SPI3_NSS"
+		(at 123.19 85.09 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b4bad8d4-9adf-4eb1-a05b-a67a7b14b8be")
+	)
 	(label "Pan_CV"
 		(at 381 69.85 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13994,7 +13987,6 @@
 	)
 	(label "Harm_Stretch_CV"
 		(at 309.88 135.89 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14005,7 +13997,6 @@
 	)
 	(label "Filter_A_CV"
 		(at 123.19 138.43 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14016,7 +14007,6 @@
 	)
 	(label "Octave_Btn"
 		(at 67.31 80.01 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14027,7 +14017,6 @@
 	)
 	(label "Filter_Slope_Pot"
 		(at 29.21 259.08 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14038,7 +14027,6 @@
 	)
 	(label "Harm_Stretch_CV_In"
 		(at 67.31 251.46 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14049,7 +14037,6 @@
 	)
 	(label "VSW"
 		(at 203.2 250.19 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14060,7 +14047,6 @@
 	)
 	(label "Filter_Slope_CV"
 		(at 308.61 104.14 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14071,7 +14057,6 @@
 	)
 	(label "-5V_REF"
 		(at 281.94 264.16 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14082,7 +14067,6 @@
 	)
 	(label "SWCLK"
 		(at 123.19 82.55 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14093,7 +14077,6 @@
 	)
 	(label "Audio_Out_R"
 		(at 29.21 254 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14104,7 +14087,6 @@
 	)
 	(label "LED_Filter_A"
 		(at 67.31 151.13 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14115,7 +14097,6 @@
 	)
 	(label "UART_TX"
 		(at 67.31 125.73 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14126,7 +14107,6 @@
 	)
 	(label "SWIO"
 		(at 227.33 144.78 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14137,7 +14117,6 @@
 	)
 	(label "Filter_A_CV"
 		(at 381 104.14 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14148,7 +14127,6 @@
 	)
 	(label "Harm_Stretch_CV_In"
 		(at 279.4 133.35 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14159,7 +14137,6 @@
 	)
 	(label "Harm_Stretch_CV"
 		(at 123.19 59.69 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14170,7 +14147,6 @@
 	)
 	(label "DAC_Out_L"
 		(at 264.16 201.93 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14181,7 +14157,6 @@
 	)
 	(label "+12V_IN"
 		(at 274.32 250.19 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14192,7 +14167,6 @@
 	)
 	(label "DAC_DATA"
 		(at 123.19 128.27 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14203,7 +14177,6 @@
 	)
 	(label "Pan_CV_In"
 		(at 350.52 67.31 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14214,7 +14187,6 @@
 	)
 	(label "Pan_CV"
 		(at 123.19 135.89 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14225,7 +14197,6 @@
 	)
 	(label "Octave_Btn"
 		(at 67.31 217.17 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14236,7 +14207,6 @@
 	)
 	(label "Audio_Out_L"
 		(at 29.21 248.92 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14247,7 +14217,6 @@
 	)
 	(label "LED_Oct_Out"
 		(at 29.21 219.71 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14258,7 +14227,6 @@
 	)
 	(label "LED_SDA"
 		(at 123.19 158.75 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14269,7 +14237,6 @@
 	)
 	(label "Filter_A_Pot"
 		(at 67.31 219.71 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14280,7 +14247,6 @@
 	)
 	(label "-5V_REF"
 		(at 280.67 127 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14291,7 +14257,6 @@
 	)
 	(label "Harm_Warp_CV"
 		(at 123.19 57.15 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14302,7 +14267,6 @@
 	)
 	(label "-5V_REF"
 		(at 280.67 29.21 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14312,8 +14276,7 @@
 		(uuid "f0b5744e-c24d-47b0-9935-b652b07107c6")
 	)
 	(label "UART_TX"
-		(at 226.06 120.65 0)
-		(fields_autoplaced yes)
+		(at 226.06 121.92 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14324,7 +14287,6 @@
 	)
 	(label "LED_SDA"
 		(at 29.21 212.09 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14335,7 +14297,6 @@
 	)
 	(label "DAC_Out_R"
 		(at 341.63 201.93 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14346,7 +14307,6 @@
 	)
 	(label "USB_DP"
 		(at 203.2 166.37 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14356,8 +14316,7 @@
 		(uuid "f32c90df-818b-4907-88ee-4f32c543a33a")
 	)
 	(label "LED_SDA"
-		(at 191.77 121.92 0)
-		(fields_autoplaced yes)
+		(at 191.77 120.65 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14368,7 +14327,6 @@
 	)
 	(label "USB_D-"
 		(at 229.87 173.99 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14379,7 +14337,6 @@
 	)
 	(label "FB"
 		(at 203.2 260.35 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14390,7 +14347,6 @@
 	)
 	(label "LED_SCL"
 		(at 29.21 209.55 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14401,7 +14357,6 @@
 	)
 	(label "USB_DP"
 		(at 123.19 77.47 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14412,7 +14367,6 @@
 	)
 	(label "Filter_Slope_Pot"
 		(at 123.19 90.17 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14423,7 +14377,6 @@
 	)
 	(label "Pan_CV_In"
 		(at 67.31 266.7 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14434,7 +14387,6 @@
 	)
 	(label "Harm_Warp_CV_In"
 		(at 279.4 67.31 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14445,7 +14397,6 @@
 	)
 	(label "Harm_Stretch_Trm"
 		(at 29.21 266.7 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -18246,7 +18197,7 @@
 	)
 	(symbol
 		(lib_id "Device:R_Small")
-		(at 186.69 121.92 90)
+		(at 186.69 120.65 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -18255,7 +18206,7 @@
 		(fields_autoplaced yes)
 		(uuid "2b290b1b-e2c5-435e-99b3-ebfb79b44a6a")
 		(property "Reference" "R15"
-			(at 186.69 116.84 90)
+			(at 186.69 115.57 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18263,7 +18214,7 @@
 			)
 		)
 		(property "Value" "1k6"
-			(at 186.69 119.38 90)
+			(at 186.69 118.11 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18271,7 +18222,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 186.69 121.92 0)
+			(at 186.69 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18280,7 +18231,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 186.69 121.92 0)
+			(at 186.69 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18289,7 +18240,7 @@
 			)
 		)
 		(property "Description" "Resistor, small symbol"
-			(at 186.69 121.92 0)
+			(at 186.69 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18298,7 +18249,7 @@
 			)
 		)
 		(property "Part_Number" "C4190"
-			(at 186.69 121.92 0)
+			(at 186.69 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18307,7 +18258,7 @@
 			)
 		)
 		(property "AVAILABILITY" ""
-			(at 186.69 121.92 0)
+			(at 186.69 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18316,7 +18267,7 @@
 			)
 		)
 		(property "DESCRIPTION" ""
-			(at 186.69 121.92 0)
+			(at 186.69 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18325,7 +18276,7 @@
 			)
 		)
 		(property "MF" ""
-			(at 186.69 121.92 0)
+			(at 186.69 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18334,7 +18285,7 @@
 			)
 		)
 		(property "MP" ""
-			(at 186.69 121.92 0)
+			(at 186.69 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18343,7 +18294,7 @@
 			)
 		)
 		(property "PACKAGE" ""
-			(at 186.69 121.92 0)
+			(at 186.69 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18352,7 +18303,7 @@
 			)
 		)
 		(property "PRICE" ""
-			(at 186.69 121.92 0)
+			(at 186.69 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18361,7 +18312,7 @@
 			)
 		)
 		(property "PURCHASE-URL" ""
-			(at 186.69 121.92 0)
+			(at 186.69 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24094,7 +24045,7 @@
 	)
 	(symbol
 		(lib_id "power:+3.3V")
-		(at 182.88 121.92 90)
+		(at 182.88 120.65 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -24102,7 +24053,7 @@
 		(dnp no)
 		(uuid "761115da-4091-41f3-a192-f402265ad49e")
 		(property "Reference" "#PWR043"
-			(at 186.69 121.92 0)
+			(at 186.69 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24111,7 +24062,7 @@
 			)
 		)
 		(property "Value" "+3.3V"
-			(at 176.022 122.174 90)
+			(at 176.022 120.904 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24119,7 +24070,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 182.88 121.92 0)
+			(at 182.88 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24128,7 +24079,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 182.88 121.92 0)
+			(at 182.88 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24137,7 +24088,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 182.88 121.92 0)
+			(at 182.88 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25422,8 +25373,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector:Conn_01x02_Pin")
-		(at 220.98 120.65 0)
+		(lib_id "Connector:Conn_01x03_Pin")
+		(at 220.98 121.92 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -25431,7 +25382,7 @@
 		(dnp no)
 		(uuid "8c5ffa12-bd8c-468d-a559-c39da6b9562a")
 		(property "Reference" "J7"
-			(at 227.584 113.538 0)
+			(at 227.33 112.776 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25440,7 +25391,7 @@
 			)
 		)
 		(property "Value" "UART_Test_Pins"
-			(at 233.172 116.332 0)
+			(at 232.918 115.57 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25448,8 +25399,8 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical"
-			(at 220.98 120.65 0)
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical"
+			(at 220.98 121.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25458,7 +25409,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 220.98 120.65 0)
+			(at 220.98 121.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25466,8 +25417,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Generic connector, single row, 01x02, script generated"
-			(at 220.98 120.65 0)
+		(property "Description" "Generic connector, single row, 01x03, script generated"
+			(at 220.98 121.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25480,6 +25431,9 @@
 		)
 		(pin "2"
 			(uuid "bc58f63b-37f4-491f-ba69-fabb4a7d64b7")
+		)
+		(pin "3"
+			(uuid "9883ff51-3c7a-402d-9c8a-45292139631f")
 		)
 		(instances
 			(project "Kishoof_Components"
@@ -32446,7 +32400,7 @@
 	)
 	(symbol
 		(lib_id "Device:R_Small")
-		(at 186.69 125.73 90)
+		(at 186.69 124.46 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -32455,7 +32409,7 @@
 		(fields_autoplaced yes)
 		(uuid "ce092c01-3eb7-44da-aaff-649201728ad8")
 		(property "Reference" "R28"
-			(at 186.69 128.27 90)
+			(at 186.69 127 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -32463,7 +32417,7 @@
 			)
 		)
 		(property "Value" "1k6"
-			(at 186.69 130.81 90)
+			(at 186.69 129.54 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -32471,7 +32425,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 186.69 125.73 0)
+			(at 186.69 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -32480,7 +32434,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 186.69 125.73 0)
+			(at 186.69 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -32489,7 +32443,7 @@
 			)
 		)
 		(property "Description" "Resistor, small symbol"
-			(at 186.69 125.73 0)
+			(at 186.69 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -32498,7 +32452,7 @@
 			)
 		)
 		(property "Part_Number" "C4190"
-			(at 186.69 125.73 0)
+			(at 186.69 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -32507,7 +32461,7 @@
 			)
 		)
 		(property "AVAILABILITY" ""
-			(at 186.69 125.73 0)
+			(at 186.69 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -32516,7 +32470,7 @@
 			)
 		)
 		(property "DESCRIPTION" ""
-			(at 186.69 125.73 0)
+			(at 186.69 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -32525,7 +32479,7 @@
 			)
 		)
 		(property "MF" ""
-			(at 186.69 125.73 0)
+			(at 186.69 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -32534,7 +32488,7 @@
 			)
 		)
 		(property "MP" ""
-			(at 186.69 125.73 0)
+			(at 186.69 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -32543,7 +32497,7 @@
 			)
 		)
 		(property "PACKAGE" ""
-			(at 186.69 125.73 0)
+			(at 186.69 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -32552,7 +32506,7 @@
 			)
 		)
 		(property "PRICE" ""
-			(at 186.69 125.73 0)
+			(at 186.69 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -32561,7 +32515,7 @@
 			)
 		)
 		(property "PURCHASE-URL" ""
-			(at 186.69 125.73 0)
+			(at 186.69 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33117,7 +33071,7 @@
 	)
 	(symbol
 		(lib_id "power:+3.3V")
-		(at 182.88 125.73 90)
+		(at 182.88 124.46 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -33125,7 +33079,7 @@
 		(dnp no)
 		(uuid "d642ad7c-51e0-4839-a3e8-9e2247e93e7e")
 		(property "Reference" "#PWR09"
-			(at 186.69 125.73 0)
+			(at 186.69 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33134,7 +33088,7 @@
 			)
 		)
 		(property "Value" "+3.3V"
-			(at 176.022 125.984 90)
+			(at 176.022 124.714 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33142,7 +33096,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 182.88 125.73 0)
+			(at 182.88 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33151,7 +33105,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 182.88 125.73 0)
+			(at 182.88 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33160,7 +33114,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 182.88 125.73 0)
+			(at 182.88 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
