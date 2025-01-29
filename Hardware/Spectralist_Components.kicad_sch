@@ -13162,6 +13162,16 @@
 		)
 		(uuid "91b17fd6-3be1-4c41-9619-e5917f4bb45f")
 	)
+	(text "v1.0 Errata: TPS561201 pads too long"
+		(exclude_from_sim no)
+		(at 322.326 256.794 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "9d6ba978-29e8-4dba-83ee-599740bcb317")
+	)
 	(text "Input Scaling"
 		(exclude_from_sim no)
 		(at 255.016 165.1 0)
