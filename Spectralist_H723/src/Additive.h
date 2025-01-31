@@ -19,15 +19,26 @@ public:
 
 	static constexpr uint32_t sinLUTSize = 65536;
 	static constexpr uint32_t lutMask = sinLUTSize - 1;				// 0x1FFFF
-	constexpr auto CreateSinLUT(float* array)
+	constexpr auto CreateSinLUT()
 	{
-		//std::array<float, sinLUTSize> array {};
+		std::array<float, sinLUTSize> array {};
 		for (uint32_t s = 0; s < sinLUTSize; ++s){
 			array[s] = std::sin(s * 2.0f * std::numbers::pi / sinLUTSize);
 		}
-		//return array;
+		return array;
 	}
 
+	/*
+	static constexpr uint32_t sinLUTSize = 2048;
+	constexpr auto CreateSinLUT()									// constexpr function to generate LUT in Flash
+	{
+		std::array<float, sinLUTSize + 1> array {};					// Create one extra entry to simplify interpolation
+		for (uint32_t s = 0; s < sinLUTSize + 1; ++s){
+			array[s] = std::sin(s * 2.0f * std::numbers::pi / sinLUTSize);
+		}
+		return array;
+	}
+	*/
 	uint32_t maxHarmonic = 200;
 	uint32_t aliasHarmonic;
 	float prevIncErr = 0.0f;
@@ -53,8 +64,20 @@ private:
 
 	int32_t filterTypeVal = 0;					// Used for setting hysteresis on filter type
 
-
 	float multipliers[maxHarmonics];
+
+	static inline float NormaliseADC(uint16_t adcVal)
+	{
+		static constexpr float adcDivider = 1.0f / 55000.0f;		// reduce divider to allow maximum of slightly over 1.0f
+		return adcDivider * adcVal;
+	}
+
+	GpioPin harmonicMode	{GPIOE, 3, GpioPin::Type::InputPulldown};
+	GpioPin filterMode		{GPIOE, 2, GpioPin::Type::InputPulldown};
+
+	Btn octaveBtn = {{GPIOE, 4, GpioPin::Type::InputPullup}, 0, 0};
+
+
 };
 
 extern Additive additive;

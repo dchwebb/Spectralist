@@ -128,7 +128,7 @@ SECTIONS
   .dma_buffer (NOLOAD) :
   {
     *(.dma_buffer)
-  } >RAM_D3
+  } >RAM_D2
   
   /* used by the startup to initialize data */
   _sidata = LOADADDR(.data);

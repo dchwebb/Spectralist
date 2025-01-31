@@ -1,6 +1,6 @@
 #include "initialisation.h"
-//#include "CDCHandler.h"
-//#include "USB.h"
+#include "CDCHandler.h"
+#include "USB.h"
 #include "configManager.h"
 #include "Calib.h"
 #include "Filter.h"
@@ -34,11 +34,11 @@ int main(void) {
 	if (!SafeMode) {
 		config.RestoreConfig();
 	}
-//	usb.Init(false);
+	usb.Init(false);
 	InitI2S();						// Initialise I2S which will start main sample interrupts
 
 	while (1) {
-//		usb.cdc.ProcessCommand();	// Check for incoming USB serial commands
+		usb.cdc.ProcessCommand();	// Check for incoming USB serial commands
 		config.SaveConfig();		// Save any scheduled changes
 		calib.Calibrate();
 		if (modeSpectralist) {

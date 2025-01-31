@@ -5,12 +5,12 @@
 Additive additive;
 
 // Create sine look up table as constexpr so will be stored in flash
-//std::array<float, Additive::sinLUTSize> sineLUT = additive.CreateSinLUT();
-float sineLUT[Additive::sinLUTSize];
+constexpr std::array<float, Additive::sinLUTSize> sineLUT = additive.CreateSinLUT();
+//float sineLUT[Additive::sinLUTSize];
 
 Additive::Additive()
 {
-	CreateSinLUT(sineLUT);
+	//CreateSinLUT(sineLUT);
 	multipliers[0] = 0.3f;
 	multipliers[9] = 0.0f;
 	multipliers[99] = 0.3f;
@@ -23,18 +23,17 @@ void Additive::CalcSample()
 	debugPin2.SetHigh();
 
 	// Previously calculated samples output at beginning of interrupt to keep timing independent of calculation time
-	if (vcaConnected) {
-		const float vcaMult = std::max(60000.0f - adc.VcaCV, 0.0f);
-		SPI2->TXDR = (int32_t)(outputSamples[0] * scaleVCAOutput * vcaMult);
-		SPI2->TXDR = (int32_t)(outputSamples[1] * scaleVCAOutput * vcaMult);
-	} else {
-		SPI2->TXDR = (int32_t)(outputSamples[0] * scaleOutput);
-		SPI2->TXDR = (int32_t)(outputSamples[1] * scaleOutput);
-	}
+	SPI2->TXDR = (int32_t)(outputSamples[0] * scaleOutput);
+	SPI2->TXDR = (int32_t)(outputSamples[1] * scaleOutput);
 
 	// Pitch calculations
-	const float octave = wavetable.octaveDown.IsHigh() ? 0.5 : 1.0f;
+	//const float octave = octaveDown.IsHigh() ? 0.5 : 1.0f;		// FIXME - octave is a momentary button
+	if (octaveBtn.Pressed()) {
+
+	}
+	const float octave = 1.0f;
 	const uint32_t newInc = calib.pitchLUT[adc.Pitch_CV] * octave;
+	smoothedInc = newInc;
 
 	// Calculate the maximum harmonic before aliasing (experimenting shows we need to truncate slightly before the nyquist frequency)
 	aliasHarmonic = std::min(maxHarmonic, (uint32_t)(((float)sinLUTSize / 2.25f) / (newInc >> 16)));
@@ -52,13 +51,7 @@ void Additive::CalcSample()
 		incMult += inc;
 	}
 
-	if (wavetable.chBRingMod.IsHigh()) {
-		outputSamples[0] = FastTanh(mixOut[0] * mixOut[1]);
-	} else if (wavetable.chBMix.IsHigh()) {
-		outputSamples[0] = FastTanh(mixOut[0] + mixOut[1]);
-	} else {
-		outputSamples[0] = FastTanh(mixOut[0]);
-	}
+	outputSamples[0] = FastTanh(mixOut[0]);
 	outputSamples[1] = FastTanh(mixOut[1]);
 
 	debugPin2.SetLow();
@@ -86,7 +79,7 @@ void Additive::IdleJobs()
 {
 	debugPin1.SetHigh();
 
-	bool lpf = !wavetable.cfg.octaveChnB;
+	const bool lpf = filterMode.IsHigh();
 
 	static constexpr float smoothOld = 0.95f;
 	static constexpr float smoothNew = 1.0f - smoothOld;
@@ -94,26 +87,27 @@ void Additive::IdleJobs()
 	static constexpr float startMultComb = smoothNew * (50.0f / 65535.0f);		// Start becomes interval between comb frequencies
 
 	if (lpf) {
+		// LPF
 		static constexpr float slopeMult = (1.0f / 65535.0f);
-		float slope = adc.Wavetable_Pos_A_Trm * slopeMult;
+		float slope = adc.Filter_Slope_Pot * slopeMult;		// FIXME - slope also has CV input
 		filterSlope = filterSlope * smoothOld + (1.0f - (slope * slope)) * smoothNew;		// Square the slope to give better control at low settings
 
 	} else {
 		// Comb filter
 		static constexpr float slopeMult = smoothNew * (0.1f / 65535.0f);
-		filterSlope = filterSlope * smoothOld + (adc.Wavetable_Pos_A_Trm + 5000) * slopeMult;
+		filterSlope = filterSlope * smoothOld + (adc.Filter_Slope_Pot + 5000) * slopeMult;		// FIXME - slope also has CV input
 	}
 
-	const float cvA = std::max(61300.0f - adc.WavetablePosA_CV, 0.0f);		// Reduce to ensure can hit zero with noise
-	const float cvB = std::max(61300.0f - adc.WavetablePosB_CV, 0.0f);		// Reduce to ensure can hit zero with noise
-	filterStart[0] = filterStart[0] * smoothOld + std::clamp((adc.Wavetable_Pos_A_Pot + cvA), 0.0f, 65535.0f) * (lpf ? startMultLPF : startMultComb);
-	filterStart[1] = filterStart[1] * smoothOld + std::clamp((adc.Wavetable_Pos_B_Pot + cvB), 0.0f, 65535.0f) * (lpf ? startMultLPF : startMultComb);
+	const float cvA = std::max(61300.0f - adc.Filter_A_CV, 0.0f);		// Reduce to ensure can hit zero with noise
+	const float cvB = std::max(61300.0f - adc.Filter_B_CV, 0.0f);		// Reduce to ensure can hit zero with noise
+	filterStart[0] = filterStart[0] * smoothOld + std::clamp((adc.Filter_A_Pot + cvA), 0.0f, 65535.0f) * (lpf ? startMultLPF : startMultComb);
+	filterStart[1] = filterStart[1] * smoothOld + std::clamp((adc.Filter_B_Pot + cvB), 0.0f, 65535.0f) * (lpf ? startMultLPF : startMultComb);
 
 	uint32_t combPos[2] = {0, 0};
 	int32_t combDir[2] = {1, 1};
 
 
-	if (wavetable.modeSwitch.IsHigh()) {				// Mode to scale multipliers according to a cosine wave shape
+	if (harmonicMode.IsHigh()) {				// Mode to scale multipliers according to a cosine wave shape
 
 		const float maxLevel = 0.15f;
 		float sineScale[2] = {maxLevel, maxLevel};
@@ -121,13 +115,13 @@ void Additive::IdleJobs()
 
 		// Calculate smoothed spread amount from pot and CV with trimmer controlling range of CV
 		static constexpr float spreadMult = 10000.0f / 65535.0f;
-		const float cv = std::max(61300.0f - adc.WarpCV, 0.0f);		// Reduce to ensure can hit zero with noise
+		const float cv = std::max(61300.0f - adc.Harm_Stretch_CV, 0.0f);		// Reduce to ensure can hit zero with noise
 
-		Smooth(multSpread, 100.0f + (adc.Warp_Amt_Pot + (WaveTable::NormaliseADC(adc.Warp_Amt_Trm) * cv)) * spreadMult, 0.99f);
+		Smooth(multSpread, 100.0f + (adc.Harm_Stretch_Pot + (NormaliseADC(adc.Harm_Stretch_Trm) * cv)) * spreadMult, 0.99f);
 		float spread = multSpread;
 
 		static constexpr float growMult = 0.05f * (30.0f / 65535.0f);
-		multGrow = multGrow * 0.95f + (adc.Warp_Type_Pot - 32768) * growMult;
+		multGrow = multGrow * 0.95f + (adc.Harm_Warp_CV - 32768) * growMult;
 
 		for (uint32_t i = 0; i < maxHarmonics; ++i) {
 			FilterCalc(i, sineScale[i & 1], combPos[i & 1], combDir[i & 1], maxLevel);
@@ -141,8 +135,6 @@ void Additive::IdleJobs()
 				spread += multGrow;
 			}
 			sinePos += spread;
-
-			wavetable.drawData[0][i] = 240 * multipliers[i];
 		}
 
 	} else {								// Mode to spread individual harmonics
@@ -152,20 +144,18 @@ void Additive::IdleJobs()
 
 		// Calculate smoothed spread amount from pot and CV with trimmer controlling range of CV
 		static constexpr float spreadMult = 10.0f / 65535.0f;
-		const float cv = std::max(61300.0f - adc.WarpCV, 0.0f);		// Reduce to ensure can hit zero with noise
+		const float cv = std::max(61300.0f - adc.Harm_Stretch_CV, 0.0f);		// Reduce to ensure can hit zero with noise
 		multSpread = (0.99f * multSpread) +
-				(0.01f * (1.0f + (adc.Warp_Amt_Pot + WaveTable::NormaliseADC(adc.Warp_Amt_Trm) * cv) * spreadMult));
+				(0.01f * (1.0f + (adc.Harm_Stretch_Pot + NormaliseADC(adc.Harm_Stretch_Trm) * cv) * spreadMult));
 
 		static constexpr float growMult = 0.05f * (1.0f / 65535.0f);
-		multGrow = multGrow * 0.95f + (adc.Warp_Type_Pot - 32768) * growMult;
+		multGrow = multGrow * 0.95f + (adc.Harm_Warp_CV - 32768) * growMult;
 		float spread = multSpread;
 
 		float spreadHarm = 1.0f + spread;
 
 		multipliers[0] = startLevel[0];
 		multipliers[1] = startLevel[1];
-		wavetable.drawData[0][0] = 80;
-		wavetable.drawData[0][1] = 80;
 
 		float nextVal = 0.0f;		// For storing partial value when spread creates fractional harmonic
 
@@ -195,7 +185,6 @@ void Additive::IdleJobs()
 			} else {
 				multipliers[i] = 0.0f;
 			}
-			wavetable.drawData[0][i] = 240 * multipliers[i];
 		}
 	}
 
@@ -205,7 +194,7 @@ void Additive::IdleJobs()
 
 inline void Additive::FilterCalc(uint32_t pos, float& scale, uint32_t& combPos, int32_t& combDir, float maxLevel)
 {
-	bool lpf = !wavetable.cfg.octaveChnB;
+	bool lpf = filterMode.IsHigh();
 	bool notch = false;
 
 	if (lpf) {						// Exponential LP filter

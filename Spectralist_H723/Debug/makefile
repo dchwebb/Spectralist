@@ -9,6 +9,7 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include src/usb/subdir.mk
 -include src/subdir.mk
 -include objects.mk
 
@@ -82,8 +83,8 @@ all: main-build
 main-build: Spectralist_H723.elf secondary-outputs
 
 # Tool invocations
-Spectralist_H723.elf Spectralist_H723.map: $(OBJS) $(USER_OBJS) D:\CubeIDE\Spectralist_H723\STM32H723VGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-g++ -o "Spectralist_H723.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"D:\CubeIDE\Spectralist_H723\STM32H723VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Spectralist_H723.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Spectralist_H723.elf Spectralist_H723.map: $(OBJS) $(USER_OBJS) D:\Eurorack\Spectralist\Spectralist_H723\STM32H723VGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-g++ -o "Spectralist_H723.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"D:\Eurorack\Spectralist\Spectralist_H723\STM32H723VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Spectralist_H723.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

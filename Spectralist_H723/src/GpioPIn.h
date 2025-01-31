@@ -1,5 +1,7 @@
 #pragma once
 
+extern volatile uint32_t SysTickVal;
+
 class GpioPin {
 public:
 	enum class Type {Input, InputPullup, InputPulldown, Output, AlternateFunction};
@@ -84,3 +86,40 @@ private:
 	Type pinType;
 };
 
+
+// Struct to manage buttons with debounce and GPIO management
+struct Btn {
+	GpioPin pin;
+	uint32_t down = 0;			// set to zero if button has been pressed and is subsequently released
+	uint32_t up = 0;			// Set to last release time
+	bool longPressed = false;
+
+	// Debounce button press mechanism
+	bool Pressed() {
+		// Has been pressed and now released
+		if (pin.IsHigh() && down && SysTickVal > up + 100) {		// IsHigh = button not pressed
+			down = 0;
+			up = SysTickVal;
+			if (longPressed) {
+				longPressed = false;
+				return false;
+			}
+			return true;
+		}
+
+		if (pin.IsLow() && down == 0 && SysTickVal > up + 100) {	// IsLow  = button pressed
+			down = SysTickVal;
+			up = 0;
+		}
+		return false;
+	}
+
+	bool LongPress() {
+		if (pin.IsLow() && !longPressed && down && SysTickVal > down + 1000) {
+			longPressed = true;
+			return true;
+		}
+		return false;
+	}
+
+};

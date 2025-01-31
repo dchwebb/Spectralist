@@ -26,9 +26,6 @@ void InitClocks()
 	RCC->APB4ENR |= RCC_APB4ENR_SYSCFGEN;			// Enable System configuration controller clock
 
 	// Voltage scaling - see Datasheet page 91. VOS0 > 520MHz; VOS1 > 400MHz; VOS2 > 300MHz; VOS3 < 170MHz
-	//PWR->CR3 &= ~PWR_CR3_SCUEN;						// Supply configuration update enable - this must be deactivated or VOS ready does not come on
-	//PWR->CR3 |= PWR_CR3_BYPASS;						// power management unit bypassed: Must be set before changing VOS
-
 	PWR->D3CR &= ~PWR_D3CR_VOS;						// Configure voltage scaling level 0 (Highest)
 	while ((PWR->D3CR & PWR_D3CR_VOSRDY) == 0);	// Check Voltage ready 1= Ready, voltage level at or above VOS selected level
 
@@ -172,8 +169,10 @@ void InitADC()
 
 	ADC12_COMMON->CCR |= ADC_CCR_PRESC_0;			// Set prescaler to ADC clock divided by 2 (if 8MHz = 4MHz)
 	ADC3_COMMON->CCR |= ADC_CCR_PRESC_0;			// Set prescaler to ADC clock divided by 2 (if 8MHz = 4MHz)
+
 	InitADC1();
 	InitADC2();
+	InitADC3();
 }
 
 
@@ -259,7 +258,7 @@ void InitADC1()
 
 	DMA1_Stream1->NDTR |= ADC1_BUFFER_LENGTH;		// Number of data items to transfer (ie size of ADC buffer)
 	DMA1_Stream1->PAR = (uint32_t)(&(ADC1->DR));	// Configure the peripheral data register address 0x40022040
-	DMA1_Stream1->M0AR = (uint32_t)(&adc);		// Configure the memory address (note that M1AR is used for double-buffer mode) 0x24000040
+	DMA1_Stream1->M0AR = (uint32_t)(&adc);			// Configure the memory address (note that M1AR is used for double-buffer mode) 0x24000040
 
 	DMA1_Stream1->CR |= DMA_SxCR_EN;				// Enable DMA and wait
 	wait_loop_index = (SystemCoreClock / (100000UL * 2UL));
@@ -341,6 +340,77 @@ void InitADC2()
 }
 
 
+void InitADC3()
+{
+	// Initialize ADC peripheral - NB ADC 3 is only 12 bit whilst ADC1/2 are 16 bit
+	DMA1_Stream3->CR &= ~DMA_SxCR_EN;
+	DMA1_Stream3->CR |= DMA_SxCR_CIRC;				// Circular mode to keep refilling buffer
+	DMA1_Stream3->CR |= DMA_SxCR_MINC;				// Memory in increment mode
+	DMA1_Stream3->CR |= DMA_SxCR_PSIZE_0;			// Peripheral size: 8 bit; 01 = 16 bit; 10 = 32 bit
+	DMA1_Stream3->CR |= DMA_SxCR_MSIZE_0;			// Memory size: 8 bit; 01 = 16 bit; 10 = 32 bit
+	DMA1_Stream3->CR |= DMA_SxCR_PL_0;				// Priority: 00 = low; 01 = Medium; 10 = High; 11 = Very High
+
+	DMA1_Stream3->FCR &= ~DMA_SxFCR_FTH;			// Disable FIFO Threshold selection
+	DMA1->LIFCR = 0x3F << DMA_LIFCR_CFEIF3_Pos;		// clear all five interrupts for this stream
+
+	DMAMUX1_Channel3->CCR |= 115; 					// DMA request MUX input 115 = adc3_dma (See p.676)
+	DMAMUX1_ChannelStatus->CFR |= DMAMUX_CFR_CSOF3; // Clear synchronization overrun event flag
+
+	ADC3->CR &= ~ADC_CR_DEEPPWD;					// Deep power down: 0: ADC not in deep-power down	1: ADC in deep-power-down (default reset state)
+	ADC3->CR |= ADC_CR_ADVREGEN;					// Enable ADC internal voltage regulator
+
+	// Wait until voltage regulator settled: 5-10uS. Datasheet p 157
+	volatile uint32_t wait_loop_index = (SystemCoreClock / (100000UL * 2UL));
+	while (wait_loop_index != 0UL) {
+		wait_loop_index--;
+	}
+	while ((ADC3->CR & ADC_CR_ADVREGEN) != ADC_CR_ADVREGEN) {}
+
+	ADC3->CFGR |= ADC_CFGR_CONT;					// 1: Continuous conversion mode for regular conversions
+	ADC3->CFGR |= ADC_CFGR_OVRMOD;					// Overrun Mode 1: ADC_DR register is overwritten with the last conversion result when an overrun is detected.
+	ADC3->CFGR |= ADC_CFGR_DMNGT;					// Data Management configuration 11: DMA Circular Mode selected
+
+	// Boost mode 1: Boost mode on. Must be used when ADC clock > 20 MHz.
+	ADC3->CR |= ADC_CR_BOOST_0;						// Note this sets reserved bit according to SFR - HAL has notes about silicon revision
+	ADC3->SQR1 |= (ADC3_BUFFER_LENGTH - 1);			// For scan mode: set number of channels to be converted
+
+	// Start calibration
+	ADC3->CR |= ADC_CR_ADCALLIN;					// Activate linearity calibration (as well as offset calibration)
+	ADC3->CR |= ADC_CR_ADCAL;
+	while ((ADC3->CR & ADC_CR_ADCAL) == ADC_CR_ADCAL) {};
+
+	/* Configure ADC Channels to be converted:
+	PC0 ADC123_INP10 Filter_B_Trm
+	PC1	ADC123_INP11 Pan_CV
+	PC2_C ADC3_INP0 Filter_A_CV
+	*/
+	InitAdcPins(ADC3, {10, 11, 0});
+
+	// Enable ADC
+	ADC3->ISR |= ADC_ISR_ADRDY;						// Clear the ADC Ready bit
+	ADC3->CR |= ADC_CR_ADEN;
+	while ((ADC3->ISR & ADC_ISR_ADRDY) == 0) {
+		if ((ADC3->CR & ADC_CR_ADEN) == 0) {		// Not sure why but ADC3 does not turn on immediately
+			ADC3->CR |= ADC_CR_ADEN;
+		}
+	}
+
+	DMAMUX1_ChannelStatus->CFR |= DMAMUX_CFR_CSOF3; // Channel 3 Clear synchronization overrun event flag
+	DMA1->LIFCR = 0x3F << DMA_LIFCR_CFEIF3_Pos;		// clear all five interrupts for this stream
+
+	DMA1_Stream3->NDTR |= ADC3_BUFFER_LENGTH;		// Number of data items to transfer (ie size of ADC buffer)
+	DMA1_Stream3->PAR = reinterpret_cast<uint32_t>(&(ADC3->DR));	// Configure the peripheral data register address 0x40022040
+	DMA1_Stream3->M0AR = reinterpret_cast<uint32_t>(&adc.Filter_B_Trm);		// Configure the memory address (note that M1AR is used for double-buffer mode) 0x24000040
+
+	DMA1_Stream3->CR |= DMA_SxCR_EN;				// Enable DMA and wait
+	wait_loop_index = (SystemCoreClock / (100000UL * 2UL));
+	while (wait_loop_index != 0UL) {
+		wait_loop_index--;
+	}
+
+	ADC3->CR |= ADC_CR_ADSTART;						// Start ADC
+}
+
 
 void InitI2S()
 {
@@ -369,16 +439,17 @@ void InitI2S()
 	RCC->D2CCIP1R |= RCC_D2CCIP1R_SPI123SEL_0;		// 001: pll2_p_ck clock selected as SPI/I2S1,2 and 3 kernel clock
 	SPI2->I2SCFGR |= (10 << SPI_I2SCFGR_I2SDIV_Pos);	// Set I2SDIV to 10
 
-	SPI2->IER |= (SPI_IER_TXPIE | SPI_IER_UDRIE);	// Enable interrupt when FIFO has free slot or underrun occurs
-	NVIC_SetPriority(SPI2_IRQn, 2);					// Lower is higher priority
-	NVIC_EnableIRQ(SPI2_IRQn);
-
 	SPI2->CR1 |= SPI_CR1_SPE;						// Enable I2S
 
 	SPI2->TXDR = (int32_t)0;						// Preload the FIFO
 	SPI2->TXDR = (int32_t)0;
 	SPI2->TXDR = (int32_t)0;
 	SPI2->TXDR = (int32_t)0;
+
+	SPI2->IER |= (SPI_IER_TXPIE | SPI_IER_UDRIE);	// Enable interrupt when FIFO has free slot or underrun occurs
+	NVIC_SetPriority(SPI2_IRQn, 2);					// Lower is higher priority
+	NVIC_EnableIRQ(SPI2_IRQn);
+
 
 	SPI2->CR1 |= SPI_CR1_CSTART;					// Start I2S
 }

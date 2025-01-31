@@ -1,5 +1,5 @@
 void OTG_HS_IRQHandler(void) {
-//	usb.InterruptHandler();
+	usb.InterruptHandler();
 }
 
 uint32_t underrun = 0;
@@ -12,7 +12,7 @@ void SPI2_IRQHandler()
 		++underrun;
 	}
 
-	//additive.CalcSample();
+	additive.CalcSample();
 }
 
 
