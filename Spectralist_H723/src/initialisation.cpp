@@ -342,7 +342,7 @@ void InitADC2()
 
 void InitADC3()
 {
-	// Initialize ADC peripheral - NB ADC 3 is only 12 bit whilst ADC1/2 are 16 bit
+	// Initialize ADC peripheral - NB ADC 3 is only 12 bit whilst ADC1/2 are 16 bit (values are left shifted by 4 for consistency)
 	DMA1_Stream3->CR &= ~DMA_SxCR_EN;
 	DMA1_Stream3->CR |= DMA_SxCR_CIRC;				// Circular mode to keep refilling buffer
 	DMA1_Stream3->CR |= DMA_SxCR_MINC;				// Memory in increment mode
@@ -369,6 +369,7 @@ void InitADC3()
 	ADC3->CFGR |= ADC_CFGR_CONT;					// 1: Continuous conversion mode for regular conversions
 	ADC3->CFGR |= ADC_CFGR_OVRMOD;					// Overrun Mode 1: ADC_DR register is overwritten with the last conversion result when an overrun is detected.
 	ADC3->CFGR |= ADC_CFGR_DMNGT;					// Data Management configuration 11: DMA Circular Mode selected
+	ADC3->CFGR |= ADC3_CFGR_ALIGN;					// Left align data so that 12 bit value is converted to 16 bit
 
 	// Boost mode 1: Boost mode on. Must be used when ADC clock > 20 MHz.
 	ADC3->CR |= ADC_CR_BOOST_0;						// Note this sets reserved bit according to SFR - HAL has notes about silicon revision

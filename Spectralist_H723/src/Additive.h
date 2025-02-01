@@ -28,17 +28,6 @@ public:
 		return array;
 	}
 
-	/*
-	static constexpr uint32_t sinLUTSize = 2048;
-	constexpr auto CreateSinLUT()									// constexpr function to generate LUT in Flash
-	{
-		std::array<float, sinLUTSize + 1> array {};					// Create one extra entry to simplify interpolation
-		for (uint32_t s = 0; s < sinLUTSize + 1; ++s){
-			array[s] = std::sin(s * 2.0f * std::numbers::pi / sinLUTSize);
-		}
-		return array;
-	}
-	*/
 	uint32_t maxHarmonic = 200;
 	uint32_t aliasHarmonic;
 	float prevIncErr = 0.0f;
@@ -50,7 +39,7 @@ private:
 	float outputSamples[2] = {0.0f, 0.0f};		// Preprepared samples sent to DAC on interrupt
 	float smoothedInc = 0.0f;
 	static constexpr float scaleOutput = -std::pow(2.0f, 31.0f);	// Multiple to convert -1.0 - 1.0 float to 32 bit int and invert
-	static constexpr float scaleVCAOutput = scaleOutput / 65536.0f;	// To scale when VCA is used
+
 	//GpioPin octaveDown	{GPIOD, 6, GpioPin::Type::Input};
 	//GpioPin debug1		{GPIOC, 10, GpioPin::Type::Output};
 

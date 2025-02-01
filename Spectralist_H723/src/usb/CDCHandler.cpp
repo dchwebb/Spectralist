@@ -34,7 +34,7 @@ void CDCHandler::ProcessCommand()
 
 	} else if (cmd.compare("info") == 0) {				// Print diagnostic information
 		extern uint32_t underrun;			// Diagnostics from interrupt hander and wavetable output
-		printf("\r\nMountjoy Kishoof v1.0\r\n\r\n"
+		printf("\r\nMountjoy Spectralist v1.0\r\n\r\n"
 				"Build Date: %s %s\r\n"
 				"Calibration base pitch: %.2f\r\n"
 				"Calibration pitch divider: %.2f\r\n"
@@ -52,34 +52,15 @@ void CDCHandler::ProcessCommand()
 
 	} else if (cmd.compare("help") == 0) {
 
-		usb->SendString("Mountjoy Kishoof\r\n"
+		usb->SendString("Mountjoy Spectralist\r\n"
 				"\r\nSupported commands:\r\n"
 				"info        -  Show diagnostic information\r\n"
 				"calib       -  Start calibration\r\n"
 				"dfu         -  USB firmware upgrade\r\n"
-				"wavetables  -  Print list of wavetables\r\n"
-				"dirdetails  -  Print detailed FAT directory info\r\n"
-				"add:XXXXXXXX   Channel B additive waves. Type 'help add' for details\r\n"
-				"dispmark:X  -  CV markers in display. N - none, L - line, P - pointer\r\n"
 				"clearconfig -  Erase configuration and restart\r\n"
 				"saveconfig  -  Immediately save config\r\n"
-				"fatinfo     -  Print fat file system details\r\n"
 				"reboot      -  Reboot module\r\n"
 				"\r\n"
-				"Flash Tools:\r\n"
-				"------------\r\n"
-				"eraseflash  -  Erase all sample storage flash data\r\n"
-				"format      -  Format sample storage flash\r\n"
-				"fixunaligned   Attempt to fix any wavetables with Unaligned errors\r\n"
-				"sreg        -  Print flash status register\r\n"
-				"flashid     -  Print flash manufacturer and device IDs\r\n"
-				"mem:A       -  Print 1024 bytes of flash (A = decimal address)\r\n"
-				"printcluster:A Print 2048 bytes of cluster address A (>=2)\r\n"
-				"clusterchain   List chain of FAT clusters\r\n"
-				"cacheinfo   -  Summary of unwritten changes in header cache\r\n"
-				"cachechanges   Show all bytes changed in header cache\r\n"
-				"flushcache  -  Flush any changed data in cache to flash\r\n"
-				"eraseblock:A   Erase block of memory (4096 bytes)\r\n"
 
 #if (USB_DEBUG)
 				"\r\n"
@@ -87,21 +68,6 @@ void CDCHandler::ProcessCommand()
 				"\r\n"
 #endif
 		);
-
-	} else if (cmd.compare("help add") == 0) {
-
-		usb->SendString("Configure channel B additive waves\r\n"
-				"syntax add:XXXXXXXX where X = 0 to 9:\r\n"
-				" 0 = none\r\n"
-				" 1 = fundamental sine\r\n"
-				" 2 = 2nd harmonic sine\r\n"
-				" 3 = 3rd harmonic sine\r\n"
-				" 4 = 4th harmonic sine\r\n"
-				" 5 = 5th harmonic sine\r\n"
-				" 6 = 6th harmonic sine\r\n"
-				" 7 = square\r\n"
-				" 8 = saw tooth\r\n"
-				" 9 = triangle\r\n");
 
 
 #if (USB_DEBUG)
@@ -133,7 +99,6 @@ void CDCHandler::ProcessCommand()
 
 	} else if (cmd.compare("saveconfig") == 0) {				// Immediate config save
 		config.SaveConfig(true);
-
 
 
 	} else {

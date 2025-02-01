@@ -6,7 +6,6 @@
 #include "Filter.h"
 #include "Additive.h"
 
-bool modeSpectralist = false;
 volatile uint32_t SysTickVal;
 extern uint32_t SystemCoreClock;
 bool SafeMode = false;				// Disables file system mounting, USB MSC drive is disabled, don't load config
@@ -25,15 +24,8 @@ int main(void) {
 
 	InitClocks();					// Configure the clock and PLL
 	InitHardware();
-
-	if (GpioPin::IsLow(GPIOE, 4)) {	// If encoder button is pressed enter 'safe-mode'
-		SafeMode = true;
-	}
-
 	filter.Init();					// Initialise look up table of filter coefficients, windows etc
-	if (!SafeMode) {
-		config.RestoreConfig();
-	}
+	config.RestoreConfig();
 	usb.Init(false);
 	InitI2S();						// Initialise I2S which will start main sample interrupts
 
@@ -41,9 +33,8 @@ int main(void) {
 		usb.cdc.ProcessCommand();	// Check for incoming USB serial commands
 		config.SaveConfig();		// Save any scheduled changes
 		calib.Calibrate();
-		if (modeSpectralist) {
-			//additive.IdleJobs();
-		}
+		additive.IdleJobs();
+
 #if (USB_DEBUG)
 		if ((GPIOB->IDR & GPIO_IDR_ID4) == 0 && USBDebug) {
 			USBDebug = false;

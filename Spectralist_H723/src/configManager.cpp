@@ -218,9 +218,9 @@ bool Config::FlashProgram(uint32_t* dest_addr, uint32_t* src_addr, size_t size)
 	__ISB();
 	__DSB();
 
-	// Each write block is up to 128 bits
-	for (uint16_t b = 0; b < std::ceil(static_cast<float>(size) / 16); ++b) {
-		for (uint8_t i = 0; i < 4; ++i) {
+	// Each write block is up to 256 bits
+	for (uint16_t b = 0; b < std::ceil(static_cast<float>(size) / 32); ++b) {
+		for (uint8_t i = 0; i < 8; ++i) {
 			*dest_addr = *src_addr;
 			++dest_addr;
 			++src_addr;

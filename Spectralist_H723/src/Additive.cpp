@@ -79,7 +79,7 @@ void Additive::IdleJobs()
 {
 	debugPin1.SetHigh();
 
-	const bool lpf = filterMode.IsHigh();
+	const bool lpf = filterMode.IsLow();
 
 	static constexpr float smoothOld = 0.95f;
 	static constexpr float smoothNew = 1.0f - smoothOld;
@@ -107,7 +107,7 @@ void Additive::IdleJobs()
 	int32_t combDir[2] = {1, 1};
 
 
-	if (harmonicMode.IsHigh()) {				// Mode to scale multipliers according to a cosine wave shape
+	if (harmonicMode.IsLow()) {				// Mode to scale multipliers according to a cosine wave shape
 
 		const float maxLevel = 0.15f;
 		float sineScale[2] = {maxLevel, maxLevel};
@@ -194,7 +194,7 @@ void Additive::IdleJobs()
 
 inline void Additive::FilterCalc(uint32_t pos, float& scale, uint32_t& combPos, int32_t& combDir, float maxLevel)
 {
-	bool lpf = filterMode.IsHigh();
+	bool lpf = filterMode.IsLow();
 	bool notch = false;
 
 	if (lpf) {						// Exponential LP filter

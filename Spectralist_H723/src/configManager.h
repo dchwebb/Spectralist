@@ -17,10 +17,10 @@ class Config {
 public:
 	static constexpr uint8_t configVersion = 10;
 	
-	// STM32H7B0 has 128k Flash in 16 sectors of 8192k
-	static constexpr uint32_t flashConfigSector = 14;		// Allow 3 sectors for config giving a config size of 24k before erase needed
-	static constexpr uint32_t flashSectorSize = 8192;
-	static constexpr uint32_t configSectorCount = 3;		// Number of sectors after base sector used for config
+	// STM32H723 has 1024k Flash in 8 sectors of 128k
+	static constexpr uint32_t flashConfigSector = 7;		// Allow 1 sector for config giving a config size of 128k before erase needed
+	static constexpr uint32_t flashSectorSize = 131072;
+	static constexpr uint32_t configSectorCount = 1;		// Number of sectors after base sector used for config
 	uint32_t* flashConfigAddr = reinterpret_cast<uint32_t* const>(FLASH_BASE + flashSectorSize * (flashConfigSector - 1));;
 
 	bool scheduleSave = false;
