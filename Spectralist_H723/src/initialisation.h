@@ -51,6 +51,7 @@ void InitADC1();
 void InitADC2();
 void InitADC3();
 void InitI2S();
+void InitPWMTimer();
 void InitDebugTimer();
 void StartDebugTimer();
 float StopDebugTimer();

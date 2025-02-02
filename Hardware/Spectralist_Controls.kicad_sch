@@ -3743,7 +3743,7 @@
 		)
 		(uuid "4e424b88-4e37-43ce-8fb7-192e4652e6ba")
 	)
-	(text "Panel Errata: Mode switch hole too large for subminiature switch"
+	(text "Panel Errata: Mode switch hole too large for subminiature switch\nFilter type switch hole just too narrow"
 		(exclude_from_sim no)
 		(at 212.598 170.434 0)
 		(effects

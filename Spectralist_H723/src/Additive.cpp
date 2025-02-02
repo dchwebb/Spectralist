@@ -27,11 +27,15 @@ void Additive::CalcSample()
 	SPI2->TXDR = (int32_t)(outputSamples[1] * scaleOutput);
 
 	// Pitch calculations
-	//const float octave = octaveDown.IsHigh() ? 0.5 : 1.0f;		// FIXME - octave is a momentary button
 	if (octaveBtn.Pressed()) {
-
+		cfg.octaveDown = !cfg.octaveDown;
+		if (cfg.octaveDown) {
+			octaveLED.SetHigh();
+		} else {
+			octaveLED.SetLow();
+		}
 	}
-	const float octave = 1.0f;
+	const float octave = cfg.octaveDown ? 0.5 : 1.0f;
 	const uint32_t newInc = calib.pitchLUT[adc.Pitch_CV] * octave;
 	smoothedInc = newInc;
 
@@ -102,6 +106,10 @@ void Additive::IdleJobs()
 	const float cvB = std::max(61300.0f - adc.Filter_B_CV, 0.0f);		// Reduce to ensure can hit zero with noise
 	filterStart[0] = filterStart[0] * smoothOld + std::clamp((adc.Filter_A_Pot + cvA), 0.0f, 65535.0f) * (lpf ? startMultLPF : startMultComb);
 	filterStart[1] = filterStart[1] * smoothOld + std::clamp((adc.Filter_B_Pot + cvB), 0.0f, 65535.0f) * (lpf ? startMultLPF : startMultComb);
+
+	// Set filter LED brightness - FIXME - very inefficient
+	filterLED_A = (filterStart[0] * 4096) / (lpf ? 200 : 50);
+	filterLED_B = (filterStart[1] * 4096) / (lpf ? 200 : 50);
 
 	uint32_t combPos[2] = {0, 0};
 	int32_t combDir[2] = {1, 1};
@@ -249,4 +257,10 @@ inline void Additive::FilterCalc(uint32_t pos, float& scale, uint32_t& combPos, 
 
 		}
 	}
+}
+
+
+void Additive::UpdateConfig()
+{
+
 }
