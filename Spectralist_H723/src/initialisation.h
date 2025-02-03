@@ -14,7 +14,6 @@ extern bool vcaConnected;			// Temporary hack as current hardware does not have 
 static constexpr uint32_t sysTickInterval = 1000;					// Set in uS so 1000uS = 1ms
 constexpr uint32_t sampleRate = 48000;
 static constexpr uint32_t adcMax = 65536;
-enum class SampleType {Unsupported, Float32, PCM16};
 
 static constexpr uint32_t ADC1_BUFFER_LENGTH = 6;
 static constexpr uint32_t ADC2_BUFFER_LENGTH = 6;
@@ -51,6 +50,7 @@ void InitADC1();
 void InitADC2();
 void InitADC3();
 void InitI2S();
+void InitCordic();
 void InitPWMTimer();
 void InitDebugTimer();
 void StartDebugTimer();

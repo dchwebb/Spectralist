@@ -88,6 +88,7 @@ void InitHardware()
 	InitCache();
 	InitADC();
 	InitPWMTimer();
+	InitCordic();
 //	InitDebugTimer();
 }
 
@@ -454,6 +455,12 @@ void InitI2S()
 
 
 	SPI2->CR1 |= SPI_CR1_CSTART;					// Start I2S
+}
+
+
+void InitCordic()
+{
+	RCC->AHB2ENR |= RCC_AHB2ENR_CORDICEN;
 }
 
 
