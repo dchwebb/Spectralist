@@ -42,14 +42,14 @@ public:
 
 	uint32_t maxHarmonic = 200;
 	uint32_t aliasHarmonic;
-	float prevIncErr = 0.0f;
+
 private:
 	float FastTanh(const float x);
 	inline void FilterCalc(uint32_t pos, float& scale, uint32_t& combPos, int32_t& combDir, float maxLevel);
 	inline void Smooth(float& currentValue, const float newValue, const float fraction);
 
 	float outputSamples[2] = {0.0f, 0.0f};		// Preprepared samples sent to DAC on interrupt
-	float smoothedInc = 0.0f;
+
 	static constexpr float scaleOutput = -std::pow(2.0f, 31.0f);	// Multiple to convert -1.0 - 1.0 float to 32 bit int and invert
 
 	float filterStart[2] = {0.0f, 0.0f};

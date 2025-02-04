@@ -12,7 +12,7 @@ Calib::Calib()
 void Calib::UpdatePitchLUT()
 {
 	for (uint32_t i = 0; i < adcMax + 1; ++i) {
-		calib.pitchLUT[i] = 65536.0f * calib.cfg.pitchBase * std::pow(2.0f, (float)i * calib.cfg.pitchMult);
+		calib.pitchLUT[i] = std::round(65536.0f * calib.cfg.pitchBase * std::pow(2.0f, calib.cfg.pitchMult * i));
 	}
 }
 

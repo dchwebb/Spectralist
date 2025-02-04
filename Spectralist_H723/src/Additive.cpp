@@ -35,33 +35,18 @@ void Additive::CalcSample()
 			octaveLED.SetLow();
 		}
 	}
-	const float octave = cfg.octaveDown ? 0.5 : 1.0f;
-	const uint32_t newInc = calib.pitchLUT[adc.Pitch_CV] * octave;
-	smoothedInc = newInc;
+	const float octave = cfg.octaveDown ? 2 : 1;
+	const uint32_t inc = calib.pitchLUT[adc.Pitch_CV] / octave;		// Increment of the base sine read position
+	uint32_t incMult = inc;											// Increment of the harmonic sine read position
 
 	// Calculate the maximum harmonic before aliasing (experimenting shows we need to truncate slightly before the nyquist frequency)
-	aliasHarmonic = std::min(maxHarmonic, (uint32_t)(((float)sinLUTSize / 2.25f) / (newInc >> 16)));
-
-	// Increment the sine read position
-	uint32_t inc = std::round(newInc);
-	prevIncErr = newInc - inc;				// To prevent errors compounding store the previous error to apply to the next increment
-	uint32_t incMult = inc;
+	aliasHarmonic = std::min(maxHarmonic, (uint32_t)(((float)sinLUTSize / 2.25f) / (inc >> 16)));
 
 	float mixOut[2] = {0.0f, 0.0f};
 
-#ifdef UseCordic
-	CORDIC->CSR = (1 << CORDIC_CSR_FUNC_Pos) | 		// 0: Cos, 1: Sin, 2: Phase, 3: Modulus, 4: Arctan, 5: cosh, 6: sinh, 7: Arctanh, 8: ln, 9: Square Root
-			(6 << CORDIC_CSR_PRECISION_Pos);		// Set precision to 6 (gives 6 * 4 = 24 iterations in 6 clock cycles)
-#endif
-
 	for (uint32_t i = 0; i < aliasHarmonic; ++i) {
 		readPos[i] += incMult;
-#ifdef UseCordic
-		CORDIC->WDATA = readPos[i];
-		mixOut[i & 1] += (float)((int)CORDIC->RDATA) * multipliers[i];
-#else
 		mixOut[i & 1] += sineLUT[readPos[i] >> 16] * multipliers[i];
-#endif
 		incMult += inc;
 	}
 
@@ -69,7 +54,6 @@ void Additive::CalcSample()
 	outputSamples[1] = FastTanh(mixOut[1]);
 
 	debugPin2.SetLow();
-
 }
 
 

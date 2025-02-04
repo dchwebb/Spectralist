@@ -3,7 +3,7 @@
 #include "USB.h"
 #include "configManager.h"
 #include "Calib.h"
-#include "Filter.h"
+//#include "Filter.h"
 #include "Additive.h"
 
 volatile uint32_t SysTickVal;
@@ -24,7 +24,7 @@ int main(void) {
 
 	InitClocks();					// Configure the clock and PLL
 	InitHardware();
-	filter.Init();					// Initialise look up table of filter coefficients, windows etc
+//	filter.Init();					// Initialise look up table of filter coefficients, windows etc
 	config.RestoreConfig();
 	usb.Init(false);
 	InitI2S();						// Initialise I2S which will start main sample interrupts

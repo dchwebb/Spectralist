@@ -9,10 +9,10 @@ GpioPin debugPin2	{GPIOD, 5, GpioPin::Type::Output};			// PD6: Debug (also UART_
 // I2S 				PLL2 P 				61.44 MHz
 // ADC		 		Peripheral Clock 	8 MHz
 
-// Main clock 8MHz (HSE) / 2 (M) * 200 (N) / 2 (P) = 400MHz
+// Main clock 8MHz (HSE) / 2 (M) * 125 (N) / 1 (P) = 500MHz
 #define PLL_M1 2
-#define PLL_N1 200
-#define PLL_P1 2
+#define PLL_N1 100
+#define PLL_P1 1
 
 // PPL2P used for I2S: 		8MHz / 5 (M) * 192 (N) / 5 (P) = 61.44 MHz
 #define PLL_M2 5
@@ -63,16 +63,16 @@ void InitClocks()
 
 	// Peripheral scalers
 	RCC->D1CCIPR |= RCC_D1CCIPR_CKPERSEL_1;			// Peripheral clock to HSE (8MHz)
-	RCC->D1CFGR |= RCC_D1CFGR_HPRE_DIV2;			// D1 domain AHB prescaler - divide 400MHz by 2 for 200MHz - this is then divided for all APB clocks below
+	RCC->D1CFGR |= RCC_D1CFGR_HPRE_DIV2;			// D1 domain AHB prescaler - divide 500MHz by 2 for 250MHz - this is then divided for all APB clocks below
 	RCC->D1CFGR |= RCC_D1CFGR_D1PPRE_DIV2;			// APB3 Clocks
 	RCC->D2CFGR |= RCC_D2CFGR_D2PPRE1_DIV2;			// APB1 Clocks
 	RCC->D2CFGR |= RCC_D2CFGR_D2PPRE2_DIV2;			// APB2 Clocks
 	RCC->D3CFGR |= RCC_D3CFGR_D3PPRE_DIV2;			// APB4 Clocks
 
-	// By default Flash latency is set to 7 wait states - See page 161 - HAL sets to 2 FIXME
+	// By default Flash latency is set to 7 wait states - Note values in table are half system clock rates
 	FLASH->ACR = FLASH_ACR_WRHIGHFREQ |
-				(FLASH->ACR & ~FLASH_ACR_LATENCY) | FLASH_ACR_LATENCY_6WS;
-	while ((FLASH->ACR & FLASH_ACR_LATENCY_Msk) != FLASH_ACR_LATENCY_6WS);
+				(FLASH->ACR & ~FLASH_ACR_LATENCY) | FLASH_ACR_LATENCY_4WS;
+	while ((FLASH->ACR & FLASH_ACR_LATENCY_Msk) != FLASH_ACR_LATENCY_4WS);
 
 	RCC->CFGR |= RCC_CFGR_SW_PLL1;					//3 System clock switch: 011: PLL1 selected as system clock
 	while ((RCC->CFGR & RCC_CFGR_SWS_Msk) != (RCC_CFGR_SW_PLL1 << RCC_CFGR_SWS_Pos));		// Wait until PLL has been selected as system clock source
@@ -482,14 +482,14 @@ void InitPWMTimer()
 	TIM4->CCR2 = 0;
 	TIM4->CCR4 = 0;
 
-	// Timing calculations: Clock = 400MHz / (PSC + 1) = 25m counts per second
+	// Timing calculations: Clock = 500MHz / (PSC + 1) = 31m counts per second
 	// ARR = number of counts per PWM tick = 4095
-	// 25m / ARR ~= 6.1kHz of PWM square wave with 4095 levels of output
+	// 31m / ARR ~= 7.6kHz of PWM square wave with 4095 levels of output
 
 	TIM4->ARR = 4095;								// Total number of PWM ticks
-	TIM4->PSC = 15;									// Should give ~5.2kHz
+	TIM4->PSC = 15;									// Prescaler
 	TIM4->CR1 |= TIM_CR1_ARPE;						// 1: TIMx_ARR register is buffered
-	TIM4->CCER |= (TIM_CCER_CC1E | TIM_CCER_CC2E | TIM_CCER_CC3E | TIM_CCER_CC4E);		// Capture mode enabled / OC1 signal is output on the corresponding output pin
+	TIM4->CCER |= (TIM_CCER_CC2E | TIM_CCER_CC4E);	// Capture mode enabled / OC1 signal is output on the corresponding output pin
 	TIM4->EGR |= TIM_EGR_UG;						// 1: Re-initialize the counter and generates an update of the registers
 
 	TIM4->CR1 |= TIM_CR1_CEN;						// Enable counter
@@ -498,7 +498,7 @@ void InitPWMTimer()
 
 void InitDebugTimer()
 {
-	// Configure timer to use in internal debug timing - uses APB1 timer clock which is Main Clock [280MHz]
+	// Configure timer to use in internal debug timing - uses APB1 timer clock which is Main Clock [500MHz]
 	// Each tick is 4ns with PSC 12nS - full range is 786.42 uS
 	RCC->APB1LENR |= RCC_APB1LENR_TIM3EN;
 	TIM3->ARR = 65535;

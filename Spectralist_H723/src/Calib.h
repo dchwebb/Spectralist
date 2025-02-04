@@ -33,7 +33,7 @@ public:
 		.validateSettings = UpdateConfig
 	};
 
-	float pitchLUT[adcMax + 1];
+	uint32_t pitchLUT[adcMax + 1];
 
 	bool calibrating;			// Triggered by serial console
 	enum class State {Waiting0, Waiting1, Octave0, Octave1, PendingSave};
