@@ -130,6 +130,11 @@ SECTIONS
     *(.dma_buffer)
   } >RAM_D2
   
+  .dtcm (NOLOAD) :
+  {
+    *(.dtcm)
+  } >DTCMRAM  
+  
   /* used by the startup to initialize data */
   _sidata = LOADADDR(.data);
 

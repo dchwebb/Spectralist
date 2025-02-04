@@ -6,17 +6,20 @@
 Additive additive;
 
 // Create sine look up table as constexpr so will be stored in flash
-constexpr std::array<float, Additive::sinLUTSize> sineLUT = additive.CreateSinLUT();
-
+//constexpr std::array<float, Additive::sinLUTSize> sineLUT = additive.CreateSinLUT();
+float sineLUT[Additive::sinLUTSize] __attribute__((section (".dtcm")));
 
 Additive::Additive()
 {
+	for (uint32_t s = 0; s < sinLUTSize; ++s){
+		sineLUT[s] = std::sin(s * 2.0f * std::numbers::pi / sinLUTSize);
+	}
+
 	multipliers[0] = 0.3f;
 	multipliers[9] = 0.0f;
 	multipliers[99] = 0.3f;
 }
 
-//#define UseCordic
 
 void Additive::CalcSample()
 {
@@ -40,13 +43,13 @@ void Additive::CalcSample()
 	uint32_t incMult = inc;											// Increment of the harmonic sine read position
 
 	// Calculate the maximum harmonic before aliasing (experimenting shows we need to truncate slightly before the nyquist frequency)
-	aliasHarmonic = std::min(maxHarmonic, (uint32_t)(((float)sinLUTSize / 2.25f) / (inc >> 16)));
+	aliasHarmonic = std::min(maxHarmonic, (uint32_t)(((float)sinLUTSize / 2.25f) / (inc >> sinLUTShift)));
 
 	float mixOut[2] = {0.0f, 0.0f};
 
 	for (uint32_t i = 0; i < aliasHarmonic; ++i) {
 		readPos[i] += incMult;
-		mixOut[i & 1] += sineLUT[readPos[i] >> 16] * multipliers[i];
+		mixOut[i & 1] += sineLUT[readPos[i] >> sinLUTShift] * multipliers[i];
 		incMult += inc;
 	}
 
@@ -116,13 +119,13 @@ void Additive::IdleJobs()
 		uint16_t sinePos = Additive::sinLUTSize / 4;		// Start at maximum (pi/2)
 
 		// Calculate smoothed spread amount from pot and CV with trimmer controlling range of CV
-		static constexpr float spreadMult = 10000.0f / 65535.0f;
+		static constexpr float spreadMult = 10000.0f / (float)sinLUTSize;
 		const float cv = std::max(61300.0f - adc.Harm_Stretch_CV, 0.0f);		// Reduce to ensure can hit zero with noise
 
 		Smooth(multSpread, 100.0f + (adc.Harm_Stretch_Pot + (NormaliseADC(adc.Harm_Stretch_Trm) * cv)) * spreadMult, 0.99f);
 		float spread = multSpread;
 
-		static constexpr float growMult = 0.05f * (30.0f / 65535.0f);
+		static constexpr float growMult = 0.05f * (30.0f / (float)sinLUTSize);
 		multGrow = multGrow * 0.95f + (adc.Harm_Warp_CV - 32768) * growMult;
 
 		for (uint32_t i = 0; i < maxHarmonics; ++i) {
@@ -132,7 +135,7 @@ void Additive::IdleJobs()
 			if (i == maxHarmonics - 2) sineScale[i & 1] *= 0.5f;
 			if (i == maxHarmonics - 1) sineScale[i & 1] *= 0.25f;
 
-			multipliers[i] = sineScale[i & 1] * (1.0f + sineLUT[sinePos]);
+			multipliers[i] = sineScale[i & 1] * (1.0f + sineLUT[sinePos & sinLUTBits]);
 			if (spread + multGrow > 50.0f) {			// Check the sine wave position will increment enough
 				spread += multGrow;
 			}
@@ -140,11 +143,8 @@ void Additive::IdleJobs()
 		}
 
 	} else {								// Mode to spread individual harmonics
-#ifdef UseCordic
-		const float maxLevel = 0.3f / 2147483648.0f;;
-#else
+
 		const float maxLevel = 0.3f;
-#endif
 		float startLevel[2] = {maxLevel, maxLevel};
 
 		// Calculate smoothed spread amount from pot and CV with trimmer controlling range of CV

@@ -29,8 +29,10 @@ public:
 		.validateSettings = UpdateConfig
 	};
 
-	static constexpr uint32_t sinLUTSize = 65536;
-	static constexpr uint32_t lutMask = sinLUTSize - 1;				// 0x1FFFF
+	static constexpr uint32_t sinLUTSize = 32768;
+	static constexpr uint32_t sinLUTBits = log2(sinLUTSize);
+	static constexpr uint32_t sinLUTShift = 32 - sinLUTBits;		// Size of right shift of 32 uint to map to sine LUT size
+
 	constexpr auto CreateSinLUT()
 	{
 		std::array<float, sinLUTSize> array {};
@@ -52,15 +54,13 @@ private:
 
 	static constexpr float scaleOutput = -std::pow(2.0f, 31.0f);	// Multiple to convert -1.0 - 1.0 float to 32 bit int and invert
 
+	enum class Filter {LP, HP, BP, Comb, count} filterType = Filter::LP;
+	int32_t filterTypeVal = 0;										// Used for setting hysteresis on filter type
 	float filterStart[2] = {0.0f, 0.0f};
 	float filterSlope = 0.0f;
-	//float startLevel = 0.0f;
+
 	float multSpread = 0.0f;
 	float multGrow = 0.0f;
-
-	enum class Filter {LP, HP, BP, Comb, count} filterType = Filter::LP;
-
-	int32_t filterTypeVal = 0;					// Used for setting hysteresis on filter type
 
 	float multipliers[maxHarmonics];
 
