@@ -313,11 +313,11 @@ void InitADC2()
 
 	/* Configure ADC Channels to be converted:
 	PA6 ADC12_INP3 Filter_B_CV
-	PA7 ADC12_INP7 Harm_Stretch_Pot
+	PA7 ADC12_INP7 Harm_Warp_Pot
 	PB0 ADC12_INP9 Filter_Slope_Pot
 	PB1 ADC12_INP5 Filter_B_Pot
 	PC4 ADC12_INP4 Harm_Stretch_Trm
-	PC5 ADC12_INP8 Harm_Warp_Pot
+	PC5 ADC12_INP8 Harm_Stretch_Pot
 	*/
 	InitAdcPins(ADC2, {3, 7, 9, 5, 4, 8});
 

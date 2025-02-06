@@ -18,8 +18,11 @@ public:
 	void CalcSample();
 	void IdleJobs();
 
-	static constexpr uint32_t sinLUTSize = 65536;
-	static constexpr uint32_t lutMask = sinLUTSize - 1;				// 0x1FFFF
+	static constexpr uint32_t sinLUTSize = 32768;
+	static constexpr uint32_t sinLUTBits = log2(sinLUTSize);
+	static constexpr uint32_t sinLUTShift32 = 32 - sinLUTBits;		// Size of right shift of 32 uint to map to sine LUT size
+	static constexpr uint32_t sinLUTShift16 = 16 - sinLUTBits;		// Size of right shift of 16 uint to map to sine LUT size
+
 	constexpr auto CreateSinLUT(float* array)
 	{
 		//std::array<float, sinLUTSize> array {};

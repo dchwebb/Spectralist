@@ -27,11 +27,11 @@ struct ADCValues {
 	uint16_t Harm_Warp_CV;
 	uint16_t Harm_Stretch_CV;
 	uint16_t Filter_B_CV;
-	uint16_t Harm_Stretch_Pot;
+	uint16_t Harm_Warp_Pot;
 	uint16_t Filter_Slope_Pot;
 	uint16_t Filter_B_Pot;
 	uint16_t Harm_Stretch_Trm;
-	uint16_t Harm_Warp_Pot;
+	uint16_t Harm_Stretch_Pot;
 	uint16_t Filter_B_Trm;
 	uint16_t Pan_CV;
 	uint16_t Filter_A_CV;

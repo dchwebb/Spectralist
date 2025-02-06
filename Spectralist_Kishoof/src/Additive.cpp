@@ -34,21 +34,18 @@ void Additive::CalcSample()
 
 	// Pitch calculations
 	const float octave = wavetable.octaveDown.IsHigh() ? 0.5 : 1.0f;
-	const uint32_t newInc = calib.pitchLUT[adc.Pitch_CV] * octave;
+	const uint32_t inc = calib.pitchLUT[adc.Pitch_CV] * octave;
+	uint32_t incMult = inc;
 
 	// Calculate the maximum harmonic before aliasing (experimenting shows we need to truncate slightly before the nyquist frequency)
-	aliasHarmonic = std::min(maxHarmonic, (uint32_t)(((float)sinLUTSize / 2.25f) / (newInc >> 16)));
+	aliasHarmonic = std::min(maxHarmonic, (uint32_t)(((float)sinLUTSize / 2.25f) / (inc >> sinLUTShift32)));
 
-	// Increment the sine read position
-	uint32_t inc = std::round(newInc);
-	prevIncErr = newInc - inc;				// To prevent errors compounding store the previous error to apply to the next increment
-	uint32_t incMult = inc;
 
 	float mixOut[2] = {0.0f, 0.0f};
 
 	for (uint32_t i = 0; i < aliasHarmonic; ++i) {
 		readPos[i] += incMult;
-		mixOut[i & 1] += sineLUT[readPos[i] >> 16] * multipliers[i];
+		mixOut[i & 1] += sineLUT[readPos[i] >> sinLUTShift32] * multipliers[i];
 		incMult += inc;
 	}
 
@@ -136,7 +133,7 @@ void Additive::IdleJobs()
 			if (i == maxHarmonics - 2) sineScale[i & 1] *= 0.5f;
 			if (i == maxHarmonics - 1) sineScale[i & 1] *= 0.25f;
 
-			multipliers[i] = sineScale[i & 1] * (1.0f + sineLUT[sinePos]);
+			multipliers[i] = sineScale[i & 1] * (1.0f + sineLUT[sinePos >> sinLUTShift16]);
 			if (spread + multGrow > 50.0f) {			// Check the sine wave position will increment enough
 				spread += multGrow;
 			}
@@ -158,9 +155,9 @@ void Additive::IdleJobs()
 
 		static constexpr float growMult = 0.05f * (1.0f / 65535.0f);
 		multGrow = multGrow * 0.95f + (adc.Warp_Type_Pot - 32768) * growMult;
-		float spread = multSpread;
 
-		float spreadHarm = 1.0f + spread;
+		float spread = multSpread;				// Current harmonic spread distance after warp accounted for
+		float spreadHarm = 1.0f + spread;		// Next harmonic
 
 		multipliers[0] = startLevel[0];
 		multipliers[1] = startLevel[1];
@@ -183,7 +180,7 @@ void Additive::IdleJobs()
 				multipliers[i] = (nextVal + 1.0f - fractPart) * startLevel[i & 1];
 				nextVal = fractPart;
 				spreadHarm += spread;
-				if (spread + multGrow > 3.0f) {
+				if (spread + multGrow > 1.0f) {
 					spread += multGrow;
 				}
 

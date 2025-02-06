@@ -43,13 +43,13 @@ void Additive::CalcSample()
 	uint32_t incMult = inc;											// Increment of the harmonic sine read position
 
 	// Calculate the maximum harmonic before aliasing (experimenting shows we need to truncate slightly before the nyquist frequency)
-	aliasHarmonic = std::min(maxHarmonic, (uint32_t)(((float)sinLUTSize / 2.25f) / (inc >> sinLUTShift)));
+	aliasHarmonic = std::min(maxHarmonics, (uint32_t)(((float)sinLUTSize / 2.25f) / (inc >> sinLUTShift32)));
 
 	float mixOut[2] = {0.0f, 0.0f};
 
 	for (uint32_t i = 0; i < aliasHarmonic; ++i) {
 		readPos[i] += incMult;
-		mixOut[i & 1] += sineLUT[readPos[i] >> sinLUTShift] * multipliers[i];
+		mixOut[i & 1] += sineLUT[readPos[i] >> sinLUTShift32] * multipliers[i];
 		incMult += inc;
 	}
 
@@ -84,19 +84,19 @@ void Additive::IdleJobs()
 
 	static constexpr float smoothOld = 0.95f;
 	static constexpr float smoothNew = 1.0f - smoothOld;
-	static constexpr float startMultLPF = smoothNew * (200.0f / 65535.0f);
+	static constexpr float startMultLPF = smoothNew * ((float)maxHarmonics / 65535.0f);
 	static constexpr float startMultComb = smoothNew * (50.0f / 65535.0f);		// Start becomes interval between comb frequencies
 
 	if (lpf) {
 		// LPF
 		static constexpr float slopeMult = (1.0f / 65535.0f);
-		float slope = adc.Filter_Slope_Pot * slopeMult;		// FIXME - slope also has CV input
+		float slope = ((65535 - adc.Filter_Slope_CV) + adc.Filter_Slope_Pot) * slopeMult;
 		filterSlope = filterSlope * smoothOld + (1.0f - (slope * slope)) * smoothNew;		// Square the slope to give better control at low settings
 
 	} else {
 		// Comb filter
 		static constexpr float slopeMult = smoothNew * (0.1f / 65535.0f);
-		filterSlope = filterSlope * smoothOld + (adc.Filter_Slope_Pot + 5000) * slopeMult;		// FIXME - slope also has CV input
+		filterSlope = filterSlope * smoothOld + ((65535 - adc.Filter_Slope_CV) + adc.Filter_Slope_Pot + 5000) * slopeMult;		// FIXME - slope also has CV input
 	}
 
 	const float cvA = std::max(61300.0f - adc.Filter_A_CV, 0.0f);		// Reduce to ensure can hit zero with noise
@@ -119,14 +119,15 @@ void Additive::IdleJobs()
 		uint16_t sinePos = Additive::sinLUTSize / 4;		// Start at maximum (pi/2)
 
 		// Calculate smoothed spread amount from pot and CV with trimmer controlling range of CV
-		static constexpr float spreadMult = 10000.0f / (float)sinLUTSize;
-		const float cv = std::max(61300.0f - adc.Harm_Stretch_CV, 0.0f);		// Reduce to ensure can hit zero with noise
+		static constexpr float spreadMult = 10000.0f / 65536.0f;
+		const float stretchCV = std::max(61300.0f - adc.Harm_Stretch_CV, 0.0f);		// Reduce to ensure can hit zero with noise
 
-		Smooth(multSpread, 100.0f + (adc.Harm_Stretch_Pot + (NormaliseADC(adc.Harm_Stretch_Trm) * cv)) * spreadMult, 0.99f);
+		Smooth(multSpread, 100.0f + (adc.Harm_Stretch_Pot + (NormaliseADC(adc.Harm_Stretch_Trm) * stretchCV)) * spreadMult, 0.99f);
 		float spread = multSpread;
 
-		static constexpr float growMult = 0.05f * (30.0f / (float)sinLUTSize);
-		multGrow = multGrow * 0.95f + (adc.Harm_Warp_CV - 32768) * growMult;
+		static constexpr float growMult = 0.05f * (30.0f / 65536.0f);
+		const float warpCV = std::max(61300.0f - adc.Harm_Warp_CV, 0.0f);		// Reduce to ensure can hit zero with noise
+		multGrow = multGrow * 0.95f + (adc.Harm_Warp_Pot + warpCV - 32768) * growMult;
 
 		for (uint32_t i = 0; i < maxHarmonics; ++i) {
 			FilterCalc(i, sineScale[i & 1], combPos[i & 1], combDir[i & 1], maxLevel);
@@ -135,7 +136,7 @@ void Additive::IdleJobs()
 			if (i == maxHarmonics - 2) sineScale[i & 1] *= 0.5f;
 			if (i == maxHarmonics - 1) sineScale[i & 1] *= 0.25f;
 
-			multipliers[i] = sineScale[i & 1] * (1.0f + sineLUT[sinePos & sinLUTBits]);
+			multipliers[i] = sineScale[i & 1] * (1.0f + sineLUT[sinePos >> sinLUTShift16]);
 			if (spread + multGrow > 50.0f) {			// Check the sine wave position will increment enough
 				spread += multGrow;
 			}
@@ -153,11 +154,13 @@ void Additive::IdleJobs()
 		multSpread = (0.99f * multSpread) +
 				(0.01f * (1.0f + (adc.Harm_Stretch_Pot + NormaliseADC(adc.Harm_Stretch_Trm) * cv) * spreadMult));
 
+		// Warp control increases or decreases spread amount for higher harmonics
 		static constexpr float growMult = 0.05f * (1.0f / 65535.0f);
-		multGrow = multGrow * 0.95f + (adc.Harm_Warp_CV - 32768) * growMult;
-		float spread = multSpread;
+		const float warpCV = std::max(61300.0f - adc.Harm_Warp_CV, 0.0f);		// Reduce to ensure can hit zero with noise
+		multGrow = multGrow * 0.95f + (adc.Harm_Warp_Pot + warpCV - 32768) * growMult;
 
-		float spreadHarm = 1.0f + spread;
+		float spread = multSpread;				// Current harmonic spread distance after warp accounted for
+		float spreadHarm = 1.0f + spread;		// Next harmonic
 
 		multipliers[0] = startLevel[0];
 		multipliers[1] = startLevel[1];
@@ -178,7 +181,7 @@ void Additive::IdleJobs()
 				multipliers[i] = (nextVal + 1.0f - fractPart) * startLevel[i & 1];
 				nextVal = fractPart;
 				spreadHarm += spread;
-				if (spread + multGrow > 3.0f) {
+				if (spread + multGrow > 1.0f) {
 					spread += multGrow;
 				}
 

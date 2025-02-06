@@ -7,7 +7,7 @@
 	(title_block
 		(title "Kishoof Components")
 		(date "2024-04-24")
-		(rev "1.0")
+		(rev "1.1")
 		(company "Mountjoy Modular")
 	)
 	(lib_symbols
@@ -13162,13 +13162,14 @@
 		)
 		(uuid "91b17fd6-3be1-4c41-9619-e5917f4bb45f")
 	)
-	(text "v1.0 Errata: TPS561201 pads too long"
+	(text "v1.0 Errata: TPS561201 pads too long\nHarm_Warp_pot and Harm_Stretch_Pot wrong way round (fixed 1.1)"
 		(exclude_from_sim no)
-		(at 322.326 256.794 0)
+		(at 302.768 257.556 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
+			(justify left)
 		)
 		(uuid "9d6ba978-29e8-4dba-83ee-599740bcb317")
 	)
@@ -13276,7 +13277,7 @@
 		(uuid "07a2ebc3-30f6-4428-8d86-912f0be49a32")
 	)
 	(label "Harm_Stretch_Pot"
-		(at 123.19 64.77 0)
+		(at 123.19 146.05 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13436,7 +13437,7 @@
 		(uuid "2760c755-4b5a-4b78-b8dd-f230f2916163")
 	)
 	(label "Harm_Warp_Pot"
-		(at 29.21 264.16 0)
+		(at 29.21 269.24 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13606,7 +13607,7 @@
 		(uuid "45d6c817-c75b-455a-80ef-698afde1cee3")
 	)
 	(label "Harm_Warp_Pot"
-		(at 123.19 146.05 0)
+		(at 123.19 64.77 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13866,7 +13867,7 @@
 		(uuid "966d51ca-f8df-4386-9da1-6c43d54cae74")
 	)
 	(label "Harm_Stretch_Pot"
-		(at 29.21 269.24 0)
+		(at 29.21 264.16 0)
 		(effects
 			(font
 				(size 1.27 1.27)
