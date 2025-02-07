@@ -81,6 +81,10 @@ void Additive::IdleJobs()
 	debugPin1.SetHigh();
 
 	const bool lpf = filterMode.IsLow();
+	const bool cosineWave = harmonicMode.IsLow();
+
+	const float maxLevel = cosineWave ? 0.15f : 0.3f;
+	float startLevel[2] = {maxLevel, maxLevel};
 
 	static constexpr float smoothOld = 0.95f;
 	static constexpr float smoothNew = 1.0f - smoothOld;
@@ -96,7 +100,8 @@ void Additive::IdleJobs()
 	} else {
 		// Comb filter
 		static constexpr float slopeMult = smoothNew * (0.1f / 65535.0f);
-		filterSlope = filterSlope * smoothOld + ((65535 - adc.Filter_Slope_CV) + adc.Filter_Slope_Pot + 5000) * slopeMult;		// FIXME - slope also has CV input
+		filterSlope = filterSlope * smoothOld + ((65535 - adc.Filter_Slope_CV) + adc.Filter_Slope_Pot) * slopeMult;
+		filterSlope = std::min(filterSlope, maxLevel * 0.99f);
 	}
 
 	const float cvA = std::max(61300.0f - adc.Filter_A_CV, 0.0f);		// Reduce to ensure can hit zero with noise
@@ -105,17 +110,15 @@ void Additive::IdleJobs()
 	filterStart[1] = filterStart[1] * smoothOld + std::clamp((adc.Filter_B_Pot + cvB), 0.0f, 65535.0f) * (lpf ? startMultLPF : startMultComb);
 
 	// Set filter LED brightness - FIXME - very inefficient
-	filterLED_A = (filterStart[0] * 4096) / (lpf ? 200 : 50);
-	filterLED_B = (filterStart[1] * 4096) / (lpf ? 200 : 50);
+	filterLED_A = (filterStart[0] * 4096) / (lpf ? maxHarmonics : 50);
+	filterLED_B = (filterStart[1] * 4096) / (lpf ? maxHarmonics : 50);
 
 	uint32_t combPos[2] = {0, 0};
-	int32_t combDir[2] = {1, 1};
+	int32_t combDir[2] = {-1, -1};
 
 
-	if (harmonicMode.IsLow()) {				// Mode to scale multipliers according to a cosine wave shape
+	if (cosineWave) {				// Mode to scale multipliers according to a cosine wave shape
 
-		const float maxLevel = 0.15f;
-		float sineScale[2] = {maxLevel, maxLevel};
 		uint16_t sinePos = Additive::sinLUTSize / 4;		// Start at maximum (pi/2)
 
 		// Calculate smoothed spread amount from pot and CV with trimmer controlling range of CV
@@ -130,13 +133,13 @@ void Additive::IdleJobs()
 		multGrow = multGrow * 0.95f + (adc.Harm_Warp_Pot + warpCV - 32768) * growMult;
 
 		for (uint32_t i = 0; i < maxHarmonics; ++i) {
-			FilterCalc(i, sineScale[i & 1], combPos[i & 1], combDir[i & 1], maxLevel);
+			FilterCalc(i, startLevel[i & 1], combPos[i & 1], combDir[i & 1], maxLevel);
 
 			// Reduce the level of the last two harmonics to avoid glitching
-			if (i == maxHarmonics - 2) sineScale[i & 1] *= 0.5f;
-			if (i == maxHarmonics - 1) sineScale[i & 1] *= 0.25f;
+			if (i == maxHarmonics - 2) startLevel[i & 1] *= 0.5f;
+			if (i == maxHarmonics - 1) startLevel[i & 1] *= 0.25f;
 
-			multipliers[i] = sineScale[i & 1] * (1.0f + sineLUT[sinePos >> sinLUTShift16]);
+			multipliers[i] = startLevel[i & 1] * (1.0f + sineLUT[sinePos >> sinLUTShift16]);
 			if (spread + multGrow > 50.0f) {			// Check the sine wave position will increment enough
 				spread += multGrow;
 			}
@@ -145,14 +148,10 @@ void Additive::IdleJobs()
 
 	} else {								// Mode to spread individual harmonics
 
-		const float maxLevel = 0.3f;
-		float startLevel[2] = {maxLevel, maxLevel};
-
 		// Calculate smoothed spread amount from pot and CV with trimmer controlling range of CV
 		static constexpr float spreadMult = 10.0f / 65535.0f;
 		const float cv = std::max(61300.0f - adc.Harm_Stretch_CV, 0.0f);		// Reduce to ensure can hit zero with noise
-		multSpread = (0.99f * multSpread) +
-				(0.01f * (1.0f + (adc.Harm_Stretch_Pot + NormaliseADC(adc.Harm_Stretch_Trm) * cv) * spreadMult));
+		Smooth(multSpread, (1.0f + (adc.Harm_Stretch_Pot + NormaliseADC(adc.Harm_Stretch_Trm) * cv) * spreadMult), 0.99f);
 
 		// Warp control increases or decreases spread amount for higher harmonics
 		static constexpr float growMult = 0.05f * (1.0f / 65535.0f);
@@ -203,9 +202,8 @@ void Additive::IdleJobs()
 inline void Additive::FilterCalc(uint32_t pos, float& scale, uint32_t& combPos, int32_t& combDir, float maxLevel)
 {
 	bool lpf = filterMode.IsLow();
-	bool notch = false;
 
-	if (lpf) {						// Exponential LP filter
+	if (lpf) {							// Exponential LP filter
 		if (pos >= filterStart[pos & 1]) {
 			if (scale > 0.001f) {
 				scale *= filterSlope;
@@ -213,48 +211,25 @@ inline void Additive::FilterCalc(uint32_t pos, float& scale, uint32_t& combPos, 
 				scale = 0.0f;
 			}
 		}
-	} else {
-		if (notch) {
-			// Repeating Notch filter - filterStart sets harmonics between combs; filterSlope sets slope of combs
-			++combPos;
-			if (combPos > std::round(filterStart[pos & 1])) {
-				if (combDir > 0) {				// falling
-					scale -= filterSlope;
-					if (scale <= 0) {
-						scale = 0;
-						combDir *= -1;
-					}
-				} else {						// rising
-					scale += filterSlope;
-					if (scale >= maxLevel) {
-						scale = maxLevel;
-						combDir *= -1;
-						combPos = 0;
-					}
-				}
-			}
-		} else {
-			// Comb filter
-			if (combDir > 0) {				// Start falling
-				scale -= filterSlope;
-				if (scale <= 0) {
-					scale = 0;
-					combDir = 0;
-				}
-			} else if (combDir == 0) {		// Then wait until next spike
-				if (++combPos > std::round(filterStart[pos & 1])) {
-					combDir = -1;
-				}
-			} else {						// Then rising
-				scale += filterSlope;
-				if (scale >= maxLevel) {
-					scale = maxLevel;
-					combDir = 1;
-					combPos = 0;
-				}
+	} else {							// Comb filter
 
+		if (combDir > 0) {				// Start falling
+			scale -= filterSlope;
+			if (scale <= 0) {
+				scale = 0;
+				combDir = 0;
 			}
-
+		} else if (combDir == 0) {		// Then wait until next spike
+			if (++combPos > std::round(filterStart[pos & 1])) {
+				combDir = -1;
+			}
+		} else {						// Then rising
+			scale += filterSlope;
+			if (scale >= maxLevel) {
+				scale = maxLevel;
+				combDir = 1;
+				combPos = 0;
+			}
 		}
 	}
 }
