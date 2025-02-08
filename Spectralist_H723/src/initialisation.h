@@ -50,6 +50,7 @@ void InitADC1();
 void InitADC2();
 void InitADC3();
 void InitI2S();
+void InitI2C();
 void InitCordic();
 void InitPWMTimer();
 void InitDebugTimer();

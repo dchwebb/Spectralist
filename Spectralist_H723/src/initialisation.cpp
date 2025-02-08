@@ -9,7 +9,7 @@ GpioPin debugPin2	{GPIOD, 5, GpioPin::Type::Output};			// PD6: Debug (also UART_
 // I2S 				PLL2 P 				61.44 MHz
 // ADC		 		Peripheral Clock 	8 MHz
 
-// Main clock 8MHz (HSE) / 2 (M) * 125 (N) / 1 (P) = 500MHz
+// Main clock 8MHz (HSE) / 2 (M) * 100 (N) / 1 (P) = 400MHz
 #define PLL_M1 2
 #define PLL_N1 100
 #define PLL_P1 1
@@ -89,7 +89,39 @@ void InitHardware()
 	InitADC();
 	InitPWMTimer();
 	InitCordic();
+	InitI2C();
 //	InitDebugTimer();
+}
+
+
+void InitI2C()
+{
+	// LED Controller on I2C5
+	RCC->APB1LENR |= RCC_APB1LENR_I2C5EN;
+
+	GpioPin::Init(GPIOC, 10, GpioPin::Type::AlternateFunction, 4);		// PC10: I2C5 SDA [alternate function AF4]
+	GpioPin::Init(GPIOC, 11, GpioPin::Type::AlternateFunction, 4);		// PC11: I2C5 SCK [alternate function AF4]
+
+	// By default clock source is APB1 peripheral clock (100 MHz)
+	// 0x9034b6
+	I2C5->TIMINGR = (182 << I2C_TIMINGR_SCLL_Pos) |	// SCL low period (master mode)
+					(52 << I2C_TIMINGR_SCLH_Pos) |	// SCL high period (master mode)
+					(9 << I2C_TIMINGR_SCLDEL_Pos);	// Data setup time
+
+	I2C5->CR2 |= I2C_CR2_AUTOEND;					// 1: Automatic end mode: STOP condition automatically sent when NBYTES data transferred
+	I2C5->CR1 |= I2C_CR1_PE;						// Peripheral enable
+}
+
+
+void I2CTransfer(uint32_t address, uint32_t bytes, bool write)
+{
+	// I2C_CR2_RELOAD - determines if transfer is completed after NBYTES transferred
+
+	I2C5->CR2 = (address << I2C_CR2_SADD_Pos) |
+				(bytes << I2C_CR2_NBYTES_Pos) |
+				((write ? 0 : 1) << I2C_CR2_RD_WRN_Pos) |
+				I2C_CR2_START |
+				I2C_CR2_STOP;
 }
 
 
