@@ -2,6 +2,7 @@
 #include "CDCHandler.h"
 #include "USB.h"
 #include "configManager.h"
+#include "ledManager.h"
 #include "Calib.h"
 #include "Additive.h"
 
@@ -25,6 +26,7 @@ int main(void) {
 	InitHardware();
 	config.RestoreConfig();
 	usb.Init(false);
+	ledManager.Init();
 	InitI2S();						// Initialise I2S which will start main sample interrupts
 
 	while (1) {

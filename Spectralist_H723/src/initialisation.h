@@ -51,6 +51,7 @@ void InitADC2();
 void InitADC3();
 void InitI2S();
 void InitI2C();
+void I2CTransfer(uint8_t* data, uint32_t bytes, bool write);
 void InitCordic();
 void InitPWMTimer();
 void InitDebugTimer();

@@ -33,8 +33,14 @@ void Additive::CalcSample()
 	if (octaveBtn.Pressed()) {
 		cfg.octaveDown = !cfg.octaveDown;
 		if (cfg.octaveDown) {
+
+			//I2CTransfer(uint32_t address, uint8_t data, uint32_t bytes, bool write)
+			uint8_t buff[2] = {0x07, 0x01};
+			//I2CTransfer(buff, 0x2, true);		// Register is 0xF0, but first bit is autoincrement
 			octaveLED.SetHigh();
 		} else {
+
+
 			octaveLED.SetLow();
 		}
 	}

@@ -2,6 +2,7 @@
 #include "CDCHandler.h"
 #include "Filter.h"
 #include "Calib.h"
+#include "ledManager.h"
 #include <stdio.h>
 #include <charconv>
 
@@ -60,6 +61,7 @@ void CDCHandler::ProcessCommand()
 				"clearconfig -  Erase configuration and restart\r\n"
 				"saveconfig  -  Immediately save config\r\n"
 				"reboot      -  Reboot module\r\n"
+				"writei2c:RR,VV - Write value 0xVV to led register 0xRR\r\n"
 				"\r\n"
 
 #if (USB_DEBUG)
@@ -85,6 +87,34 @@ void CDCHandler::ProcessCommand()
 	} else if (cmd.compare("reboot") == 0) {					// Reboot module
 		Reboot();
 
+	} else if (cmd.compare(0, 9, "writei2c:") == 0) {			// write i2c register
+
+		uint8_t regNo, value;
+		auto res = std::from_chars(cmd.data() + cmd.find(":") + 1, cmd.data() + cmd.size(), regNo, 16);
+		if (res.ec == std::errc()) {			// no error
+			auto res = std::from_chars(cmd.data() + cmd.find(",") + 1, cmd.data() + cmd.size(), value, 16);
+			if (res.ec == std::errc()) {			// no error
+
+				ledManager.WriteRegister(regNo, value);		// Register is 0xF0, but first bit is autoincrement
+
+				printf("I2C write: Register: %#04x Value: %#04x\r\n", regNo, value);
+			} else {
+				usb->SendString("Invalid value\r\n");
+			}
+		} else {
+			usb->SendString("Invalid register\r\n");
+		}
+
+	} else if (cmd.compare(0, 8, "readi2c:") == 0) {			// read i2c register
+
+		uint8_t regNo;
+		auto res = std::from_chars(cmd.data() + cmd.find(":") + 1, cmd.data() + cmd.size(), regNo, 16);
+		if (res.ec == std::errc()) {			// no error
+			uint8_t value = ledManager.ReadRegister(regNo);		// Register is 0xF0, but first bit is autoincrement
+			printf("I2C write: Register: %#04x Value: %#04x\r\n", regNo, value);
+		} else {
+			usb->SendString("Invalid register\r\n");
+		}
 
 	} else if (cmd.compare("calib") == 0) {						// Start calibration process
 		calib.Calibrate('s');

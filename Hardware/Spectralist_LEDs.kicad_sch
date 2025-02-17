@@ -3466,7 +3466,6 @@
 	)
 	(label "LED_SCL"
 		(at 124.46 29.21 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3477,7 +3476,6 @@
 	)
 	(label "LED_SDA"
 		(at 124.46 34.29 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3488,7 +3486,6 @@
 	)
 	(label "LED_SDA"
 		(at 30.48 46.99 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3499,7 +3496,6 @@
 	)
 	(label "LED_SCL"
 		(at 30.48 44.45 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3676,7 +3672,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.mouser.co.uk/datasheet/2/180/IN-S63BT%20Series_V1.0-1115643.pdf"
 			(at 71.12 66.04 0)
 			(effects
 				(font
@@ -4011,7 +4007,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.mouser.co.uk/datasheet/2/180/IN-S63BT%20Series_V1.0-1115643.pdf"
 			(at 71.12 71.12 0)
 			(effects
 				(font
@@ -4079,7 +4075,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.mouser.co.uk/datasheet/2/180/IN-S63BT%20Series_V1.0-1115643.pdf"
 			(at 71.12 45.72 0)
 			(effects
 				(font
@@ -4281,7 +4277,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.mouser.co.uk/datasheet/2/180/IN-S63BT%20Series_V1.0-1115643.pdf"
 			(at 82.55 58.42 0)
 			(effects
 				(font
@@ -4349,7 +4345,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.mouser.co.uk/datasheet/2/180/IN-S63BT%20Series_V1.0-1115643.pdf"
 			(at 82.55 48.26 0)
 			(effects
 				(font
@@ -4560,7 +4556,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.mouser.co.uk/datasheet/2/180/IN-S63BT%20Series_V1.0-1115643.pdf"
 			(at 71.12 76.2 0)
 			(effects
 				(font
@@ -4696,7 +4692,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.mouser.co.uk/datasheet/2/180/IN-S63BT%20Series_V1.0-1115643.pdf"
 			(at 82.55 53.34 0)
 			(effects
 				(font
@@ -4897,7 +4893,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.mouser.co.uk/datasheet/2/180/IN-S63BT%20Series_V1.0-1115643.pdf"
 			(at 82.55 93.98 0)
 			(effects
 				(font
@@ -5033,7 +5029,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.mouser.co.uk/datasheet/2/180/IN-S63BT%20Series_V1.0-1115643.pdf"
 			(at 82.55 73.66 0)
 			(effects
 				(font
@@ -5167,7 +5163,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.mouser.co.uk/datasheet/2/180/IN-S63BT%20Series_V1.0-1115643.pdf"
 			(at 82.55 78.74 0)
 			(effects
 				(font
@@ -5303,7 +5299,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.mouser.co.uk/datasheet/2/180/IN-S63BT%20Series_V1.0-1115643.pdf"
 			(at 171.45 31.75 0)
 			(effects
 				(font
@@ -5371,7 +5367,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.mouser.co.uk/datasheet/2/180/IN-S63BT%20Series_V1.0-1115643.pdf"
 			(at 71.12 86.36 0)
 			(effects
 				(font
@@ -5439,7 +5435,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.mouser.co.uk/datasheet/2/180/IN-S63BT%20Series_V1.0-1115643.pdf"
 			(at 71.12 35.56 0)
 			(effects
 				(font
@@ -5574,7 +5570,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.mouser.co.uk/datasheet/2/180/IN-S63BT%20Series_V1.0-1115643.pdf"
 			(at 82.55 68.58 0)
 			(effects
 				(font
@@ -5708,7 +5704,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.mouser.co.uk/datasheet/2/180/IN-S63BT%20Series_V1.0-1115643.pdf"
 			(at 71.12 40.64 0)
 			(effects
 				(font
@@ -5843,7 +5839,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.mouser.co.uk/datasheet/2/180/IN-S63BT%20Series_V1.0-1115643.pdf"
 			(at 82.55 63.5 0)
 			(effects
 				(font
@@ -5978,7 +5974,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.mouser.co.uk/datasheet/2/180/IN-S63BT%20Series_V1.0-1115643.pdf"
 			(at 82.55 38.1 0)
 			(effects
 				(font
@@ -6046,7 +6042,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.mouser.co.uk/datasheet/2/180/IN-S63BT%20Series_V1.0-1115643.pdf"
 			(at 82.55 43.18 0)
 			(effects
 				(font
@@ -6181,7 +6177,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.mouser.co.uk/datasheet/2/180/IN-S63BT%20Series_V1.0-1115643.pdf"
 			(at 71.12 91.44 0)
 			(effects
 				(font
@@ -6249,7 +6245,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.mouser.co.uk/datasheet/2/180/IN-S63BT%20Series_V1.0-1115643.pdf"
 			(at 71.12 55.88 0)
 			(effects
 				(font
@@ -6317,7 +6313,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.mouser.co.uk/datasheet/2/180/IN-S63BT%20Series_V1.0-1115643.pdf"
 			(at 71.12 81.28 0)
 			(effects
 				(font
@@ -6697,7 +6693,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.mouser.co.uk/datasheet/2/180/IN-S63BT%20Series_V1.0-1115643.pdf"
 			(at 82.55 83.82 0)
 			(effects
 				(font
@@ -6900,7 +6896,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.mouser.co.uk/datasheet/2/180/IN-S63BT%20Series_V1.0-1115643.pdf"
 			(at 82.55 88.9 0)
 			(effects
 				(font
@@ -6968,7 +6964,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.mouser.co.uk/datasheet/2/180/IN-S63BT%20Series_V1.0-1115643.pdf"
 			(at 71.12 50.8 0)
 			(effects
 				(font
@@ -7240,7 +7236,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.mouser.co.uk/datasheet/2/180/IN-S63BT%20Series_V1.0-1115643.pdf"
 			(at 71.12 60.96 0)
 			(effects
 				(font

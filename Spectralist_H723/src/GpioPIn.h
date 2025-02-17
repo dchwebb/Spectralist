@@ -6,15 +6,16 @@ class GpioPin {
 public:
 	enum class Type {Input, InputPullup, InputPulldown, Output, AlternateFunction};
 	enum class DriveStrength {Low, Medium, High, VeryHigh};
+	enum class OutputType {PushPull, OpenDrain};
 
-	GpioPin(GPIO_TypeDef* port, uint32_t pin, Type pinType, uint32_t alternateFunction = 0, DriveStrength driveStrength = DriveStrength::Low) :
+	GpioPin(GPIO_TypeDef* port, uint32_t pin, Type pinType, uint32_t alternateFunction = 0, DriveStrength driveStrength = DriveStrength::Low, OutputType outputType = OutputType::PushPull) :
 		port(port), pin(pin), pinType(pinType)
 	{
 		Init(port, pin, pinType, alternateFunction, driveStrength);		// Init function is static so can be called without instantiating object
 	}
 
 
-	static void Init(GPIO_TypeDef* port, const uint32_t pin, const Type pinType, const uint32_t alternateFunction = 0, const DriveStrength driveStrength = DriveStrength::Low)
+	static void Init(GPIO_TypeDef* port, const uint32_t pin, const Type pinType, const uint32_t alternateFunction = 0, const DriveStrength driveStrength = DriveStrength::Low, OutputType outputType = OutputType::PushPull)
 	{
 		// maths to calculate RCC clock to enable
 		const uint32_t portPos = ((uint32_t)port - GPIOA_BASE) >> 10;
@@ -45,6 +46,10 @@ public:
 		}
 
 		port->OSPEEDR |= static_cast<uint32_t>(driveStrength) << (pin * 2);
+
+		if (outputType == OutputType::OpenDrain) {
+			port->OTYPER |= 1 << pin;
+		}
 	}
 
 
