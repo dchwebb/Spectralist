@@ -156,7 +156,7 @@ void InitCache()
 				(1     << MPU_RASR_S_Pos)    |		// Shareable: provides data synchronization between bus masters. Eg a processor with a DMA controller
 				(0     << MPU_RASR_C_Pos)    |		// Cacheable
 				(0     << MPU_RASR_B_Pos)    |		// Bufferable (ignored for non-cacheable configuration)
-				(17    << MPU_RASR_SIZE_Pos) |		// 256KB - (size is log 2(mem size) - 1 ie 2^18 = 256k)
+				(14    << MPU_RASR_SIZE_Pos) |		// 32KB - (size is log 2(mem size) - 1 ie 2^15 = 32k)
 				(1     << MPU_RASR_ENABLE_Pos);		// Enable MPU region
 
 

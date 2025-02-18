@@ -116,6 +116,9 @@ void CDCHandler::ProcessCommand()
 			usb->SendString("Invalid register\r\n");
 		}
 
+	} else if (cmd.compare("dmaled") == 0) {						// Send led dma data
+		ledManager.DMASend();
+
 	} else if (cmd.compare("calib") == 0) {						// Start calibration process
 		calib.Calibrate('s');
 
