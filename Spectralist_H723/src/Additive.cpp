@@ -1,6 +1,7 @@
 #include "Additive.h"
 #include "Calib.h"
 #include "cordic.h"
+#include "ledManager.h"
 #include <cstring>
 
 Additive additive;
@@ -33,14 +34,8 @@ void Additive::CalcSample()
 	if (octaveBtn.Pressed()) {
 		cfg.octaveDown = !cfg.octaveDown;
 		if (cfg.octaveDown) {
-
-			//I2CTransfer(uint32_t address, uint8_t data, uint32_t bytes, bool write)
-			uint8_t buff[2] = {0x07, 0x01};
-			//I2CTransfer(buff, 0x2, true);		// Register is 0xF0, but first bit is autoincrement
 			octaveLED.SetHigh();
 		} else {
-
-
 			octaveLED.SetLow();
 		}
 	}
@@ -122,21 +117,22 @@ void Additive::IdleJobs()
 	uint32_t combPos[2] = {0, 0};
 	int32_t combDir[2] = {-1, -1};
 
+	// Calculate smoothed spread amount from pot and CV with trimmer controlling range of CV (Range: 0 to 10)
+	static constexpr float spreadMult = 10.0f / 65535.0f;
+	const float cv = std::max(61300.0f - adc.Harm_Stretch_CV, 0.0f);		// Reduce to ensure can hit zero with noise
+	Smooth(multSpread, (adc.Harm_Stretch_Pot + NormaliseADC(adc.Harm_Stretch_Trm) * cv) * spreadMult, 0.99f);
 
-	if (cosineWave) {				// Mode to scale multipliers according to a cosine wave shape
+	// Warp control increases or decreases spread amount for higher harmonics (Range: -0.5 to +0.5)
+	static constexpr float growMult = 0.05f * (1.0f / 65535.0f);
+	const float warpCV = std::max(61300.0f - adc.Harm_Warp_CV, 0.0f);		// Reduce to ensure can hit zero with noise
+	multGrow = multGrow * 0.95f + (adc.Harm_Warp_Pot + warpCV - 32768) * growMult;
 
-		uint16_t sinePos = Additive::sinLUTSize / 4;		// Start at maximum (pi/2)
+	if (cosineWave) {									// Mode to scale multipliers according to a cosine wave shape
 
-		// Calculate smoothed spread amount from pot and CV with trimmer controlling range of CV
-		static constexpr float spreadMult = 10000.0f / 65536.0f;
-		const float stretchCV = std::max(61300.0f - adc.Harm_Stretch_CV, 0.0f);		// Reduce to ensure can hit zero with noise
+		uint16_t sinePos = Additive::sinLUTSize / 4;	// Start at maximum (pi/2)
 
-		Smooth(multSpread, 100.0f + (adc.Harm_Stretch_Pot + (NormaliseADC(adc.Harm_Stretch_Trm) * stretchCV)) * spreadMult, 0.99f);
-		float spread = multSpread;
-
-		static constexpr float growMult = 0.05f * (30.0f / 65536.0f);
-		const float warpCV = std::max(61300.0f - adc.Harm_Warp_CV, 0.0f);		// Reduce to ensure can hit zero with noise
-		multGrow = multGrow * 0.95f + (adc.Harm_Warp_Pot + warpCV - 32768) * growMult;
+		float spread = 100.0f + (multSpread * 1000.0f);
+		float grow = multGrow * 30.0f;
 
 		for (uint32_t i = 0; i < maxHarmonics; ++i) {
 			FilterCalc(i, startLevel[i & 1], combPos[i & 1], combDir[i & 1], maxLevel);
@@ -146,26 +142,16 @@ void Additive::IdleJobs()
 			if (i == maxHarmonics - 1) startLevel[i & 1] *= 0.25f;
 
 			multipliers[i] = startLevel[i & 1] * (1.0f + sineLUT[sinePos >> sinLUTShift16]);
-			if (spread + multGrow > 50.0f) {			// Check the sine wave position will increment enough
-				spread += multGrow;
+			if (spread + grow > 50.0f) {				// Check the sine wave position will increment enough
+				spread += grow;
 			}
 			sinePos += spread;
 		}
 
-	} else {								// Mode to spread individual harmonics
+	} else {											// Mode to spread individual harmonics
 
-		// Calculate smoothed spread amount from pot and CV with trimmer controlling range of CV
-		static constexpr float spreadMult = 10.0f / 65535.0f;
-		const float cv = std::max(61300.0f - adc.Harm_Stretch_CV, 0.0f);		// Reduce to ensure can hit zero with noise
-		Smooth(multSpread, (1.0f + (adc.Harm_Stretch_Pot + NormaliseADC(adc.Harm_Stretch_Trm) * cv) * spreadMult), 0.99f);
-
-		// Warp control increases or decreases spread amount for higher harmonics
-		static constexpr float growMult = 0.05f * (1.0f / 65535.0f);
-		const float warpCV = std::max(61300.0f - adc.Harm_Warp_CV, 0.0f);		// Reduce to ensure can hit zero with noise
-		multGrow = multGrow * 0.95f + (adc.Harm_Warp_Pot + warpCV - 32768) * growMult;
-
-		float spread = multSpread;				// Current harmonic spread distance after warp accounted for
-		float spreadHarm = 1.0f + spread;		// Next harmonic
+		float spread = 1.0f + multSpread;				// Current harmonic spread distance after warp accounted for
+		float spreadHarm = 1.0f + spread;				// Next harmonic
 
 		multipliers[0] = startLevel[0];
 		multipliers[1] = startLevel[1];
@@ -200,6 +186,8 @@ void Additive::IdleJobs()
 			}
 		}
 	}
+
+	UpdateLEDs();
 
 	debugPin1.SetLow();
 }
@@ -239,6 +227,52 @@ inline void Additive::FilterCalc(uint32_t pos, float& scale, uint32_t& combPos, 
 		}
 	}
 }
+
+
+void Additive::UpdateLEDs()
+{
+	if (!ledManager.Ready()) {
+		return;
+	}
+
+	// Diffusion in display means that there is no point trying to distinguish between cosine and individual mode
+	//const bool cosineWave = harmonicMode.IsLow();
+
+	// multSpread is 0 -> 10
+	float spread = 2.0f + multSpread;				// Current harmonic spread distance after warp accounted for
+	float spreadHarm = spread;						// Next harmonic
+	float grow = multGrow;
+
+	uint32_t startLevel = 10.0f;
+	float nextVal = 0.0f;							// For storing partial value when spread creates fractional harmonic
+
+	for (uint32_t i = 1; i < LedManager::ledCount; ++i) {		// First byte is control data, led brightness from second byte
+
+		// Increase the spread of harmonics dividing fractional components between the current and next multiplier
+		uint32_t intPart = (uint32_t)spreadHarm;
+		if (intPart == i) {
+			float fractPart = spreadHarm - intPart;
+			LedManager::leds[i] = round(std::pow((nextVal + 1.0f - fractPart), 2.0f) * startLevel);
+			nextVal = fractPart;
+
+			if (spread + grow > 1.0f) {
+				spread += grow;
+			}
+			spreadHarm += spread;
+
+		} else if (intPart > i && nextVal > 0.0f) {
+			// if increasing the spread skips the next harmonic then apply the residual fraction to the next harmonic here
+			LedManager::leds[i] = round(nextVal * startLevel);
+			nextVal = 0.0f;
+
+		} else {
+			LedManager::leds[i] = 0;
+		}
+	}
+	ledManager.DMASend();
+}
+
+
 
 
 void Additive::UpdateConfig()

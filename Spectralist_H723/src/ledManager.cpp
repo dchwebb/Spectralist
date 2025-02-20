@@ -114,3 +114,9 @@ void LedManager::DMASend()
 				(ledCount << I2C_CR2_NBYTES_Pos) |
 				I2C_CR2_START;
 }
+
+
+bool LedManager::Ready()
+{
+	return (I2C5->ISR & I2C_ISR_TC);				// Use transfer complete flag to indicate ready for next transfer
+}

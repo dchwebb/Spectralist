@@ -9,6 +9,7 @@ public:
 	void WriteRegister(uint8_t reg, uint8_t value);
 	uint8_t ReadRegister(uint8_t reg);
 	void DMASend();
+	bool Ready();
 
 	const uint32_t i2cAddress = 0x01;
 
