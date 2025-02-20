@@ -13128,6 +13128,16 @@
 		)
 		(uuid "422b2550-0bc9-4fd1-80bc-e13c8be9d136")
 	)
+	(text "Red LED needs lower resistor than blue"
+		(exclude_from_sim no)
+		(at 188.976 157.226 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "4bd9e839-724c-4d34-8fad-877913b50c89")
+	)
 	(text "USB/Connectors"
 		(exclude_from_sim no)
 		(at 169.926 188.214 0)
@@ -32631,7 +32641,7 @@
 				)
 			)
 		)
-		(property "Value" "1k"
+		(property "Value" "240"
 			(at 186.436 154.686 90)
 			(effects
 				(font
