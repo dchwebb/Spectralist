@@ -24,7 +24,7 @@ Additive::Additive()
 
 void Additive::CalcSample()
 {
-	debugPin2.SetHigh();
+//	debugPin2.SetHigh();
 
 	// Previously calculated samples output at beginning of interrupt to keep timing independent of calculation time
 	SPI2->TXDR = (int32_t)(outputSamples[0] * scaleOutput);
@@ -57,29 +57,14 @@ void Additive::CalcSample()
 	outputSamples[0] = FastTanh(mixOut[0]);
 	outputSamples[1] = FastTanh(mixOut[1]);
 
-	debugPin2.SetLow();
+//	debugPin2.SetLow();
 }
 
-
-inline void Additive::Smooth(float& currentValue, const float newValue, const float fraction)
-{
-	currentValue = currentValue * fraction + (1.0f - fraction) * newValue;
-}
-
-
-float Additive::FastTanh(const float x)
-{
-	// Apply FastTan approximation to limit sample from -1 to +1
-	float x2 = x * x;
-	float a = x * (135135.0f + x2 * (17325.0f + x2 * (378.0f + x2)));
-	float b = 135135.0f + x2 * (62370.0f + x2 * (3150.0f + x2 * 28.0f));
-	return a / b;
-}
 
 
 void Additive::IdleJobs()
 {
-	debugPin1.SetHigh();
+//	debugPin1.SetHigh();
 
 	const bool lpf = filterMode.IsLow();
 	const bool cosineWave = harmonicMode.IsLow();
@@ -186,10 +171,11 @@ void Additive::IdleJobs()
 			}
 		}
 	}
+//	debugPin1.SetLow();
+
 
 	UpdateLEDs();
 
-	debugPin1.SetLow();
 }
 
 
@@ -234,7 +220,7 @@ void Additive::UpdateLEDs()
 	if (!ledManager.Ready()) {
 		return;
 	}
-
+//	debugPin3.SetHigh();
 	// Diffusion in display means that there is no point trying to distinguish between cosine and individual mode
 	//const bool cosineWave = harmonicMode.IsLow();
 
@@ -270,10 +256,38 @@ void Additive::UpdateLEDs()
 		}
 	}
 	ledManager.DMASend();
+	debugPin3.SetLow();
 }
 
 
 
+
+inline void Additive::Smooth(float& currentValue, const float newValue, const float fraction)
+{
+	currentValue = currentValue * fraction + (1.0f - fraction) * newValue;
+}
+
+
+float Additive::FastTanh(const float x)
+{
+	// Apply FastTan approximation to limit sample from -1 to +1
+	float x2 = x * x;
+	float a = x * (135135.0f + x2 * (17325.0f + x2 * (378.0f + x2)));
+	float b = 135135.0f + x2 * (62370.0f + x2 * (3150.0f + x2 * 28.0f));
+	return a / b;
+}
+
+
+float Additive::EqualPowerCrossfade(const float mix1, const float sample1, const float sample2)
+{
+	// See https://signalsmith-audio.co.uk/writing/2021/cheap-energy-crossfade/
+	const float mix2 = 1.0f - mix1;
+	const float A = mix1 * mix2;
+	const float B = A * (1.0f + 1.4186f * A);
+	const float C = B + mix1;
+	const float D = B + mix2;
+	return (sample1 * C * C) + (sample2 * D * D);
+}
 
 void Additive::UpdateConfig()
 {

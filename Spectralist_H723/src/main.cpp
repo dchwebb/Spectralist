@@ -22,12 +22,25 @@ bool USBDebug = false;
 
 int main(void) {
 
+//	debugPin1.SetLow();
+//	debugPin2.SetLow();
+//	debugPin3.SetLow();
+
 	InitClocks();					// Configure the clock and PLL
+	debugPin3.SetHigh();		//b
 	InitHardware();
-	config.RestoreConfig();
+	debugPin2.SetHigh();		//y
+	if (!config.RestoreConfig()) {
+		calib.UpdatePitchLUT();		// Generating the pitch LUT is slow so want to avoid doing twice on startup
+	}
+
 	usb.Init(false);
 	ledManager.Init();
 	InitI2S();						// Initialise I2S which will start main sample interrupts
+
+	debugPin1.SetLow();
+	debugPin2.SetLow();
+	debugPin3.SetLow();
 
 	while (1) {
 		usb.cdc.ProcessCommand();	// Check for incoming USB serial commands

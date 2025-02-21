@@ -7,7 +7,6 @@ bool Config::SaveConfig(const bool forceSave)
 {
 	bool result = true;
 	if (forceSave || (scheduleSave && SysTickVal > saveBooked + 60000)) {			// 60 seconds between saves
-		GpioPin::SetHigh(GPIOD, 5);
 		scheduleSave = false;
 
 		if (currentSettingsOffset == -1) {					// Default = -1 if not first set in RestoreConfig
@@ -57,13 +56,12 @@ bool Config::SaveConfig(const bool forceSave)
 		} else {
 			printf("Error saving config\r\n");
 		}
-		GpioPin::SetLow(GPIOD, 5);
 	}
 	return result;
 }
 
 
-void Config::RestoreConfig()
+bool Config::RestoreConfig()
 {
 	// Initialise sector array - used to manage which sector contains current config, and which sectors are available for writing when current sector full
 	for (uint32_t i = 0; i < configSectorCount; ++i) {
@@ -135,7 +133,9 @@ void Config::RestoreConfig()
 			}
 			configPos += saver->settingsSize;
 		}
+		return true;
 	}
+	return false;
 }
 
 

@@ -38,7 +38,7 @@ public:
 	void ScheduleSave();				// called whenever a config setting is changed to schedule a save after waiting to see if any more changes are being made
 	bool SaveConfig(const bool forceSave = false);
 	void EraseConfig();					// Erase flash page containing config
-	void RestoreConfig();				// gets config from Flash, checks and updates settings accordingly
+	bool RestoreConfig();				// gets config from Flash, checks and updates settings accordingly
 
 private:
 	static constexpr uint32_t flashAllErrors = FLASH_CCR_CLR_WRPERR | FLASH_CCR_CLR_PGSERR | FLASH_CCR_CLR_STRBERR | FLASH_CCR_CLR_INCERR | FLASH_CCR_CLR_RDPERR | FLASH_CCR_CLR_RDSERR | FLASH_CCR_CLR_SNECCERR | FLASH_CCR_CLR_DBECCERR | FLASH_CCR_CLR_CRCEND | FLASH_CCR_CLR_CRCRDERR;

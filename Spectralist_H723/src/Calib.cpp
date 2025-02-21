@@ -3,14 +3,16 @@
 
 Calib calib;
 
+volatile uint32_t lutUpdates = 0;
 
 Calib::Calib()
 {
-	UpdatePitchLUT();
+	//UpdatePitchLUT();
 }
 
 void Calib::UpdatePitchLUT()
 {
+	++lutUpdates;
 	for (uint32_t i = 0; i < adcMax + 1; ++i) {
 		calib.pitchLUT[i] = std::round(65536.0f * calib.cfg.pitchBase * std::pow(2.0f, calib.cfg.pitchMult * i));
 	}
@@ -69,11 +71,12 @@ void Calib::Calibrate(char key)
 			state = State::Waiting0;
 			const float voltSpread = (adcOctave0 - adcOctave1) / 2000.0f;
 
-			cfg.pitchBase = (65.41f * (2048.0f / sampleRate)) / std::pow(2.0f, (-adcOctave1 / 2000.0f) / voltSpread);
+			cfg.pitchBase = (65.41f * (65536.0f / sampleRate)) / std::pow(2.0f, (-adcOctave1 / 2000.0f) / voltSpread);
 			cfg.pitchMult = -1.0f / voltSpread;
 
 			printf("Calibration saved\r\n");
 			config.SaveConfig(true);
+			UpdatePitchLUT();
 			calibrating = false;
 			}
 			break;
@@ -98,4 +101,5 @@ void Calib::UpdateConfig()
 	if (calib.cfg.pitchMult == 0.0f) {
 		calib.cfg.pitchMult = pitchMultDef;
 	}
+	calib.UpdatePitchLUT();
 }

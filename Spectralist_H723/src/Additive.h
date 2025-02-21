@@ -44,6 +44,7 @@ private:
 	void UpdateLEDs();
 	inline void FilterCalc(uint32_t pos, float& scale, uint32_t& combPos, int32_t& combDir, float maxLevel);
 	inline void Smooth(float& currentValue, const float newValue, const float fraction);
+	float EqualPowerCrossfade(const float mix1, const float sample1, const float sample2);
 
 	float outputSamples[2] = {0.0f, 0.0f};							// Preprepared samples sent to DAC on interrupt
 	uint32_t aliasHarmonic;

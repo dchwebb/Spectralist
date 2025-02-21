@@ -40,6 +40,7 @@ struct ADCValues {
 extern volatile ADCValues adc;
 extern GpioPin debugPin1;			// PD5: Debug
 extern GpioPin debugPin2;			// PD6: Debug
+extern GpioPin debugPin3;			// PA15: Debug (SPI NSS)
 
 void InitClocks();
 void InitHardware();
@@ -50,8 +51,6 @@ void InitADC1();
 void InitADC2();
 void InitADC3();
 void InitI2S();
-void InitI2C();
-void I2CTransfer(uint8_t* data, uint32_t bytes, bool write);
 void InitCordic();
 void InitPWMTimer();
 void InitDebugTimer();
