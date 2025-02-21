@@ -13,7 +13,7 @@ public:
 
 	void CalcSample();
 	void IdleJobs();
-	static void UpdateConfig();
+	static void UpdateOctaveLED();
 
 	struct {
 		bool octaveDown = false;
@@ -22,7 +22,7 @@ public:
 	ConfigSaver configSaver = {
 		.settingsAddress = &cfg,
 		.settingsSize = sizeof(cfg),
-		.validateSettings = UpdateConfig
+		.validateSettings = UpdateOctaveLED
 	};
 
 	static constexpr uint32_t sinLUTSize = 32768;

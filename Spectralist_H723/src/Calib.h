@@ -5,7 +5,6 @@
 
 class Calib {
 public:
-	Calib();
 	void Calibrate(char key = 0);
 	static void UpdatePitchLUT();
 	static void UpdateConfig();

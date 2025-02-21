@@ -13,7 +13,6 @@ void LedManager::Init()
 	GpioPin::Init(GPIOC, 11, GpioPin::Type::AlternateFunction, 4, GpioPin::DriveStrength::VeryHigh, GpioPin::OutputType::OpenDrain);		// PC11: I2C5 SCK [alternate function AF4]
 
 	// By default clock source is APB1 peripheral clock (100 MHz)
-	// 0x9034b6
 	I2C5->TIMINGR = (110 << I2C_TIMINGR_SCLL_Pos) |	// SCL low period (master mode)
 					(110 << I2C_TIMINGR_SCLH_Pos) |	// SCL high period (master mode)
 					(9 << I2C_TIMINGR_SCLDEL_Pos);	// Data setup time
@@ -98,18 +97,18 @@ void LedManager::DMASend()
 {
 	while ((I2C5->ISR & I2C_ISR_TXE) == 0);
 
-	I2C5->CR1 &= ~I2C_CR1_PE;						// Disable SPI
-	I2C5->ICR |= (I2C_ICR_NACKCF | I2C_ICR_BERRCF);	// Clear NAK and bus errors
+	I2C5->CR1 &= ~I2C_CR1_PE;								// Disable SPI
+	I2C5->ICR |= (I2C_ICR_NACKCF | I2C_ICR_BERRCF);			// Clear NAK and bus errors
 
-	DMA1_Stream0->CR &= ~DMA_SxCR_EN;				// Disable DMA
+	DMA1_Stream0->CR &= ~DMA_SxCR_EN;						// Disable DMA
 	DMA1->LIFCR |= DMA_LIFCR_CFEIF0 | DMA_LIFCR_CHTIF0 | DMA_LIFCR_CTCIF0;	// Clear DMA errors and transfer complete status flags
 
-	DMA1_Stream0->M0AR = (uint32_t)leds;			// Configure the memory data register address
-	DMA1_Stream0->NDTR = ledCount;					// Number of data items to transfer
-	DMA1_Stream0->CR |= DMA_SxCR_EN;				// Enable DMA and wait
+	DMA1_Stream0->M0AR = (uint32_t)leds;					// Configure the memory data register address
+	DMA1_Stream0->NDTR = ledCount;							// Number of data items to transfer
+	DMA1_Stream0->CR |= DMA_SxCR_EN;						// Enable DMA and wait
 
-	I2C5->CR1 |= I2C_CR1_TXDMAEN;					// Tx DMA stream enable
-	I2C5->CR1 |= I2C_CR1_PE;						// Enable I2C
+	I2C5->CR1 |= I2C_CR1_TXDMAEN;							// Tx DMA stream enable
+	I2C5->CR1 |= I2C_CR1_PE;								// Enable I2C
 	I2C5->CR2 = (i2cAddress << (I2C_CR2_SADD_Pos + 1)) |	// 7 bit addresses are SADD[7:1]
 				(ledCount << I2C_CR2_NBYTES_Pos) |
 				I2C_CR2_START;

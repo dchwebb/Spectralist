@@ -1,14 +1,10 @@
 #include <Calib.h>
 #include <cstdio>
 
-Calib calib;
+//Calib calib;
 
 volatile uint32_t lutUpdates = 0;
 
-Calib::Calib()
-{
-	//UpdatePitchLUT();
-}
 
 void Calib::UpdatePitchLUT()
 {
@@ -26,7 +22,7 @@ void Calib::Calibrate(char key)
 		if (state == State::Octave0) {
 			adcOctave0 += (float)adc.Pitch_CV;
 			if (++calibCount == 2000) {
-				printf("Pitch reading: %d (expected around 61000)\r\n"
+				printf("Pitch reading: %d (expected around 62000)\r\n"
 						"Apply 1V to Pitch input\r\n"
 						"Enter 'y' to continue, 'x' to cancel\r\n",
 						(int)(adcOctave0 / 2000.0f)
@@ -37,7 +33,7 @@ void Calib::Calibrate(char key)
 		if (state == State::Octave1) {
 			adcOctave1 += (float)adc.Pitch_CV;
 			if (++calibCount == 2000) {
-				printf("Pitch reading: %d (expected around 50000)\r\n"
+				printf("Pitch reading: %d (expected around 52800)\r\n"
 						"Enter 'y' to save calibration, 'x' to cancel\r\n",
 						(int)(adcOctave1 / 2000.0f)
 						);

@@ -6,7 +6,7 @@
 bool Config::SaveConfig(const bool forceSave)
 {
 	bool result = true;
-	if (forceSave || (scheduleSave && SysTickVal > saveBooked + 60000)) {			// 60 seconds between saves
+	if (forceSave || (scheduleSave && SysTickVal > saveBooked + 20000)) {			// 20 seconds between saves
 		scheduleSave = false;
 
 		if (currentSettingsOffset == -1) {					// Default = -1 if not first set in RestoreConfig
@@ -61,7 +61,7 @@ bool Config::SaveConfig(const bool forceSave)
 }
 
 
-bool Config::RestoreConfig()
+void Config::RestoreConfig()
 {
 	// Initialise sector array - used to manage which sector contains current config, and which sectors are available for writing when current sector full
 	for (uint32_t i = 0; i < configSectorCount; ++i) {
@@ -133,9 +133,14 @@ bool Config::RestoreConfig()
 			}
 			configPos += saver->settingsSize;
 		}
-		return true;
+	} else {		// If no config stored run update settings to initialise config across components
+		for (auto saver : configSavers) {
+			if (saver->validateSettings != nullptr) {
+				saver->validateSettings();
+			}
+		}
 	}
-	return false;
+
 }
 
 

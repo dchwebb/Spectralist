@@ -4,10 +4,9 @@
 #include "ledManager.h"
 #include <cstring>
 
-Additive additive;
+//Additive additive;
 
-// Create sine look up table as constexpr so will be stored in flash
-//constexpr std::array<float, Additive::sinLUTSize> sineLUT = additive.CreateSinLUT();
+// Create sine look up table in data tightly coupled memory for performance
 float sineLUT[Additive::sinLUTSize] __attribute__((section (".dtcm")));
 
 Additive::Additive()
@@ -15,10 +14,6 @@ Additive::Additive()
 	for (uint32_t s = 0; s < sinLUTSize; ++s){
 		sineLUT[s] = std::sin(s * 2.0f * std::numbers::pi / sinLUTSize);
 	}
-
-	multipliers[0] = 0.3f;
-	multipliers[9] = 0.0f;
-	multipliers[99] = 0.3f;
 }
 
 
@@ -33,11 +28,8 @@ void Additive::CalcSample()
 	// Pitch calculations
 	if (octaveBtn.Pressed()) {
 		cfg.octaveDown = !cfg.octaveDown;
-		if (cfg.octaveDown) {
-			octaveLED.SetHigh();
-		} else {
-			octaveLED.SetLow();
-		}
+		UpdateOctaveLED();
+		config.ScheduleSave();
 	}
 	const float octave = cfg.octaveDown ? 2 : 1;
 	const uint32_t inc = calib.pitchLUT[adc.Pitch_CV] / octave;		// Increment of the base sine read position
@@ -289,7 +281,12 @@ float Additive::EqualPowerCrossfade(const float mix1, const float sample1, const
 	return (sample1 * C * C) + (sample2 * D * D);
 }
 
-void Additive::UpdateConfig()
-{
 
+void Additive::UpdateOctaveLED()
+{
+	if (additive.cfg.octaveDown) {
+		additive.octaveLED.SetHigh();
+	} else {
+		additive.octaveLED.SetLow();
+	}
 }

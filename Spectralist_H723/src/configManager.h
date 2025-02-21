@@ -15,7 +15,7 @@ struct ConfigSaver {
 class Config {
 	friend class CDCHandler;					// Allow the serial handler access to private data for printing
 public:
-	static constexpr uint8_t configVersion = 10;
+	static constexpr uint8_t configVersion = 3;
 	
 	// STM32H723 has 1024k Flash in 8 sectors of 128k
 	static constexpr uint32_t flashConfigSector = 7;		// Allow 1 sector for config giving a config size of 128k before erase needed
@@ -23,25 +23,26 @@ public:
 	static constexpr uint32_t configSectorCount = 1;		// Number of sectors after base sector used for config
 	uint32_t* flashConfigAddr = reinterpret_cast<uint32_t* const>(FLASH_BASE + flashSectorSize * (flashConfigSector - 1));;
 
-	bool scheduleSave = false;
-	uint32_t saveBooked = false;
 
 	// Constructor taking multiple config savers: Get total config block size from each saver
 	Config(std::initializer_list<ConfigSaver*> initList) : configSavers(initList) {
 		for (auto saver : configSavers) {
 			settingsSize += saver->settingsSize;
 		}
-		// Ensure config size (+ 4 byte header + 1 byte index) is aligned to 8 byte boundary
-		settingsSize = AlignTo16Bytes(settingsSize + headerSize);
+		// Ensure config size (+ 4 byte header + 1 byte index) is aligned to 32 byte boundary
+		settingsSize = AlignToBytes(settingsSize + headerSize, 32);
 	}
 
 	void ScheduleSave();				// called whenever a config setting is changed to schedule a save after waiting to see if any more changes are being made
 	bool SaveConfig(const bool forceSave = false);
 	void EraseConfig();					// Erase flash page containing config
-	bool RestoreConfig();				// gets config from Flash, checks and updates settings accordingly
+	void RestoreConfig();				// gets config from Flash, checks and updates settings accordingly
 
 private:
 	static constexpr uint32_t flashAllErrors = FLASH_CCR_CLR_WRPERR | FLASH_CCR_CLR_PGSERR | FLASH_CCR_CLR_STRBERR | FLASH_CCR_CLR_INCERR | FLASH_CCR_CLR_RDPERR | FLASH_CCR_CLR_RDSERR | FLASH_CCR_CLR_SNECCERR | FLASH_CCR_CLR_DBECCERR | FLASH_CCR_CLR_CRCEND | FLASH_CCR_CLR_CRCRDERR;
+
+	bool scheduleSave = false;
+	uint32_t saveBooked = false;
 
 	const std::vector<ConfigSaver*> configSavers;
 	uint32_t settingsSize = 0;			// Size of all settings from each config saver module + size of config header
@@ -68,11 +69,11 @@ private:
 	bool FlashWaitForLastOperation();
 	bool FlashProgram(uint32_t* dest_addr, uint32_t* src_addr, size_t size);
 
-	static const inline uint32_t AlignTo16Bytes(uint32_t val) {
-		val += 15;
-		val >>= 4;
-		val <<= 4;
-		return val;
+	// Aligns to a power of two boundary - eg val = 37, bytes = 32, returns 64
+	static const inline uint32_t AlignToBytes(uint32_t val, uint32_t bytes) {
+		val += bytes - 1;
+		val &= ~(bytes - 1);
+		return std::max(val, bytes);
 	}
 };
 
