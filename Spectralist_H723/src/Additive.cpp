@@ -19,7 +19,7 @@ Additive::Additive()
 
 void Additive::CalcSample()
 {
-//	debugPin2.SetHigh();
+	debugPin2.SetHigh();
 
 	// Previously calculated samples output at beginning of interrupt to keep timing independent of calculation time
 	SPI2->TXDR = (int32_t)(outputSamples[0] * scaleOutput);
@@ -46,17 +46,20 @@ void Additive::CalcSample()
 		incMult += inc;
 	}
 
-	outputSamples[0] = FastTanh(mixOut[0]);
-	outputSamples[1] = FastTanh(mixOut[1]);
+	// Calculate panning
+	float pan = adc.Pan_CV / 65535.0f;
 
-//	debugPin2.SetLow();
+	outputSamples[0] = FastTanh(EqualPowerCrossfade(pan, mixOut[0], mixOut[1]));
+	outputSamples[1] = FastTanh(EqualPowerCrossfade(1.0f - pan, mixOut[0], mixOut[1]));
+
+	debugPin2.SetLow();
 }
 
 
 
 void Additive::IdleJobs()
 {
-//	debugPin1.SetHigh();
+	debugPin1.SetHigh();
 
 	const bool lpf = filterMode.IsLow();
 	const bool cosineWave = harmonicMode.IsLow();
@@ -163,8 +166,7 @@ void Additive::IdleJobs()
 			}
 		}
 	}
-//	debugPin1.SetLow();
-
+	debugPin1.SetLow();
 
 	UpdateLEDs();
 
@@ -212,7 +214,8 @@ void Additive::UpdateLEDs()
 	if (!ledManager.Ready()) {
 		return;
 	}
-//	debugPin3.SetHigh();
+	debugPin3.SetHigh();
+
 	// Diffusion in display means that there is no point trying to distinguish between cosine and individual mode
 	//const bool cosineWave = harmonicMode.IsLow();
 
