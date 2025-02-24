@@ -1,6 +1,7 @@
 #include "stm32h723xx.h"
 #include "initialisation.h"
 #include "Calib.h"
+#include <cstring>
 
 GpioPin debugPin1	{GPIOD, 6, GpioPin::Type::Output};			// PD5: Debug (also UART_TX)
 GpioPin debugPin2	{GPIOD, 5, GpioPin::Type::Output};			// PD6: Debug (also UART_RX)
@@ -532,27 +533,16 @@ void DelayMS(uint32_t ms)
 
 void JumpToBootloader()
 {
-	volatile uint32_t bootAddr = 0x1FF0A000;	// Set the address of the entry point to bootloader
-	__disable_irq();							// Disable all interrupts
-	SysTick->CTRL = 0;							// Disable Systick timer
+	*reinterpret_cast<unsigned long *>(0x00000000) = 0xDEADBEEF; 	// Use ITCM RAM for DFU flag as this is not cleared at restart
 
-	// Disable all peripheral clocks
-	RCC->APB1LENR = 0;
-	RCC->APB4ENR = 0;
-	RCC->AHB1ENR = 0;
-	RCC->APB2ENR = 0;
-	RCC->AHB3ENR = 0;
-	RCC->AHB4ENR = 0;
+	__disable_irq();
+	SCB_DisableDCache();
 
-	for (uint32_t i = 0; i < 5; ++i) {			// Clear Interrupt Enable Register & Interrupt Pending Register
-		NVIC->ICER[i] = 0xFFFFFFFF;
-		NVIC->ICPR[i] = 0xFFFFFFFF;
-	}
+	// Not sure why but seem to need to write this value twice or gets lost - caching issue?
+	*reinterpret_cast<unsigned long *>(0x00000000) = 0xDEADBEEF;
 
-	__enable_irq();								// Re-enable all interrupts
-	void (*SysMemBootJump)() = (void(*)()) (*((uint32_t *) (bootAddr + 4)));	// Set up the jump to booloader address + 4
-	__set_MSP(*(uint32_t *)bootAddr);			// Set the main stack pointer to the bootloader stack
-	SysMemBootJump(); 							// Call the function to jump to bootloader location
+	__DSB();
+	NVIC_SystemReset();
 
 	while (1) {
 		// Code should never reach this loop
@@ -584,7 +574,33 @@ void Reboot()
 }
 
 
-bool vcaConnected = true;
+
+#define ITCMRAM
+#ifdef ITCMRAM
+void CopyToITCMRAM()
+{
+	/* Load functions into ITCM RAM; To use add the following GCC attribute to function:
+
+	 void __attribute__((section(".itcm_text"))) myFunction()
+
+	 * The following section needs to be added to the linker script:
+
+  itcm_data = LOADADDR(.itcm_text);
+  .itcm_text :
+  {
+    . = ALIGN(4);
+    itcm_text_start = .;
+    *(.itcm_text)
+    *(.itcm_text*)
+    . = ALIGN(4);
+    itcm_text_end = .;
+  } >ITCMRAM AT> FLASH
 
 
-
+	 * */
+	extern  unsigned char itcm_text_start;
+	extern const unsigned char itcm_text_end;
+	extern const unsigned char itcm_data;
+	memcpy(&itcm_text_start, &itcm_data, (int) (&itcm_text_end - &itcm_text_start));
+}
+#endif

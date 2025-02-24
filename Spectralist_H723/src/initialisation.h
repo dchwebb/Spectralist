@@ -7,9 +7,6 @@
 #include "GpioPin.h"
 
 extern volatile uint32_t SysTickVal;
-extern bool SafeMode;
-extern bool modeSpectralist;
-extern bool vcaConnected;			// Temporary hack as current hardware does not have VCA normalled correctly
 
 static constexpr uint32_t sysTickInterval = 1000;					// Set in uS so 1000uS = 1ms
 constexpr uint32_t sampleRate = 48000;

@@ -6,6 +6,9 @@
 #include "Calib.h"
 #include "Additive.h"
 
+// FIXME - check performance of using floats for pitchLUT
+// USB DFU
+
 volatile uint32_t SysTickVal;
 extern uint32_t SystemCoreClock;
 

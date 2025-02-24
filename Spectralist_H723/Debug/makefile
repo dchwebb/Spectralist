@@ -77,7 +77,8 @@ Spectralist_H723.list \
 
 
 # All Target
-all: main-build
+all:
+	+@$(MAKE) --no-print-directory pre-build && $(MAKE) --no-print-directory main-build
 
 # Main-build Target
 main-build: Spectralist_H723.elf secondary-outputs
@@ -103,6 +104,10 @@ clean:
 	-$(RM) Spectralist_H723.elf Spectralist_H723.list Spectralist_H723.map default.size.stdout
 	-@echo ' '
 
+pre-build:
+	rm -f D:\Eurorack\Spectralist\Spectralist_H723\Debug\src\usb\CDCHandler.o
+	-@echo ' '
+
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)
 
 fail-specified-linker-script-missing:
@@ -112,6 +117,6 @@ fail-specified-linker-script-missing:
 warn-no-linker-script-specified:
 	@echo 'Warning: No linker script specified. Check the linker settings in the build configuration.'
 
-.PHONY: all clean dependents main-build fail-specified-linker-script-missing warn-no-linker-script-specified
+.PHONY: all clean dependents main-build fail-specified-linker-script-missing warn-no-linker-script-specified pre-build
 
 -include ../makefile.targets
