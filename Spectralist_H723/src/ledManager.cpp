@@ -13,13 +13,16 @@ void LedManager::Init()
 	GpioPin::Init(GPIOC, 11, GpioPin::Type::AlternateFunction, 4, GpioPin::DriveStrength::VeryHigh, GpioPin::OutputType::OpenDrain);		// PC11: I2C5 SCK [alternate function AF4]
 
 	// By default clock source is APB1 peripheral clock (100 MHz)
+	I2C5->TIMINGR = (182 << I2C_TIMINGR_SCLL_Pos) |	// SCL low period (master mode) - asymmetric settings from HAL
+					(52 << I2C_TIMINGR_SCLH_Pos) |	// SCL high period (master mode)
+					(9 << I2C_TIMINGR_SCLDEL_Pos);	// Data setup time
+
+	/*
+	// equal high/low periods
 	I2C5->TIMINGR = (110 << I2C_TIMINGR_SCLL_Pos) |	// SCL low period (master mode)
 					(110 << I2C_TIMINGR_SCLH_Pos) |	// SCL high period (master mode)
 					(9 << I2C_TIMINGR_SCLDEL_Pos);	// Data setup time
-
-	I2C5->TIMINGR = (182 << I2C_TIMINGR_SCLL_Pos) |	// SCL low period (master mode)
-					(52 << I2C_TIMINGR_SCLH_Pos) |	// SCL high period (master mode)
-					(9 << I2C_TIMINGR_SCLDEL_Pos);	// Data setup time
+*/
 
 
 	I2C5->CR1 |= I2C_CR1_DNF;						// Apply the maximum digital noise filter

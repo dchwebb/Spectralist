@@ -13172,6 +13172,16 @@
 		)
 		(uuid "91b17fd6-3be1-4c41-9619-e5917f4bb45f")
 	)
+	(text "USART2"
+		(exclude_from_sim no)
+		(at 54.356 125.984 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "93c43b9a-bedc-461e-9073-8b5c35a349fe")
+	)
 	(text "v1.0 Errata: TPS561201 pads too long\nHarm_Warp_pot and Harm_Stretch_Pot wrong way round (fixed 1.1)"
 		(exclude_from_sim no)
 		(at 302.768 257.556 0)

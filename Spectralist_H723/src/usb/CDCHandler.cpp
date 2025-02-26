@@ -1,6 +1,5 @@
 #include "USB.h"
 #include "CDCHandler.h"
-#include "Filter.h"
 #include "Calib.h"
 #include "ledManager.h"
 #include <stdio.h>

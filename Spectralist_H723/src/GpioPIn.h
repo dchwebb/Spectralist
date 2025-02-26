@@ -1,5 +1,6 @@
 #pragma once
 
+
 extern volatile uint32_t SysTickVal;
 
 class GpioPin {
@@ -18,8 +19,23 @@ public:
 	static void Init(GPIO_TypeDef* port, const uint32_t pin, const Type pinType, const uint32_t alternateFunction = 0, const DriveStrength driveStrength = DriveStrength::Low, OutputType outputType = OutputType::PushPull)
 	{
 		// maths to calculate RCC clock to enable
-		const uint32_t portPos = ((uint32_t)port - GPIOA_BASE) >> 10;
-		RCC->AHB4ENR |= (1 << portPos);
+#if defined(STM32H723xx)
+	const uint32_t portPos = ((uint32_t)port - GPIOA_BASE) >> 10;
+	RCC->AHB4ENR |= (1 << portPos);
+#elif defined(STM32H7B0xx)
+	const uint32_t portPos = ((uint32_t)port - SRD_AHB4PERIPH_BASE) >> 10;
+	RCC->AHB4ENR |= (1 << portPos);
+#elif defined(STM32H563xx)
+	const uint32_t portPos = ((uint32_t)port - AHB2PERIPH_BASE_NS) >> 10;
+	RCC->AHB2ENR |= (1 << portPos);
+#elif defined(STM32G473xx)
+	const uint32_t portPos = ((uint32_t)port - AHB2PERIPH_BASE) >> 10;
+	RCC->AHB2ENR |= (1 << portPos);
+#elif defined(STM32F446xx)
+	const uint32_t portPos = ((uint32_t)port - AHB1PERIPH_BASE) >> 10;
+	RCC->AHB1ENR |= (1 << portPos);
+#endif
+
 
 		// 00: Input, 01: Output, 10: Alternate function, 11: Analog (reset state)
 		if (pinType == Type::Input || pinType == Type::InputPullup || pinType == Type::InputPulldown) {

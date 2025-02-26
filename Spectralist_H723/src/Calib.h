@@ -38,6 +38,7 @@ public:
 	enum class State {Waiting0, Waiting1, Octave0, Octave1, PendingSave};
 	State state;
 
+private:
 	float adcOctave0;
 	float adcOctave1;
 	uint32_t calibCount = 0;

@@ -1,6 +1,5 @@
 #include "Additive.h"
 #include "Calib.h"
-#include "cordic.h"
 #include "ledManager.h"
 #include <cstring>
 
@@ -54,7 +53,6 @@ void Additive::CalcSample()
 
 	debugPin2.SetLow();
 }
-
 
 
 void Additive::IdleJobs()
