@@ -13082,7 +13082,7 @@
 		)
 		(uuid "106ffce0-3a4d-426a-a014-1b5b1e5de4ad")
 	)
-	(text "Gain: -47k/16k = -2.94\nCutoff: 1 / (2π * 1000 * 2.2e-9) = 72kHz"
+	(text "Gain: -47k/16k = -2.94\nLP input cutoff: 1 / (2π * 1000 * 2.2e-9) = 72kHz\nLP Feedback filter cut off: 1 / 2πR_{f}C_{f} = 33.8KHz"
 		(exclude_from_sim no)
 		(at 336.55 234.95 0)
 		(effects
@@ -13182,7 +13182,7 @@
 		)
 		(uuid "93c43b9a-bedc-461e-9073-8b5c35a349fe")
 	)
-	(text "v1.0 Errata: TPS561201 pads too long\nHarm_Warp_pot and Harm_Stretch_Pot wrong way round (fixed 1.1)"
+	(text "v1.0 Errata: TPS561201 pads too long\nHarm_Warp_pot and Harm_Stretch_Pot wrong way round (fixed 1.1)\nOutput RC LP filter unnecessary - can be done in op amp feedback"
 		(exclude_from_sim no)
 		(at 302.768 257.556 0)
 		(effects
@@ -19158,10 +19158,9 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "3882531c-e1f1-4f3e-b095-e3ec956a2307")
 		(property "Reference" "C30"
-			(at 354.33 204.4762 0)
+			(at 343.916 206.248 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19170,7 +19169,7 @@
 			)
 		)
 		(property "Value" "2.2nF"
-			(at 354.33 207.0162 0)
+			(at 343.916 208.788 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22240,10 +22239,9 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "5dd29969-070f-4c8b-8607-6266e68afffc")
 		(property "Reference" "U8"
-			(at 292.1 212.09 0)
+			(at 295.656 209.804 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22251,7 +22249,7 @@
 			)
 		)
 		(property "Value" "TL072"
-			(at 292.1 214.63 0)
+			(at 295.656 212.344 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24431,10 +24429,9 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "7e774b63-b910-4891-8d79-7d31a127f47e")
 		(property "Reference" "C29"
-			(at 276.86 204.4762 0)
+			(at 266.954 206.248 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24443,7 +24440,7 @@
 			)
 		)
 		(property "Value" "2.2nF"
-			(at 276.86 207.0162 0)
+			(at 266.954 208.788 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34572,10 +34569,9 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "e484f744-b7a0-4c27-86d6-ee9a20c4ae06")
 		(property "Reference" "U8"
-			(at 369.57 212.09 0)
+			(at 373.126 209.804 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34583,7 +34579,7 @@
 			)
 		)
 		(property "Value" "TL072"
-			(at 369.57 214.63 0)
+			(at 373.126 212.344 0)
 			(effects
 				(font
 					(size 1.27 1.27)
