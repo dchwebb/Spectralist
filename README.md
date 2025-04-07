@@ -14,6 +14,10 @@ The pan CV input allows each channel to be smoothly panned between the two outpu
 
 In the centre of the module is a ring of LEDs that give a visual representation of the harmonic spread and warp settings.
 
+The module was designed in conjunction with musician Tal Shoshani who produced the following demonstration video:
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/pN7oqAjkgNs/maxresdefault.jpg)](https://www.youtube.com/watch?v=pN7oqAjkgNs)
+
 
 ## Technical
 
